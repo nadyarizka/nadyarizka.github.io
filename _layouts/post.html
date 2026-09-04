@@ -1,0 +1,109 @@
+---
+layout: default
+---
+{% assign url_full = page.url | absolute_url %}
+<article class="post">
+  <div class="wrap post-hero">
+    <div class="post-head">
+      <div class="post-meta">
+        {% if page.category %}<span class="cat">{{ page.category }}</span> &nbsp;·&nbsp; {% endif %}
+        {% if page.destination %}{{ page.destination }} &nbsp;·&nbsp; {% endif %}
+        {% assign w = content | number_of_words %}{{ page.read_time | default: w | divided_by: 200 | plus: 1 }} min read
+      </div>
+      <h1>{{ page.title }}</h1>
+      {% if page.dek or page.excerpt %}<p class="dek">{{ page.dek | default: page.excerpt | strip_html | truncatewords: 30 }}</p>{% endif %}
+      <p class="byline">By {{ page.author | default: site.author }} &nbsp;·&nbsp; {{ page.date | date: "%B %-d, %Y" }}</p>
+    </div>
+  </div>
+
+  {% if page.image %}
+  <div class="wrap">
+    <img class="post-hero__cover" src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title | escape }}">
+    {% if page.image_credit %}<p style="text-align:center;font-family:var(--font-ui);font-size:.78rem;color:var(--muted);margin-top:.6rem">{{ page.image_credit }}</p>{% endif %}
+  </div>
+  {% endif %}
+
+  <div class="article">
+    {% assign paras = content | split: '</p>' %}
+    {% assign total = paras.size %}
+    {% for p in paras %}
+      {{ p }}{% unless forloop.last %}</p>{% endunless %}
+      {% if forloop.index == 3 and total > 6 %}{% include ad.html kind="inarticle" %}{% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="post-foot">
+    {% if page.tags and page.tags.size > 0 %}
+    <div class="tags">
+      {% for t in page.tags %}<span class="tag">#{{ t }}</span>{% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="share" style="margin-top:1.6rem">
+      <span>Share</span>
+      <a href="https://twitter.com/intent/tweet?url={{ url_full | url_encode }}&text={{ page.title | url_encode }}" target="_blank" rel="noopener" aria-label="Share on X"><svg viewBox="0 0 24 24"><path d="M18.9 2H22l-7.5 8.6L23 22h-6.8l-5.3-6.9L4.8 22H1.7l8-9.1L1 2h7l4.8 6.3ZM17.7 20h1.7L7.4 3.9H5.6Z"/></svg></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ url_full | url_encode }}" target="_blank" rel="noopener" aria-label="Share on Facebook"><svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg></a>
+      <a href="https://api.whatsapp.com/send?text={{ page.title | url_encode }}%20{{ url_full | url_encode }}" target="_blank" rel="noopener" aria-label="Share on WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.8 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.8-.6-3-1.3-5-4.4-5.1-4.6-.2-.2-1.3-1.7-1.3-3.3 0-1.5.8-2.3 1.1-2.6.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l.9 2.1c.1.2.1.4 0 .5l-.4.7c-.1.2-.3.3-.1.6.1.2.6 1 1.4 1.7 1 .9 1.8 1.1 2 1.2.2.1.4.1.5-.1l.7-.8c.2-.3.4-.2.6-.1l2 1c.3.1.4.2.5.3.1.2.1.6-.1 1.5Z"/></svg></a>
+      <a href="mailto:?subject={{ page.title | url_encode }}&body={{ url_full | url_encode }}" aria-label="Share by email"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5Z"/></svg></a>
+    </div>
+  </div>
+
+  {% comment %} ---------- Previous / Next article ---------- {% endcomment %}
+  {% if page.previous or page.next %}
+  <nav class="post-nav" aria-label="Article navigation">
+    <div class="post-nav__row">
+      {% if page.previous %}
+      <a class="post-nav__item post-nav__item--prev" href="{{ page.previous.url | relative_url }}" rel="prev">
+        <span class="post-nav__dir">&larr; Previous</span>
+        <span class="post-nav__title">{{ page.previous.title }}</span>
+      </a>
+      {% endif %}
+      {% if page.next %}
+      <a class="post-nav__item post-nav__item--next" href="{{ page.next.url | relative_url }}" rel="next">
+        <span class="post-nav__dir">Next &rarr;</span>
+        <span class="post-nav__title">{{ page.next.title }}</span>
+      </a>
+      {% endif %}
+    </div>
+  </nav>
+  {% endif %}
+
+  {% comment %} ---------- Related stories (same destination) ---------- {% endcomment %}
+  {% assign related = site.posts | where: "destination", page.destination %}
+  {% assign relcount = 0 %}
+  <section class="section" style="padding-top:clamp(3rem,6vw,5rem)">
+    <div class="wrap">
+      <div class="section-head"><span class="eyebrow">Keep Reading</span><h2>More Stories</h2></div>
+      <div class="story-grid">
+        {% for r in related %}
+          {% unless r.url == page.url %}
+            {% if relcount < 3 %}{% include story-card.html post=r %}{% assign relcount = relcount | plus: 1 %}{% endif %}
+          {% endunless %}
+        {% endfor %}
+        {% if relcount < 3 %}
+          {% for r in site.posts %}
+            {% unless r.url == page.url or r.destination == page.destination %}
+              {% if relcount < 3 %}{% include story-card.html post=r %}{% assign relcount = relcount | plus: 1 %}{% endif %}
+            {% endunless %}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</article>
+
+{% comment %} ---- Article structured data for SEO ---- {% endcomment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "image": ["{{ page.image | absolute_url }}"],
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "author": {"@type": "Organization", "name": {{ site.author | jsonify }}},
+  "publisher": {"@type": "Organization", "name": {{ site.title | jsonify }}},
+  "description": {{ page.excerpt | strip_html | truncatewords: 30 | jsonify }},
+  "mainEntityOfPage": "{{ url_full }}"
+}
+</script>

@@ -1,0 +1,27 @@
+---
+layout: default
+title: Stories
+permalink: /stories/
+description: "Every story from The Candid Duo — travel guides, honest reflections and the moments in between."
+---
+<div class="wrap page-hero">
+  <span class="eyebrow">The Journal</span>
+  <h1>All Stories</h1>
+  <p class="lead">Guides, reflections and the moments in between — filed from the road.</p>
+</div>
+
+<section class="section" style="padding-top:clamp(1.5rem,3vw,2.5rem)">
+  <div class="wrap">
+    {% assign cats = site.posts | map: "category" | uniq | sort %}
+    <div class="filters">
+      <button class="active" data-filter="all">All</button>
+      {% for c in cats %}{% if c and c != "" %}<button data-filter="{{ c | slugify }}">{{ c }}</button>{% endif %}{% endfor %}
+    </div>
+
+    <div class="story-grid">
+      {% for post in site.posts %}
+        {% include story-card.html post=post %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

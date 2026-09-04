@@ -1,0 +1,23 @@
+{% assign slides = site.data.homepage.hero %}
+<section class="hero" aria-label="Featured">
+  {% for s in slides %}
+    <div class="hero__slide{% if forloop.first %} active{% endif %}" style="background-image:url('{{ s.image | relative_url }}')" role="img" aria-label="{{ s.title | escape }}"></div>
+  {% endfor %}
+
+  <div class="hero__inner">
+    <div class="wrap">
+      <div class="hero__content">
+        {% assign s = slides[0] %}
+        {% if s.eyebrow %}<span class="eyebrow">{{ s.eyebrow }}</span>{% endif %}
+        <h1 class="hero__title">{{ s.title }}</h1>
+        {% if s.subtitle %}<p class="hero__subtitle">{{ s.subtitle }}</p>{% endif %}
+        {% if s.cta_text and s.cta_url %}<a class="btn btn--light" href="{{ s.cta_url | relative_url }}">{{ s.cta_text }}</a>{% endif %}
+      </div>
+      <div class="hero__dots" role="tablist" aria-label="Choose featured story"></div>
+    </div>
+  </div>
+</section>
+<script>
+  window.__BASEURL__ = "{{ site.baseurl }}";
+  window.__HERO__ = {{ slides | jsonify }};
+</script>

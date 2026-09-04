@@ -1,0 +1,5 @@
+# Google AdSense ownership verification.
+# Replace pub-XXXXXXXXXXXXXXXX with YOUR AdSense publisher ID
+# (the digits after "ca-" — e.g. pub-1234567890123456).
+# AdSense needs this file to confirm you own the ad inventory.
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

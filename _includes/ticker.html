@@ -1,0 +1,25 @@
+{% assign items = site.data.homepage.ticker %}
+{% if items and items.size > 0 %}
+<div class="ticker" aria-label="Latest from The Candid Duo">
+  <div class="ticker__track">
+    {% for pass in (1..2) %}
+      {% for it in items %}
+        {% capture link %}{% if it.url contains '://' %}{{ it.url }}{% elsif it.url != '' %}{{ it.url | relative_url }}{% endif %}{% endcapture %}
+        {% if link != '' %}
+          <a class="ticker__item" href="{{ link }}"{% if it.url contains '://' %} target="_blank" rel="noopener"{% endif %}>
+            <span class="ticker__kind">{{ it.kind }}</span>
+            <span class="ticker__sep">—</span>
+            <span class="ticker__label">{{ it.label }}</span>
+          </a>
+        {% else %}
+          <span class="ticker__item">
+            <span class="ticker__kind">{{ it.kind }}</span>
+            <span class="ticker__sep">—</span>
+            <span class="ticker__label">{{ it.label }}</span>
+          </span>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

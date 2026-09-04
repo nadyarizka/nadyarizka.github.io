@@ -1,0 +1,32 @@
+---
+layout: default
+title: Our Favorite Products
+permalink: /products/
+description: "Every travel product The Candid Duo recommends — camera gear, packing essentials and more, filtered by category."
+---
+<div class="wrap page-hero">
+  <span class="eyebrow">Shop Our Faves</span>
+  <h1>Our Favorite Products</h1>
+  <p class="lead">Everything we genuinely recommend, in one place. Filter by what you're after.</p>
+</div>
+
+<section class="section" style="padding-top:clamp(1.5rem,3vw,2.5rem)">
+  <div class="wrap">
+    {% assign all_products = site.products | sort: "date" | reverse %}
+    {% assign cats = site.products | map: "category" | uniq | sort %}
+    <div class="filters">
+      <button class="active" data-filter="all">All</button>
+      {% for c in cats %}{% if c and c != "" %}<button data-filter="{{ c | slugify }}">{{ c }}</button>{% endif %}{% endfor %}
+    </div>
+
+    {% if all_products.size > 0 %}
+    <div class="product-grid">
+      {% for p in all_products %}{% include product-card.html product=p %}{% endfor %}
+    </div>
+    {% else %}
+    <p style="text-align:center;color:var(--muted);font-size:1.15rem">Product picks are coming soon.</p>
+    {% endif %}
+
+    <p class="product-disclosure">Some links on this page are affiliate links. If you buy through them, we may earn a small commission at no extra cost to you — thank you for supporting The Candid Duo.</p>
+  </div>
+</section>

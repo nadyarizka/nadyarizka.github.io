@@ -1,0 +1,38 @@
+{% comment %}
+  Reusable ad slot.  Usage:  {% include ad.html kind="leaderboard" %}
+  kind = leaderboard | infeed | inarticle
+  Shows a real Google AdSense unit when adsense.enabled is true in _config.yml
+  (and a publisher ID is set); otherwise shows a tasteful placeholder so the
+  layout still looks right before your account is approved.
+{% endcomment %}
+{% assign kind = include.kind | default: 'leaderboard' %}
+{% assign ready = false %}
+{% if site.adsense.enabled and site.adsense.publisher_id != 'ca-pub-XXXXXXXXXXXXXXXX' %}{% assign ready = true %}{% endif %}
+
+<div class="ad ad--{{ kind }}">
+  <div class="ad__label">Advertisement</div>
+  {% if ready %}
+    {% case kind %}
+      {% when 'inarticle' %}
+        <ins class="adsbygoogle" style="display:block;text-align:center"
+             data-ad-layout="in-article" data-ad-format="fluid"
+             data-ad-client="{{ site.adsense.publisher_id }}"
+             data-ad-slot="{{ site.adsense.slot_inarticle }}"></ins>
+      {% when 'infeed' %}
+        <ins class="adsbygoogle" style="display:block" data-ad-format="fluid"
+             data-ad-client="{{ site.adsense.publisher_id }}"
+             data-ad-slot="{{ site.adsense.slot_infeed }}"></ins>
+      {% else %}
+        <ins class="adsbygoogle" style="display:block"
+             data-ad-client="{{ site.adsense.publisher_id }}"
+             data-ad-slot="{{ site.adsense.slot_leaderboard }}"
+             data-ad-format="auto" data-full-width-responsive="true"></ins>
+    {% endcase %}
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  {% else %}
+    <div class="ad-placeholder">
+      Ad space ({{ kind }})<br>
+      <small style="opacity:.7">Turn on AdSense in <code>_config.yml</code> once approved.</small>
+    </div>
+  {% endif %}
+</div>

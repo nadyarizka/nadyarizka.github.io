@@ -1,0 +1,150 @@
+---
+layout: default
+header_overlay: true
+---
+
+{% include hero.html %}
+{% include ticker.html %}
+
+{% comment %} ---------- Pick the lead (featured) story ---------- {% endcomment %}
+{% assign featured_list = site.posts | where: "featured", true %}
+{% if featured_list.size > 0 %}{% assign lead = featured_list.first %}{% else %}{% assign lead = site.posts.first %}{% endif %}
+
+<!-- ===================== LATEST STORIES ===================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Explore</span>
+      <h2>Latest Stories</h2>
+    </div>
+
+    {% if lead %}
+    <article class="featured card">
+      <a class="card__media" href="{{ lead.url | relative_url }}" aria-label="{{ lead.title | escape }}">
+        {% if lead.image %}<img src="{{ lead.image | relative_url }}" alt="{{ lead.title | escape }}">{% endif %}
+      </a>
+      <div>
+        <div class="card__meta">
+          {% if lead.category %}<span class="cat">{{ lead.category }}</span> &nbsp;·&nbsp; {% endif %}
+          {% assign lw = lead.content | number_of_words %}{{ lead.read_time | default: lw | divided_by: 200 | plus: 1 }} min read
+        </div>
+        <h3 class="card__title"><a href="{{ lead.url | relative_url }}">{{ lead.title }}</a></h3>
+        <p class="card__excerpt">{{ lead.excerpt | strip_html | truncatewords: 40 }}</p>
+        <a class="link-more" href="{{ lead.url | relative_url }}">Read the story</a>
+      </div>
+    </article>
+    {% endif %}
+
+    {% include ad.html kind="leaderboard" %}
+
+    <div class="story-grid">
+      {% assign count = 0 %}
+      {% for post in site.posts %}
+        {% unless post.url == lead.url %}
+          {% if count < 6 %}
+            {% include story-card.html post=post %}
+            {% assign count = count | plus: 1 %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+
+    <div style="text-align:center;margin-top:clamp(2.5rem,5vw,3.5rem)">
+      <a class="btn" href="{{ '/stories/' | relative_url }}">View all stories</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WATCH & LISTEN ===================== -->
+{% assign media = site.data.homepage.media_features %}
+{% if media and media.size > 0 %}
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Beyond the Blog</span>
+      <h2>Watch &amp; Listen</h2>
+    </div>
+    <div class="story-grid">
+      {% for m in media %}
+        {% capture mlink %}{% if m.url contains '://' %}{{ m.url }}{% elsif m.url != '' %}{{ m.url | relative_url }}{% endif %}{% endcapture %}
+        <article class="card card--media">
+          <a class="card__media" href="{% if mlink != '' %}{{ mlink }}{% else %}#{% endif %}"{% if m.url contains '://' %} target="_blank" rel="noopener"{% endif %} aria-label="{{ m.title | escape }}">
+            {% if m.image %}<img src="{{ m.image | relative_url }}" alt="{{ m.title | escape }}" loading="lazy">{% endif %}
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          </a>
+          <span class="badge badge--{{ m.platform }}"><span class="dot"></span>{{ m.label }}</span>
+          <h3 class="card__title"><a href="{% if mlink != '' %}{{ mlink }}{% else %}#{% endif %}"{% if m.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ m.title }}</a></h3>
+          <p class="card__excerpt">{{ m.blurb }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===================== DESTINATIONS ===================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Where We've Been</span>
+      <h2>Destinations</h2>
+    </div>
+    <div class="dest-grid">
+      {% assign dests = "Jeju,New Zealand,Tasmania,Umroh" | split: "," %}
+      {% assign dimgs = "dest-jeju.jpg,dest-newzealand.jpg,dest-tasmania.jpg,dest-umroh.jpg" | split: "," %}
+      {% for d in dests %}
+        {% assign slug = d | slugify %}
+        {% assign n = site.posts | where: "destination", d | size %}
+        <a class="dest-card" href="{{ '/destinations/' | append: slug | append: '/' | relative_url }}">
+          <img src="{{ '/assets/images/' | append: dimgs[forloop.index0] | relative_url }}" alt="{{ d }}" loading="lazy">
+          <span class="dest-card__label">
+            <span class="k">Destination</span>
+            <h3>{{ d }}</h3>
+            <span class="count">{{ n }} {% if n == 1 %}story{% else %}stories{% endif %}</span>
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OUR RECENT FAV PRODUCTS ===================== -->
+{% assign fav_products = site.products | where: "featured", true | sort: "date" | reverse %}
+{% if fav_products.size == 0 %}{% assign fav_products = site.products | sort: "date" | reverse %}{% endif %}
+{% if fav_products.size > 0 %}
+<section class="section section--alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Shop Our Faves</span>
+      <h2>Our Recent Fav Products</h2>
+      <p class="lead">The gear and everyday bits we actually reach for on the road.</p>
+    </div>
+    <div class="product-grid">
+      {% for p in fav_products limit: 4 %}
+        {% include product-card.html product=p %}
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:clamp(2.2rem,4vw,3rem)">
+      <a class="btn" href="{{ '/products/' | relative_url }}">See more products</a>
+    </div>
+    <p class="product-disclosure">Some links are affiliate links — buying through them supports the blog at no extra cost to you.</p>
+  </div>
+</section>
+{% endif %}
+
+<!-- ===================== ABOUT TEASER ===================== -->
+<section class="section">
+  <div class="wrap">
+    <div class="featured" style="border:0;padding-bottom:0;margin-bottom:0">
+      <div class="card__media" style="aspect-ratio:3/2;margin:0;border-radius:2px;overflow:hidden">
+        <img src="{{ '/assets/images/about-duo.jpg' | relative_url }}" alt="The Candid Duo">
+      </div>
+      <div>
+        <span class="eyebrow">Who We Are</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.8rem)">Two wanderers, one honest lens.</h2>
+        <p style="font-size:1.12rem">We're the couple behind The Candid Duo — trading the predictable for the unscripted, and writing it all down before we forget. No sponsored gloss, just the real cost, the wrong turns, and the moments that made the trip.</p>
+        <a class="btn" href="{{ '/about/' | relative_url }}">Our story</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,19 @@
+{% assign p = include.product %}
+<article class="product-card" data-cat="{{ p.category | default: 'other' | slugify }}">
+  <a class="product-card__media" href="{{ p.url }}" target="_blank" rel="noopener sponsored nofollow" aria-label="{{ p.name | escape }}">
+    {% if p.image %}<img src="{{ p.image | relative_url }}" alt="{{ p.name | escape }}" loading="lazy">{% endif %}
+  </a>
+  <div class="product-card__body">
+    {% if p.category %}<span class="product-card__cat">{{ p.category }}</span>{% endif %}
+    <h3 class="product-card__name"><a href="{{ p.url }}" target="_blank" rel="noopener sponsored nofollow">{{ p.name }}</a></h3>
+    {% if p.blurb %}<p class="product-card__blurb">{{ p.blurb }}</p>{% endif %}
+    <div class="product-card__pills">
+      {% if p.platform %}<span class="pill pill--platform">Available on {{ p.platform }}</span>{% endif %}
+      {% if p.country %}<span class="pill pill--country"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>{{ p.country }}</span>{% endif %}
+    </div>
+    <div class="product-card__foot">
+      {% if p.price %}<span class="product-card__price">{{ p.price }}</span>{% endif %}
+      <a class="btn btn--accent btn--sm" href="{{ p.url }}" target="_blank" rel="noopener sponsored nofollow">Shop now</a>
+    </div>
+  </div>
+</article>

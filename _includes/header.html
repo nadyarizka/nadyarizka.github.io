@@ -1,0 +1,14 @@
+{% assign overlay = include.overlay | default: false %}
+<header class="site-header{% unless overlay %} solid{% endunless %}" data-overlay="{{ overlay }}">
+  <div class="wrap">
+    <a class="brand" href="{{ '/' | relative_url }}">the candid <span>duo</span></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      {% for item in site.data.navigation.main %}
+      <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</header>

@@ -1,0 +1,76 @@
+# ============================================================
+#  THE CANDID DUO — site configuration
+#  Lines marked  # << CHANGE  are the only ones you need to edit.
+# ============================================================
+
+title: The Candid Duo
+tagline: A Travel Journal
+description: >-
+  Unscripted travel stories, vlogs and podcasts from two wanderers —
+  Jeju, New Zealand, Tasmania, Umroh and everywhere in between.
+author: The Candid Duo
+
+# Your live web address.
+# If your repo is named  <username>.github.io  keep baseurl empty (recommended).
+# If it's a normal repo (e.g. "blog"), set baseurl to "/blog".
+url: "https://nadyarizka.github.io"    # << CHANGE  (your GitHub Pages URL)
+baseurl: ""                            # << CHANGE only if using a project repo
+
+# ---- Build settings (leave as-is) ----
+markdown: kramdown
+permalink: /stories/:title/
+timezone: Asia/Singapore
+theme: null                            # this site is fully custom-designed; don't use GitHub Pages' default theme
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# ---- Monetisation: Google AdSense ----
+# Turn 'enabled' to true AFTER AdSense approves your site,
+# then paste your publisher ID and (optionally) ad unit slot IDs.
+adsense:
+  enabled: false                       # << CHANGE to true once approved
+  publisher_id: "ca-pub-XXXXXXXXXXXXXXXX"   # << CHANGE (from AdSense)
+  slot_leaderboard: ""                 # << optional ad unit slot ID
+  slot_infeed: ""                      # << optional
+  slot_inarticle: ""                   # << optional
+
+# ---- Analytics (optional) ----
+google_analytics: ""                   # e.g. "G-XXXXXXXXXX"
+
+# ---- Social / contact (also editable in the CMS) ----
+social:
+  instagram: "https://instagram.com/thecandidduo"
+  tiktok: "https://tiktok.com/@thecandidduo"
+  youtube: "https://youtube.com/@thecandidduo"
+  spotify: ""
+  email: "hello@thecandidduo.com"      # << CHANGE
+
+# ---- Feed ----
+feed:
+  path: feed.xml
+
+# ---- Collections ----
+collections:
+  products:
+    output: false      # products link out to shops; no individual pages needed
+
+# ---- Defaults ----
+defaults:
+  - scope: { path: "", type: "posts" }
+    values: { layout: "post" }
+
+# ---- Files Jekyll should ignore ----
+exclude:
+  - README.md
+  - SETUP-GUIDE.md
+  - GO-LIVE-CHECKLIST.md
+  - CLAUDE.md
+  - oauth-worker
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .sass-cache
+  - node_modules
