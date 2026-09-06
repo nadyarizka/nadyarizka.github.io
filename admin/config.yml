@@ -8,7 +8,7 @@ backend:
   name: github
   repo: nadyarizka/nadyarizka.github.io
   branch: main
-  base_url: https://YOUR-WORKER.workers.dev   # << CHANGE  (your Cloudflare OAuth worker URL — see SETUP-GUIDE.md Step 6)
+  base_url: https://candidduo-cms-auth.thecandiduo2.workers.dev
 
 # Where images you upload in the CMS are stored
 media_folder: "assets/images/uploads"
