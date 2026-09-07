@@ -1,0 +1,14 @@
+{% comment %}
+  Responsive YouTube embed. Usage in a post body:
+    {% include youtube.html id="dQw4w9WgXcQ" %}
+  Find the id in the video's URL: youtube.com/watch?v=THIS_PART
+{% endcomment %}
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/{{ include.id }}"
+    title="{{ include.title | default: 'YouTube video player' }}"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+</div>
