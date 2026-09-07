@@ -1,70 +1,60 @@
-# ============================================================
-#  HOMEPAGE CONTENT  (all editable in the CMS → "Homepage")
-#  Swap the image paths for your own photos once you upload them.
-# ============================================================
-
-# ---- Hero carousel (rotates every ~7s) ----
 hero:
   - image: /assets/images/hero-brand.jpg
     eyebrow: A Travel Journal
     title: The Candid Duo
-    subtitle: Unscripted stories from two wanderers — one road, one lens, one honest conversation at a time.
+    subtitle: Unscripted stories from two wanderers — one road, one lens, one honest
+      conversation at a time.
     cta_text: Read the latest
     cta_url: /stories/
-
-  - image: /assets/images/hero-jeju.jpg
+  - image: /assets/images/uploads/4833c213-7a10-4f39-a4a9-41a45c2ee52c_1_105_c.jpeg
     eyebrow: Featured — South Korea
     title: A Winter in Jeju
-    subtitle: Tangerine groves, black-sand coastline and the slow island rhythm we didn't see coming.
+    subtitle: Tangerine groves, black-sand coastline and the slow island rhythm we
+      didn't see coming.
     cta_text: Read the story
     cta_url: /stories/jeju-in-winter/
-
   - image: /assets/images/hero-newzealand.jpg
     eyebrow: Featured — New Zealand
     title: The South Island, End to End
-    subtitle: Two weeks, one campervan, and more mountain passes than we could photograph.
+    subtitle: Two weeks, one campervan, and more mountain passes than we could
+      photograph.
     cta_text: Read the story
     cta_url: /stories/new-zealand-south-island-road-trip/
-
   - image: /assets/images/hero-umroh.jpg
     eyebrow: Featured — Saudi Arabia
     title: Umroh, For The First Time
     subtitle: The honest, practical guide we wish we'd had before our first pilgrimage.
     cta_text: Read the guide
     cta_url: /stories/umroh-first-timers-guide/
-
-# ---- Ticker bar (the scrolling WATCH / LISTEN / READ strip) ----
 ticker:
   - kind: WATCH
-    label: "Jeju in Winter — Full Vlog"
-    url: "https://youtube.com/@thecandidduo"
+    label: Jeju in Winter — Full Vlog
+    url: https://youtube.com/@thecandidduo
   - kind: LISTEN
-    label: "Ep. 12 — The Real Cost of Full-Time Travel"
+    label: Ep. 12 — The Real Cost of Full-Time Travel
     url: ""
   - kind: READ
-    label: "What nobody tells you about Umroh for first-timers"
+    label: What nobody tells you about Umroh for first-timers
     url: /stories/umroh-first-timers-guide/
   - kind: WATCH
-    label: "The day the campervan wouldn't start in Wānaka 😅"
-    url: "https://tiktok.com/@thecandidduo"
-
-# ---- Media cards (shown between the story cards on the homepage) ----
+    label: The day the campervan wouldn't start in Wānaka 😅
+    url: https://tiktok.com/@thecandidduo
 media_features:
   - platform: youtube
     label: Watch on YouTube
-    title: "Jeju in Winter — Full Vlog"
-    blurb: "The complete, unedited island loop — sunrise peak to tangerine farm."
-    url: "https://youtube.com/@thecandidduo"
+    title: Jeju in Winter — Full Vlog
+    blurb: The complete, unedited island loop — sunrise peak to tangerine farm.
+    url: https://youtube.com/@thecandidduo
     image: /assets/images/media-youtube.jpg
   - platform: spotify
     label: Listen on Spotify
-    title: "Ep. 12 — The Real Cost of Full-Time Travel"
-    blurb: "We break down every dollar from six months on the road."
+    title: Ep. 12 — The Real Cost of Full-Time Travel
+    blurb: We break down every dollar from six months on the road.
     url: ""
     image: /assets/images/media-spotify.jpg
   - platform: tiktok
     label: Watch on TikTok
-    title: "That time the last ferry left without us 😂"
-    blurb: "Sometimes the best moments are the unplanned ones."
-    url: "https://tiktok.com/@thecandidduo"
+    title: That time the last ferry left without us 😂
+    blurb: Sometimes the best moments are the unplanned ones.
+    url: https://tiktok.com/@thecandidduo
     image: /assets/images/media-tiktok.jpg
