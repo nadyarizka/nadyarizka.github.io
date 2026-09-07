@@ -1,5 +1,5 @@
 ---
-title: 14 Days Itinerary in South Island New Zealand (with 2yo)
+title: 14 Days Itinerary in New Zealand (with 2yo)
 date: 2026-07-22
 category: Guide
 destination: New Zealand
