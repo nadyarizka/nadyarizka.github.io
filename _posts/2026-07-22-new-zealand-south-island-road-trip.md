@@ -1,13 +1,21 @@
 ---
-title: "The South Island, End to End: Two Weeks in a Campervan"
+title: 14 Days Itinerary in South Island New Zealand (with 2yo)
 date: 2026-07-22
-category: Adventure
+category: Guide
 destination: New Zealand
-image: /assets/images/hero-newzealand.jpg
-image_alt: "Mountain pass road winding through New Zealand's South Island"
-dek: "One campervan, more mountain passes than we could photograph, and a lesson in why the drive is the destination."
-excerpt: "One campervan, more mountain passes than we could count, and a two-week loop that taught us the drive is the destination. Our honest South Island route, costs and mistakes."
-tags: [new zealand, road trip, campervan, south island]
+image: /assets/images/uploads/img_4881.jpeg
+image_alt: Mountain pass road winding through New Zealand's South Island
+dek: One campervan, more mountain passes than we could photograph, and a lesson
+  in why the drive is the destination.
+excerpt: One campervan, more mountain passes than we could count, and a two-week
+  loop that taught us the drive is the destination. Our honest South Island
+  route, costs and mistakes.
+tags:
+  - new zealand
+  - road trip
+  - campervan
+  - south island
+featured: true
 ---
 
 We picked up the campervan in Christchurch on a grey Tuesday, and for the first hour neither of us said much — partly the nerves of driving a house on wheels, mostly the realisation that we had two whole weeks and an entire island to get lost in.
