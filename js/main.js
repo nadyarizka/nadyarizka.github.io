@@ -132,6 +132,106 @@ function renderTestimonials(data) {
     </section>`;
 }
 
+function renderTikTok(data) {
+  const videos = (data.tiktokVideos || []).slice(0, 3);
+  if (!videos.length) return "";
+  const handle = data.tiktokHandle || "";
+  const embeds = videos
+    .map((v) => {
+      const id = (v.url.match(/\/video\/(\d+)/) || [])[1] || "";
+      return `
+      <blockquote class="tiktok-embed" cite="${v.url}" data-video-id="${id}" style="max-width:325px;min-width:210px;margin:0;">
+        <section><a target="_blank" rel="noopener" href="${v.url}">@${handle}</a></section>
+      </blockquote>`;
+    })
+    .join("");
+
+  return `
+    <section class="block">
+      <h2 class="section-title" style="margin-bottom:16px">Latest on TikTok</h2>
+      <div class="tiktok-grid">${embeds}</div>
+      <div class="works-see-more">
+        <button class="btn-see-more" type="button" onclick="window.open('https://www.tiktok.com/@${handle}', '_blank')">See more on TikTok</button>
+      </div>
+    </section>`;
+}
+
+function loadTikTokEmbeds() {
+  if (!document.querySelector(".tiktok-embed")) return;
+  const existing = document.getElementById("tiktok-embed-script");
+  if (existing) existing.remove();
+  const script = document.createElement("script");
+  script.id = "tiktok-embed-script";
+  script.src = "https://www.tiktok.com/embed.js";
+  script.async = true;
+  document.body.appendChild(script);
+}
+
+function renderSocials(data) {
+  const socials = data.socials || [];
+  if (!socials.length) return "";
+  const icons = socials
+    .map((s) => {
+      const platform = SOCIAL_PLATFORMS[s.platform] || SOCIAL_PLATFORMS.website;
+      return `
+      <a class="social-link" href="${s.url}" target="_blank" rel="noopener" aria-label="${platform.label}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${platform.icon}</svg>
+      </a>`;
+    })
+    .join("");
+
+  return `<div class="socials-row">${icons}</div>`;
+}
+
+function renderContact(data) {
+  return `
+    <section class="block" id="contact" style="margin-bottom:0">
+      <h2 class="section-title" style="margin-bottom:16px">Contact Me</h2>
+      <form class="contact-form" onsubmit="return submitContactForm(event)">
+        <div class="form-field">
+          <label for="contact-name">Name</label>
+          <input class="form-input" type="text" id="contact-name" name="name" required>
+        </div>
+        <div class="form-field">
+          <label for="contact-email">Email</label>
+          <input class="form-input" type="email" id="contact-email" name="email" required>
+        </div>
+        <div class="form-field">
+          <label for="contact-message">Message</label>
+          <textarea class="form-input" id="contact-message" name="message" rows="5" required></textarea>
+        </div>
+        <button class="btn-send" type="submit">Send Message</button>
+        <p class="contact-hint">Clicking send opens your email app with this message ready to send to ${CONTACT_EMAIL}.</p>
+      </form>
+      ${renderSocials(data)}
+    </section>`;
+}
+
+function submitContactForm(event) {
+  event.preventDefault();
+  const form = event.target;
+  const name = form.name.value.trim();
+  const email = form.email.value.trim();
+  const message = form.message.value.trim();
+  const subject = encodeURIComponent("New message from " + name);
+  const body = encodeURIComponent(message + "\n\n— " + name + " (" + email + ")");
+  window.location.href = "mailto:" + CONTACT_EMAIL + "?subject=" + subject + "&body=" + body;
+  return false;
+}
+
+function renderTravellerTicker(persona) {
+  if (persona !== "traveller") return "";
+  const text = "✈️ Visit thecandidduo.github.io to check out more stories";
+  const repeated = new Array(8).fill(text).join(" &nbsp;&bull;&nbsp; ");
+  return `
+    <a class="traveller-ticker" href="https://thecandidduo.github.io" target="_blank" rel="noopener">
+      <div class="traveller-ticker-track">
+        <span>${repeated}</span>
+        <span>${repeated}</span>
+      </div>
+    </a>`;
+}
+
 function renderHomeContent(persona) {
   currentPersona = persona;
   const data = getPersonaData(persona);
@@ -176,9 +276,13 @@ function renderHomeContent(persona) {
       ${renderCountriesVisited(data)}
       ${renderExperience(data)}
       ${renderTestimonials(data)}
-    </div>`;
+      ${renderTikTok(data)}
+      ${renderContact(data)}
+    </div>
+    ${renderTravellerTicker(persona)}`;
 
   document.getElementById("page-root").innerHTML = content;
+  loadTikTokEmbeds();
 }
 
 function switchPersona(persona) {

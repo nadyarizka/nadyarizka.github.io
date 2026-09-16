@@ -828,6 +828,137 @@ h2.section-title {
   margin: 0;
 }
 
+/* TikTok */
+.tiktok-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Contact */
+.contact-form {
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.form-input {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: #111827;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--tag-bg);
+}
+
+textarea.form-input {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.btn-send {
+  align-self: flex-start;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  transition: opacity 0.2s;
+}
+
+.btn-send:hover {
+  opacity: 0.85;
+}
+
+.contact-hint {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: -8px 0 0 0;
+}
+
+.socials-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tag-bg);
+  color: var(--accent);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.social-link:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+/* Traveller ticker */
+.traveller-ticker {
+  display: block;
+  overflow: hidden;
+  background: var(--accent);
+  color: #ffffff;
+  padding: 14px 0;
+  text-decoration: none;
+  position: relative;
+  z-index: 10;
+}
+
+.traveller-ticker-track {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  animation: ticker-scroll 22s linear infinite;
+}
+
+.traveller-ticker-track span {
+  padding-right: 40px;
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 /* Footer */
 .site-footer {
   position: relative;

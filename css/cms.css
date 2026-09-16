@@ -493,6 +493,30 @@ a {
   width: auto;
 }
 
+.cms-social-fields {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.cms-social-select {
+  width: 160px;
+  flex: none;
+}
+
+.cms-social-url-input {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+}
+
+.cms-tiktok-url-input {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+}
+
 .cms-icon-btn {
   display: inline-flex;
   align-items: center;

@@ -20,17 +20,21 @@ const CMS_SECTIONS_BY_PERSONA = {
     { id: "posts", label: "Blog Posts" },
     { id: "experience", label: "Experience" },
     { id: "testimonials", label: "Testimonials" },
+    { id: "socials", label: "Socials" },
   ],
   traveller: [
     { id: "about", label: "About Me" },
     { id: "hero", label: "Hero Section" },
     { id: "works", label: "Travel Stories" },
     { id: "countries", label: "Countries Visited" },
+    { id: "socials", label: "Socials" },
   ],
   mother: [
     { id: "hero", label: "Hero Section" },
     { id: "about", label: "About Me" },
     { id: "works", label: "My Stories" },
+    { id: "tiktok", label: "TikTok Videos" },
+    { id: "socials", label: "Socials" },
   ],
 };
 
@@ -55,6 +59,9 @@ const CMS_ICONS = {
     '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>',
   countries:
     '<circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>',
+  socials:
+    '<circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>',
+  tiktok: '<path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>',
   site:
     '<circle cx="12" cy="12" r="3"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>',
 };
@@ -182,6 +189,8 @@ function renderPanel() {
   else if (cmsSection === "experience") panel.innerHTML = renderExperiencePanel(cmsPersona);
   else if (cmsSection === "testimonials") panel.innerHTML = renderTestimonialsPanel(cmsPersona);
   else if (cmsSection === "countries") panel.innerHTML = renderCountriesPanel(cmsPersona);
+  else if (cmsSection === "socials") panel.innerHTML = renderSocialsPanel(cmsPersona);
+  else if (cmsSection === "tiktok") panel.innerHTML = renderTikTokPanel(cmsPersona);
   else if (cmsSection === SITE_SECTION.id) panel.innerHTML = renderSitePanel();
 }
 
@@ -891,6 +900,119 @@ function deleteCountry(persona, index) {
   const list = getPersonaList(persona, "countriesVisited").slice();
   list.splice(index, 1);
   setPersonaList(persona, "countriesVisited", list);
+  renderPanel();
+  showToast("Deleted");
+}
+
+// ---- Socials ----
+
+function renderSocialsPanel(persona) {
+  const list = getPersonaList(persona, "socials");
+
+  const rows = list
+    .map((s, i) => {
+      const options = Object.keys(SOCIAL_PLATFORMS)
+        .map(
+          (key) =>
+            `<option value="${key}" ${s.platform === key ? "selected" : ""}>${escapeHtml(SOCIAL_PLATFORMS[key].label)}</option>`
+        )
+        .join("");
+      return `
+      <div class="cms-row-item">
+        <div class="cms-social-fields">
+          <select class="cms-input cms-social-select" onchange="updateSocialField('${persona}', ${i}, 'platform', this.value)">${options}</select>
+          <input class="cms-input cms-social-url-input" type="text" placeholder="https://..." value="${escapeAttr(s.url)}" oninput="updateSocialField('${persona}', ${i}, 'url', this.value)">
+        </div>
+        <div class="cms-row-actions">
+          <button class="cms-icon-btn cms-icon-btn-danger" type="button" title="Delete" onclick="deleteSocial('${persona}', ${i})">${iconSvg(TRASH_ICON, 15)}</button>
+        </div>
+      </div>`;
+    })
+    .join("");
+
+  return `
+    <div class="cms-list-header">
+      <h2 class="cms-list-header-title">Socials</h2>
+      <button class="cms-add-btn" type="button" onclick="addSocial('${persona}')">${iconSvg(PLUS_ICON, 14)}New</button>
+    </div>
+    ${rows || '<p class="cms-empty-hint">No social links yet — click "New" to add one.</p>'}`;
+}
+
+function updateSocialField(persona, index, field, value) {
+  const list = getPersonaList(persona, "socials").slice();
+  if (!list[index]) return;
+  list[index] = Object.assign({}, list[index], { [field]: value });
+  setPersonaList(persona, "socials", list);
+  showToast("Saved");
+}
+
+function addSocial(persona) {
+  const list = getPersonaList(persona, "socials").slice();
+  list.push({ platform: "website", url: "" });
+  setPersonaList(persona, "socials", list);
+  renderPanel();
+  showToast("Added");
+}
+
+function deleteSocial(persona, index) {
+  const list = getPersonaList(persona, "socials").slice();
+  list.splice(index, 1);
+  setPersonaList(persona, "socials", list);
+  renderPanel();
+  showToast("Deleted");
+}
+
+// ---- TikTok Videos (Mother) ----
+
+function renderTikTokPanel(persona) {
+  const data = getPersonaData(persona);
+  const list = getPersonaList(persona, "tiktokVideos");
+
+  const rows = list
+    .map(
+      (v, i) => `
+      <div class="cms-row-item">
+        <input class="cms-input cms-tiktok-url-input" type="text" placeholder="https://www.tiktok.com/@handle/video/..." value="${escapeAttr(v.url)}" oninput="updateTikTokField('${persona}', ${i}, this.value)">
+        <div class="cms-row-actions">
+          <button class="cms-icon-btn cms-icon-btn-danger" type="button" title="Delete" onclick="deleteTikTokVideo('${persona}', ${i})">${iconSvg(TRASH_ICON, 15)}</button>
+        </div>
+      </div>`
+    )
+    .join("");
+
+  return `
+    <div class="cms-field">
+      <label class="cms-label">TikTok Handle</label>
+      <input class="cms-input" type="text" placeholder="yourhandle" value="${escapeAttr(data.tiktokHandle)}" oninput="updatePersonaField('${persona}', 'tiktokHandle', this.value)">
+    </div>
+    <div class="cms-list-header" style="margin-top:24px">
+      <h2 class="cms-list-header-title">Featured Videos</h2>
+      <button class="cms-add-btn" type="button" onclick="addTikTokVideo('${persona}')">${iconSvg(PLUS_ICON, 14)}New</button>
+    </div>
+    <p class="cms-card-subtitle" style="margin:-8px 0 16px 0">Only the first 3 show on the homepage.</p>
+    ${rows || '<p class="cms-empty-hint">No videos yet — click "New" to add one.</p>'}`;
+}
+
+function updateTikTokField(persona, index, value) {
+  const list = getPersonaList(persona, "tiktokVideos").slice();
+  if (!list[index]) return;
+  list[index] = Object.assign({}, list[index], { url: value });
+  setPersonaList(persona, "tiktokVideos", list);
+  showToast("Saved");
+}
+
+function addTikTokVideo(persona) {
+  const list = getPersonaList(persona, "tiktokVideos").slice();
+  list.push({ url: "" });
+  setPersonaList(persona, "tiktokVideos", list);
+  renderPanel();
+  showToast("Added");
+}
+
+function deleteTikTokVideo(persona, index) {
+  const list = getPersonaList(persona, "tiktokVideos").slice();
+  list.splice(index, 1);
+  setPersonaList(persona, "tiktokVideos", list);
   renderPanel();
   showToast("Deleted");
 }
