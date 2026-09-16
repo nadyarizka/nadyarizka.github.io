@@ -1,5 +1,5 @@
 // Local persistence layer for the CMS. Since this is a static site with no
-// backend, edits made in cms.html are saved to localStorage and merged over
+// backend, edits made in admin/index.html are saved to localStorage and merged over
 // the defaults in data.js whenever a page reads persona/about content.
 // Both the CMS and the public pages (index/about/post) go through here so
 // there is exactly one source of truth at runtime.
