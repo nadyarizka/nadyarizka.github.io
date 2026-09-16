@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content CMS — Nadya Tri-Persona Portfolio</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="stylesheet" href="css/cms.css">
+</head>
+<body>
+  <div class="cms-shell">
+    <aside class="cms-sidebar">
+      <div class="cms-sidebar-header">
+        <div class="cms-logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cms-icon"><rect width="7" height="7" x="3" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="3" rx="1"></rect><rect width="7" height="7" x="14" y="14" rx="1"></rect><rect width="7" height="7" x="3" y="14" rx="1"></rect></svg>
+        </div>
+        <div>
+          <p class="cms-logo-title">Content CMS</p>
+          <p class="cms-logo-sub">Admin Dashboard</p>
+        </div>
+      </div>
+
+      <div class="cms-nav-group">
+        <p class="cms-nav-label">Persona</p>
+        <nav id="cms-persona-nav" class="cms-nav-list"></nav>
+      </div>
+
+      <div class="cms-nav-group">
+        <p class="cms-nav-label">Content</p>
+        <nav id="cms-content-nav" class="cms-nav-list"></nav>
+      </div>
+
+      <div class="cms-sidebar-footer">
+        <a class="cms-back-link" href="index.html">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cms-icon"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Back to site
+        </a>
+      </div>
+    </aside>
+
+    <main class="cms-main">
+      <p id="cms-eyebrow" class="cms-eyebrow">DESIGNER PERSONA</p>
+      <h1 id="cms-title" class="cms-title">Profile &amp; About</h1>
+
+      <div id="cms-panel" class="cms-panel"></div>
+    </main>
+  </div>
+
+  <div class="cms-toast" id="cms-toast">Saved</div>
+
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/cms.js"></script>
+</body>
+</html>

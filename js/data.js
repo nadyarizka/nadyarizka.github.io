@@ -1,0 +1,276 @@
+// Content data for the three personas — Designer, Traveller, Mother
+// Mirrors the live base44 CMS content pixel-for-pixel.
+
+const PERSONAS = ["designer", "traveller", "mother"];
+
+const PERSONA_LABELS = {
+  designer: "Designer",
+  traveller: "Traveller",
+  mother: "Mother",
+};
+
+const SITE = {
+  designer: {
+    headline: "A Digital Product Designer",
+    greeting: "Hi 👋 I'm Nadya",
+    tagline: "Part-time digital product experience crafter. Full-time mom. Singapore based 🇸🇬",
+    avatar: "assets/avatar-designer.webp",
+    resumeUrl: "",
+    badgeEmoji: "🎨",
+    stickers: ["✨", "◆"],
+    showResumeActions: true,
+    marqueeUnits: 3,
+    aboutHeading: "About Me",
+    aboutText:
+      "I'm Nadya, a curious mind who thrives to learn new things from design, content creation, and everything in between.",
+    worksHeading: "Selected Works",
+    works: [
+      {
+        id: "sea-labs-design-system",
+        title: "Sea Labs Design System",
+        description: "Built a cross-platform design system used across Shopee, Garena, and SeaMoney.",
+        year: "2022",
+        company: "Sea Group Ltd.",
+        tags: ["Design System", "Multi-platform"],
+        content: "",
+        coverImage: "",
+        featured: false,
+        published: true,
+      },
+      {
+        id: "tokopedia-travel-product-redesign",
+        title: "Tokopedia Travel Product Redesign",
+        description: "Redesigned Tokopedia's travel booking flow to lift conversion on mobile.",
+        year: "2020",
+        company: "Tokopedia",
+        tags: ["Mobile", "UX", "Travel"],
+        content: "",
+        coverImage: "",
+        featured: false,
+        published: true,
+      },
+      {
+        id: "unifying-sg-customs-officer-internal-site",
+        title: "Unifying SG Customs Officer Internal Site",
+        description: "Consolidated multiple internal tools into a single design system for customs officers.",
+        year: "2025",
+        company: "Ufinity / GovTech",
+        tags: ["Web", "Design System"],
+        content: "",
+        coverImage: "",
+        featured: false,
+        published: true,
+      },
+    ],
+    showExperience: true,
+    experience: [
+      {
+        id: "ufinity",
+        type: "work",
+        organization: "Ufinity Pte. Ltd.",
+        role: "Sr. Product Designer",
+        period: "2023 - Present",
+        location: "Full-time • Singapore",
+        description:
+          "Ufinity is a Singapore IT agency providing services from IT systems, design, and full-fledged agile teams to support public sector (Singapore's Government) as well as private sectors.",
+        highlights: [
+          "Sr. Product Designer @ GovTech GatherSG",
+          "Sr. Product Designer @ MOE (SLS)",
+          "Sr. Product Designer @ GovTech TradeNet",
+        ],
+      },
+      {
+        id: "sea-group",
+        type: "work",
+        organization: "Sea Group Ltd.",
+        role: "Product Designer",
+        period: "2021 - 2022",
+        location: "Full-time • Singapore",
+        description:
+          "Sea Limited is a leading global consumer internet company founded in Singapore and is a parent company to Shopee, Garena, and SeaMoney.",
+        highlights: ["Product Designer @ Labs"],
+      },
+      {
+        id: "tokopedia",
+        type: "work",
+        organization: "Tokopedia",
+        role: "Senior UX Designer",
+        period: "2017 - 2021",
+        location: "Full-time • Jakarta, Indonesia",
+        description:
+          "Tokopedia is one of Indonesia's unicorn tech companies that started off as an online marketplace and is now on its way to become a super ecosystem.",
+        highlights: [
+          "Senior UX Designer (Merchant Growth)",
+          "Senior UX Designer (Travel Products)",
+          "UX Designer (Digital Goods)",
+        ],
+      },
+      {
+        id: "ugm",
+        type: "education",
+        organization: "Universitas Gadjah Mada",
+        role: "Bachelor's Degree in Information Technology",
+        period: "2012 - 2016",
+        location: "Yogyakarta, Indonesia",
+        description: "GPA 3.7 of 4",
+        highlights: [],
+      },
+      {
+        id: "binar-academy",
+        type: "education",
+        organization: "Binar Academy",
+        role: "UX Design Bootcamp",
+        period: "2017",
+        location: "Indonesia",
+        description: "Intensive UX design bootcamp.",
+        highlights: [],
+      },
+    ],
+    showTestimonials: true,
+    testimonials: [
+      {
+        id: "rizky-pratama",
+        quote:
+          "Working with Nadya was a masterclass in user-centered design. She always pushed the team to think deeper about the 'why' before the 'how'.",
+        letter: "R",
+        name: "Rizky Pratama",
+        role: "Engineering Lead @ Tokopedia",
+      },
+      {
+        id: "sarah-chen",
+        quote:
+          "Nadya brings a rare combination of craft and empathy to everything she designs. Her work on our internal portal transformed how our officers interact with complex systems.",
+        letter: "S",
+        name: "Sarah Chen",
+        role: "Head of Product @ GovTech",
+      },
+    ],
+  },
+
+  traveller: {
+    headline: "A Wandering Storyteller",
+    greeting: "Hi ✈️ I'm Nadya",
+    tagline: "Chasing sunsets, street food & stories across continents. Singapore based 🇸🇬",
+    avatar: "assets/avatar-traveller.jpeg",
+    resumeUrl: "",
+    badgeEmoji: "🧭",
+    stickers: ["☀️", "〰️"],
+    showResumeActions: false,
+    marqueeUnits: 2,
+    aboutHeading: "About Me",
+    aboutText:
+      "Travelling is how I recharge. Every trip teaches me something new — about the world, and about myself.",
+    worksHeading: "Travel Stories",
+    worksSeeMore: true,
+    works: [
+      {
+        id: "48-hours-in-kyoto",
+        title: "48 Hours in Kyoto: A Visual Diary",
+        description: "A whirlwind 48 hours through temples, ramen shops, and quiet alleyways.",
+        year: "2024",
+        company: "Japan",
+        tags: ["Japan", "City Guide", "48hrs"],
+        content: "",
+        coverImage: "",
+        featured: false,
+        published: true,
+      },
+      {
+        id: "solo-trip-bali-on-a-budget",
+        title: "Solo Trip: Bali on a Budget",
+        description: "How I explored Bali solo without blowing the budget.",
+        year: "2023",
+        company: "Indonesia",
+        tags: ["Bali", "Solo", "Budget"],
+        content: "",
+        coverImage: "",
+        featured: false,
+        published: true,
+      },
+      {
+        id: "backpacking-through-vietnam",
+        title: "Backpacking Through Vietnam",
+        description: "Three weeks backpacking from Hanoi to Ho Chi Minh City.",
+        year: "2022",
+        company: "Vietnam",
+        tags: ["Vietnam", "Backpacking", "Adventure"],
+        content: "",
+        coverImage: "",
+        featured: false,
+        published: true,
+      },
+    ],
+    showExperience: false,
+    experience: [],
+    showTestimonials: false,
+    testimonials: [],
+    countriesVisited: [
+      { flag: "🇸🇬", name: "Singapore" },
+      { flag: "🇯🇵", name: "Japan" },
+      { flag: "🇮🇩", name: "Indonesia" },
+      { flag: "🇻🇳", name: "Vietnam" },
+      { flag: "🇹🇭", name: "Thailand" },
+      { flag: "🇰🇷", name: "South Korea" },
+      { flag: "🇮🇹", name: "Italy" },
+    ],
+  },
+
+  mother: {
+    headline: "A Mom Figuring It Out",
+    greeting: "Hi 💗 I'm Nadya",
+    tagline: "Navigating parenthood one beautiful, chaotic day at a time. 💗",
+    avatar: "assets/avatar-mother.jpeg",
+    resumeUrl: "",
+    badgeEmoji: "🌸",
+    stickers: ["⭐", "♥"],
+    showResumeActions: false,
+    marqueeUnits: 1,
+    aboutHeading: "About Me",
+    aboutText:
+      "Being a mom is the hardest and most rewarding thing I've ever done. I share the honest, messy, wonderful journey here.",
+    worksHeading: "My Stories",
+    works: [
+      {
+        id: "our-montessori-inspired-home-setup",
+        title: "Our Montessori-inspired home setup",
+        description: "How we set up our home to support independent play and learning.",
+        year: "2024",
+        company: "Home",
+        tags: ["Montessori", "Interior", "Parenting"],
+        content: "",
+        coverImage: "",
+        featured: false,
+        published: true,
+      },
+    ],
+    showExperience: false,
+    experience: [],
+    showTestimonials: false,
+    testimonials: [],
+  },
+};
+
+const ABOUT = {
+  intro: [
+    "I'm <strong>Nadya</strong> Arizka a product designer based in Singapore with 9 years of experience in product design.",
+    "I have developed a passion for user interface and user experience design. I've always enjoyed engaging with people and discovering the secrets to people's relationships with technology which attracted me to learn more about user experience and fell in love with it more each day.",
+    "I received a Bachelor's degree in Information Technology. As an IT graduate, knowing basic knowledge about product development has helped me to understand the feasibility of products that I design.",
+  ],
+  personaText: {
+    designer:
+      "I'm **Nadya** Arizka, a product designer based in Singapore with 9 years of experience in product design.\n\nI have developed a passion for user interface and user experience design. I've always enjoyed engaging with people and discovering the secrets to people's relationships with technology, which attracted me to learn more about user experience and fell in love with it more each day.\n\nI received a Bachelor's degree in Information Technology. As an IT graduate, knowing basic knowledge about product development has helped me to understand the feasibility of products that I design.",
+    traveller:
+      "I'm **Nadya**, and I've been travelling since before it was an aesthetic. From backpacking across Indonesia to weekend escapes in Southeast Asia — travel is my second language.\n\nEvery destination leaves a mark. I collect experiences over souvenirs.",
+    mother:
+      "I'm **Nadya**, a mom based in Singapore. Motherhood was the plot twist I never planned for — and the greatest adventure of my life.\n\nI share snippets of our daily life, learnings, and the things that keep me sane (coffee, journaling, and good podcasts).",
+  },
+  skills: [
+    "User Research",
+    "User Interface Design",
+    "User Experience Design",
+    "User Research",
+    "User Interface Design",
+    "User Experience Design",
+  ],
+  tools: ["Figma", "Protopie", "Notion", "FigJam", "Figma", "Protopie", "Notion", "FigJam"],
+};
