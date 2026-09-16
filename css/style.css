@@ -526,6 +526,10 @@ img {
   gap: 16px;
 }
 
+.marquee-outer:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 .marquee-item {
   flex-shrink: 0;
   border-radius: var(--radius-card);
