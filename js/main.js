@@ -10,11 +10,13 @@ function downloadIconSvg() {
   </svg>`;
 }
 
-function renderMarquee(units) {
+function renderMarquee(data) {
   // Always repeat the persona's unique unit-set enough times that the track
   // is comfortably wider than any viewport — otherwise a persona with few
   // unique units (e.g. Mother's single unit) doesn't fill the row, so the
   // marquee looks static/broken instead of rolling continuously.
+  const images = data.marqueeImages || [];
+  const units = images.length || data.marqueeUnits || 1;
   const ITEM_WIDTH = 360;
   const GAP = 16;
   const ITEM_FULL = ITEM_WIDTH + GAP;
@@ -28,7 +30,9 @@ function renderMarquee(units) {
 
   const items = [];
   for (let i = 0; i < totalItems; i++) {
-    items.push(`<div class="marquee-item"><div class="marquee-item-inner"></div></div>`);
+    const img = images.length ? images[i % images.length] : null;
+    const style = img ? ` style="background-image:url('${img}');background-size:cover;background-position:center"` : "";
+    items.push(`<div class="marquee-item"><div class="marquee-item-inner"${style}></div></div>`);
   }
 
   const trackStyle = `--marquee-shift:-${shiftPx}px; --marquee-duration:${durationSec}s;`;
@@ -104,7 +108,7 @@ function renderExperience(data) {
 }
 
 function renderTestimonials(data) {
-  if (!data.showTestimonials) return "";
+  if (!data.showTestimonials || !data.testimonials || !data.testimonials.length) return "";
   const cards = data.testimonials
     .map(
       (t) => `
@@ -135,11 +139,14 @@ function renderHomeContent(persona) {
   const resumeOnclick = data.resumeUrl
     ? ` onclick="window.open('${data.resumeUrl}', '_blank')"`
     : "";
+  const statusPill = data.availableForWork
+    ? `<span class="pill-available"><span class="dot-green"></span>Available for work</span>`
+    : `<span class="pill-unavailable"><span class="dot-gray"></span>Currently not available</span>`;
   const actionsHtml = data.showResumeActions
     ? `
     <div class="profile-actions">
       <button class="btn-resume" type="button"${resumeOnclick}>${downloadIconSvg()}Download resume</button>
-      <span class="pill-unavailable"><span class="dot-gray"></span>Currently not available</span>
+      ${statusPill}
     </div>`
     : "";
 
@@ -159,7 +166,7 @@ function renderHomeContent(persona) {
         <p class="tagline">${data.tagline}</p>
         ${actionsHtml}
       </div>
-      ${renderMarquee(data.marqueeUnits)}
+      ${renderMarquee(data)}
       <section class="block first">
         <h2 class="section-title">${data.aboutHeading}</h2>
         <p class="about-text">${data.aboutText}</p>

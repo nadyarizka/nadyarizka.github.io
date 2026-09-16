@@ -107,3 +107,24 @@ function resetAllOverrides() {
   _overrides = {};
   saveOverrides(_overrides);
 }
+
+// ---- Site-wide settings (favicon) ----
+
+function getSiteData() {
+  return Object.assign({ favicon: "/assets/favicon.png" }, _overrides.site || {});
+}
+
+function setSiteField(field, value) {
+  if (!_overrides.site) _overrides.site = {};
+  _overrides.site[field] = value;
+  saveOverrides(_overrides);
+}
+
+function applyStoredFavicon() {
+  const site = _overrides.site || {};
+  if (!site.favicon) return;
+  const link = document.querySelector('link[rel="icon"]');
+  if (link) link.href = site.favicon;
+}
+
+applyStoredFavicon();

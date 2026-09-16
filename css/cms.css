@@ -678,6 +678,70 @@ select.cms-input {
   accent-color: #1a1a1a;
 }
 
+.cms-file-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f0efec;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.cms-file-badge .cms-row-remove {
+  margin-left: 4px;
+}
+
+.cms-marquee-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.cms-marquee-thumb {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  flex-shrink: 0;
+}
+
+.cms-marquee-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cms-marquee-thumb-remove {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.cms-marquee-thumb-remove:hover {
+  background: #dc2626;
+}
+
 .cms-save-btn {
   display: flex;
   align-items: center;

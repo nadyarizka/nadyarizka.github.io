@@ -55,7 +55,11 @@ const CMS_ICONS = {
     '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>',
   countries:
     '<circle cx="12" cy="12" r="10"></circle><path d="M2 12h20"></path><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>',
+  site:
+    '<circle cx="12" cy="12" r="3"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>',
 };
+
+const SITE_SECTION = { id: "site", label: "Site Settings" };
 
 function iconSvg(pathContent, size) {
   const s = size || 16;
@@ -110,12 +114,21 @@ function renderSidebar() {
     </button>`
     )
     .join("");
+
+  const siteNav = document.getElementById("cms-site-nav");
+  if (siteNav) {
+    siteNav.innerHTML = `
+    <button class="cms-nav-item${cmsSection === SITE_SECTION.id ? " active" : ""}" type="button" onclick="selectSection('${SITE_SECTION.id}')">
+      ${iconSvg(CMS_ICONS.site)}
+      ${SITE_SECTION.label}
+    </button>`;
+  }
 }
 
 function selectPersona(persona) {
   cmsPersona = persona;
   const sections = getCmsSections(cmsPersona);
-  if (!sections.find((s) => s.id === cmsSection)) {
+  if (cmsSection !== SITE_SECTION.id && !sections.find((s) => s.id === cmsSection)) {
     cmsSection = sections[0].id;
   }
   cmsView = "list";
@@ -135,6 +148,11 @@ function selectSection(section) {
 }
 
 function renderHeader() {
+  if (cmsSection === SITE_SECTION.id) {
+    document.getElementById("cms-eyebrow").textContent = "SITE";
+    document.getElementById("cms-title").textContent = SITE_SECTION.label;
+    return;
+  }
   document.getElementById("cms-eyebrow").textContent = PERSONA_LABELS[cmsPersona].toUpperCase() + " PERSONA";
   const sectionDef = getCmsSections(cmsPersona).find((s) => s.id === cmsSection);
   document.getElementById("cms-title").textContent = sectionDef ? sectionDef.label : "";
@@ -164,6 +182,7 @@ function renderPanel() {
   else if (cmsSection === "experience") panel.innerHTML = renderExperiencePanel(cmsPersona);
   else if (cmsSection === "testimonials") panel.innerHTML = renderTestimonialsPanel(cmsPersona);
   else if (cmsSection === "countries") panel.innerHTML = renderCountriesPanel(cmsPersona);
+  else if (cmsSection === SITE_SECTION.id) panel.innerHTML = renderSitePanel();
 }
 
 // ---- Profile & About ----
@@ -176,33 +195,7 @@ function renderProfilePanel(persona) {
   return `
     <div class="cms-card">
       <h2 class="cms-card-title">Edit Profile</h2>
-
-      <div class="cms-field">
-        <label class="cms-label">Avatar</label>
-        <div class="cms-avatar-row">
-          <div class="cms-avatar-preview"><img id="cms-avatar-img" src="${escapeAttr(data.avatar)}" alt=""></div>
-          <button class="cms-upload-btn" type="button" onclick="document.getElementById('cms-avatar-file').click()">
-            ${iconSvg(UPLOAD_ICON)}
-            Upload photo
-          </button>
-          <input type="file" id="cms-avatar-file" accept="image/*" style="display:none" onchange="handleAvatarUpload(event, '${persona}')">
-        </div>
-      </div>
-
-      <div class="cms-field">
-        <label class="cms-label">Headline</label>
-        <input class="cms-input" type="text" value="${escapeAttr(data.headline)}" oninput="updatePersonaField('${persona}', 'headline', this.value)">
-      </div>
-
-      <div class="cms-field">
-        <label class="cms-label">Tagline</label>
-        <input class="cms-input" type="text" value="${escapeAttr(data.tagline)}" oninput="updatePersonaField('${persona}', 'tagline', this.value)">
-      </div>
-
-      <div class="cms-field">
-        <label class="cms-label">Resume URL</label>
-        <input class="cms-input" type="text" placeholder="https://..." value="${escapeAttr(data.resumeUrl)}" oninput="updatePersonaField('${persona}', 'resumeUrl', this.value)">
-      </div>
+      ${renderHeroFields(persona, data)}
 
       <div class="cms-field">
         <label class="cms-label">Short About (Homepage)</label>
@@ -216,7 +209,7 @@ function renderProfilePanel(persona) {
     </div>`;
 }
 
-// ---- Hero Section (avatar / headline / tagline / resume) ----
+// ---- Hero Section (avatar / headline / tagline / resume / availability / marquee) ----
 
 function renderHeroPanel(persona) {
   const data = getPersonaData(persona);
@@ -224,34 +217,53 @@ function renderHeroPanel(persona) {
   return `
     <div class="cms-card">
       <h2 class="cms-card-title">Edit Hero Section</h2>
-
-      <div class="cms-field">
-        <label class="cms-label">Avatar</label>
-        <div class="cms-avatar-row">
-          <div class="cms-avatar-preview"><img id="cms-avatar-img" src="${escapeAttr(data.avatar)}" alt=""></div>
-          <button class="cms-upload-btn" type="button" onclick="document.getElementById('cms-avatar-file').click()">
-            ${iconSvg(UPLOAD_ICON)}
-            Upload photo
-          </button>
-          <input type="file" id="cms-avatar-file" accept="image/*" style="display:none" onchange="handleAvatarUpload(event, '${persona}')">
-        </div>
-      </div>
-
-      <div class="cms-field">
-        <label class="cms-label">Headline</label>
-        <input class="cms-input" type="text" value="${escapeAttr(data.headline)}" oninput="updatePersonaField('${persona}', 'headline', this.value)">
-      </div>
-
-      <div class="cms-field">
-        <label class="cms-label">Tagline</label>
-        <input class="cms-input" type="text" value="${escapeAttr(data.tagline)}" oninput="updatePersonaField('${persona}', 'tagline', this.value)">
-      </div>
-
-      <div class="cms-field">
-        <label class="cms-label">Resume URL</label>
-        <input class="cms-input" type="text" placeholder="https://..." value="${escapeAttr(data.resumeUrl)}" oninput="updatePersonaField('${persona}', 'resumeUrl', this.value)">
-      </div>
+      ${renderHeroFields(persona, data)}
     </div>`;
+}
+
+// Shared by both the Designer's combined "Profile & About" panel and the
+// Traveller/Mother "Hero Section" panel — same underlying hero fields either way.
+function renderHeroFields(persona, data) {
+  const isUploadedResume = data.resumeUrl && data.resumeUrl.indexOf("data:") === 0;
+  const resumeField = isUploadedResume
+    ? `<div class="cms-file-badge">${iconSvg('<path d="M14 2v6h6"></path><path d="M6 22h12a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"></path>', 15)}Resume uploaded<button type="button" class="cms-row-remove" onclick="clearResume('${persona}')">&times;</button></div>`
+    : `<input class="cms-input" type="text" placeholder="https://..." value="${escapeAttr(data.resumeUrl)}" oninput="updatePersonaField('${persona}', 'resumeUrl', this.value)">`;
+
+  return `
+    <div class="cms-field">
+      <label class="cms-label">Avatar</label>
+      <div class="cms-avatar-row">
+        <div class="cms-avatar-preview"><img id="cms-avatar-img" src="${escapeAttr(data.avatar)}" alt=""></div>
+        <button class="cms-upload-btn" type="button" onclick="document.getElementById('cms-avatar-file').click()">
+          ${iconSvg(UPLOAD_ICON)}
+          Upload photo
+        </button>
+        <input type="file" id="cms-avatar-file" accept="image/*" style="display:none" onchange="handleAvatarUpload(event, '${persona}')">
+      </div>
+    </div>
+
+    <div class="cms-field">
+      <label class="cms-label">Headline</label>
+      <input class="cms-input" type="text" value="${escapeAttr(data.headline)}" oninput="updatePersonaField('${persona}', 'headline', this.value)">
+    </div>
+
+    <div class="cms-field">
+      <label class="cms-label">Tagline</label>
+      <input class="cms-input" type="text" value="${escapeAttr(data.tagline)}" oninput="updatePersonaField('${persona}', 'tagline', this.value)">
+    </div>
+
+    <div class="cms-field">
+      <label class="cms-label">Resume</label>
+      ${resumeField}
+      <button class="cms-upload-btn" type="button" style="margin-top:10px" onclick="document.getElementById('cms-resume-file').click()">${iconSvg(UPLOAD_ICON)}Upload resume (PDF)</button>
+      <input type="file" id="cms-resume-file" accept="application/pdf,.pdf,.doc,.docx" style="display:none" onchange="handleResumeUpload(event, '${persona}')">
+    </div>
+
+    <div class="cms-field">
+      <label class="cms-checkbox-item"><input type="checkbox" ${data.availableForWork ? "checked" : ""} onchange="updatePersonaField('${persona}', 'availableForWork', this.checked)">Available for work</label>
+    </div>
+
+    ${renderMarqueeImagesField(persona, data)}`;
 }
 
 // ---- About Me (short homepage blurb + full About page text) ----
@@ -297,6 +309,108 @@ function handleAvatarUpload(event, persona) {
     const img = document.getElementById("cms-avatar-img");
     if (img) img.src = dataUrl;
     showToast("Photo updated");
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleResumeUpload(event, persona) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    setPersonaField(persona, "resumeUrl", reader.result);
+    renderPanel();
+    showToast("Resume uploaded");
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearResume(persona) {
+  setPersonaField(persona, "resumeUrl", "");
+  renderPanel();
+  showToast("Resume removed");
+}
+
+// ---- Marquee images (per persona) ----
+
+function renderMarqueeImagesField(persona, data) {
+  const images = data.marqueeImages || [];
+  const thumbs = images
+    .map(
+      (img, i) => `
+      <div class="cms-marquee-thumb">
+        <img src="${escapeAttr(img)}" alt="">
+        <button type="button" class="cms-marquee-thumb-remove" onclick="removeMarqueeImage('${persona}', ${i})">&times;</button>
+      </div>`
+    )
+    .join("");
+
+  return `
+    <div class="cms-field">
+      <label class="cms-label">Marquee Images</label>
+      <div class="cms-marquee-thumbs">${thumbs}</div>
+      <button class="cms-upload-btn" type="button" onclick="document.getElementById('cms-marquee-file').click()">${iconSvg(UPLOAD_ICON)}Add image</button>
+      <input type="file" id="cms-marquee-file" accept="image/*" style="display:none" onchange="handleMarqueeUpload(event, '${persona}')">
+    </div>`;
+}
+
+function handleMarqueeUpload(event, persona) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const list = getPersonaList(persona, "marqueeImages").slice();
+    list.push(reader.result);
+    setPersonaList(persona, "marqueeImages", list);
+    renderPanel();
+    showToast("Image added");
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeMarqueeImage(persona, index) {
+  const list = getPersonaList(persona, "marqueeImages").slice();
+  list.splice(index, 1);
+  setPersonaList(persona, "marqueeImages", list);
+  renderPanel();
+  showToast("Image removed");
+}
+
+// ---- Site Settings (favicon) ----
+
+function renderSitePanel() {
+  const site = getSiteData();
+
+  return `
+    <div class="cms-card">
+      <h2 class="cms-card-title">Site Settings</h2>
+
+      <div class="cms-field">
+        <label class="cms-label">Favicon</label>
+        <div class="cms-avatar-row">
+          <div class="cms-avatar-preview"><img id="cms-favicon-img" src="${escapeAttr(site.favicon)}" alt=""></div>
+          <button class="cms-upload-btn" type="button" onclick="document.getElementById('cms-favicon-file').click()">
+            ${iconSvg(UPLOAD_ICON)}
+            Upload favicon
+          </button>
+          <input type="file" id="cms-favicon-file" accept="image/*" style="display:none" onchange="handleFaviconUpload(event)">
+        </div>
+      </div>
+    </div>`;
+}
+
+function handleFaviconUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const dataUrl = reader.result;
+    setSiteField("favicon", dataUrl);
+    const img = document.getElementById("cms-favicon-img");
+    if (img) img.src = dataUrl;
+    const headLink = document.querySelector('link[rel="icon"]');
+    if (headLink) headLink.href = dataUrl;
+    showToast("Favicon updated");
   };
   reader.readAsDataURL(file);
 }

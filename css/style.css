@@ -485,6 +485,26 @@ img {
   display: inline-block;
 }
 
+.pill-available {
+  background: #ecfdf5;
+  color: #059669;
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #a7f3d0;
+}
+
+.dot-green {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #10b981;
+  display: inline-block;
+}
+
 /* Marquee */
 .marquee-outer {
   position: relative;
