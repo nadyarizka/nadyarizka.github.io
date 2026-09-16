@@ -140,7 +140,7 @@ function renderTikTok(data) {
     .map((v) => {
       const id = (v.url.match(/\/video\/(\d+)/) || [])[1] || "";
       return `
-      <blockquote class="tiktok-embed" cite="${v.url}" data-video-id="${id}" style="max-width:325px;min-width:210px;margin:0;">
+      <blockquote class="tiktok-embed tiktok-embed-item" cite="${v.url}" data-video-id="${id}">
         <section><a target="_blank" rel="noopener" href="${v.url}">@${handle}</a></section>
       </blockquote>`;
     })

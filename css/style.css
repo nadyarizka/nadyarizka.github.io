@@ -836,7 +836,25 @@ h2.section-title {
 .tiktok-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tiktok-embed-item {
+  margin: 0;
+  width: 100%;
+  max-width: 260px;
+  min-width: 0;
+}
+
+@media (min-width: 600px) {
+  .tiktok-grid {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .tiktok-embed-item {
+    max-width: 170px;
+  }
 }
 
 /* Contact */
