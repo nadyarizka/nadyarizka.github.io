@@ -132,39 +132,59 @@ function renderTestimonials(data) {
     </section>`;
 }
 
+function playIconSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>`;
+}
+
 function renderTikTok(data) {
   const videos = (data.tiktokVideos || []).slice(0, 3);
   if (!videos.length) return "";
   const handle = data.tiktokHandle || "";
-  const embeds = videos
-    .map((v) => {
-      const id = (v.url.match(/\/video\/(\d+)/) || [])[1] || "";
-      return `
-      <blockquote class="tiktok-embed tiktok-embed-item" cite="${v.url}" data-video-id="${id}">
-        <section><a target="_blank" rel="noopener" href="${v.url}">@${handle}</a></section>
-      </blockquote>`;
-    })
+  const cards = videos
+    .map(
+      (v, i) => `
+      <a class="tiktok-card" id="tiktok-card-${i}" href="${v.url}" target="_blank" rel="noopener">
+        <div class="tiktok-card-thumb"></div>
+        <div class="tiktok-card-play">${playIconSvg()}</div>
+        <p class="tiktok-card-caption" id="tiktok-caption-${i}"></p>
+      </a>`
+    )
     .join("");
 
   return `
     <section class="block">
       <h2 class="section-title" style="margin-bottom:16px">Latest on TikTok</h2>
-      <div class="tiktok-grid">${embeds}</div>
+      <div class="tiktok-grid">${cards}</div>
       <div class="works-see-more">
         <button class="btn-see-more" type="button" onclick="window.open('https://www.tiktok.com/@${handle}', '_blank')">See more on TikTok</button>
       </div>
     </section>`;
 }
 
-function loadTikTokEmbeds() {
-  if (!document.querySelector(".tiktok-embed")) return;
-  const existing = document.getElementById("tiktok-embed-script");
-  if (existing) existing.remove();
-  const script = document.createElement("script");
-  script.id = "tiktok-embed-script";
-  script.src = "https://www.tiktok.com/embed.js";
-  script.async = true;
-  document.body.appendChild(script);
+// TikTok's official embed widget renders each video at a near-fixed height
+// (~750px) regardless of width, so shrinking the width to fit 3 side by side
+// left them badly out of proportion. Their public oEmbed endpoint gives a
+// plain 9:16 thumbnail image instead, which we can size ourselves.
+function loadTikTokThumbnails(data) {
+  const videos = (data.tiktokVideos || []).slice(0, 3);
+  videos.forEach((v, i) => {
+    fetch("https://www.tiktok.com/oembed?url=" + encodeURIComponent(v.url))
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (!json) return;
+        const thumbEl = document.querySelector("#tiktok-card-" + i + " .tiktok-card-thumb");
+        const capEl = document.getElementById("tiktok-caption-" + i);
+        if (thumbEl && json.thumbnail_url) {
+          thumbEl.style.backgroundImage = "url('" + json.thumbnail_url + "')";
+        }
+        if (capEl && json.title) {
+          capEl.textContent = json.title;
+        }
+      })
+      .catch(() => {
+        // Thumbnail fetch failed — the card still links out to the video.
+      });
+  });
 }
 
 function renderSocials(data) {
@@ -282,7 +302,7 @@ function renderHomeContent(persona) {
     ${renderTravellerTicker(persona)}`;
 
   document.getElementById("page-root").innerHTML = content;
-  loadTikTokEmbeds();
+  loadTikTokThumbnails(data);
 }
 
 function switchPersona(persona) {
