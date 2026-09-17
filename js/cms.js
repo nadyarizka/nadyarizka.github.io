@@ -432,6 +432,10 @@ const WORKS_CONFIG = {
   editTitle: "Edit Work",
   secondMetaLabel: "Company",
   newItemLabel: "New item",
+  // Designer authors content under Blog Posts — Selected Works there is just
+  // a picker (backed by the existing "published" flag) for which posts
+  // surface as homepage cards, not a separate list of its own.
+  selectionOnlyFor: "designer",
 };
 
 const POSTS_CONFIG = {
@@ -466,6 +470,10 @@ function renderWorkLikePanel(persona, cfg) {
 }
 
 function renderWorkLikeList(persona, cfg, list) {
+  if (cfg.selectionOnlyFor === persona) {
+    return renderWorkSelectionList(persona, cfg, list);
+  }
+
   const rows = list
     .map(
       (item, i) => `
@@ -490,6 +498,35 @@ function renderWorkLikeList(persona, cfg, list) {
       <button class="cms-add-btn" type="button" onclick="addWorkLikeItem('${persona}', '${cfg.listField}', '${escapeAttr(cfg.newItemLabel)}')">${iconSvg(PLUS_ICON, 14)}New</button>
     </div>
     ${rows || '<p class="cms-empty-hint">No items yet — click "New" to add one.</p>'}`;
+}
+
+// Selected Works, in selection-only mode, is just a picker over the Blog
+// Posts list: toggling "Show" flips the same `published` flag the homepage
+// already filters on — no independent add/edit/delete here.
+function renderWorkSelectionList(persona, cfg, list) {
+  const listTitle = typeof cfg.listTitle === "function" ? cfg.listTitle(persona) : cfg.listTitle;
+
+  const rows = list
+    .map(
+      (item, i) => `
+      <div class="cms-row-item">
+        <div>
+          <p class="cms-row-title">${escapeHtml(item.title)}</p>
+          <p class="cms-row-meta">${escapeHtml(formatWorkMeta(item))}</p>
+        </div>
+        <div class="cms-row-actions">
+          <label class="cms-checkbox-item"><input type="checkbox" ${item.published !== false ? "checked" : ""} onchange="updateWorkLikeField('${persona}', '${cfg.listField}', ${i}, 'published', this.checked)">Show</label>
+        </div>
+      </div>`
+    )
+    .join("");
+
+  return `
+    <div class="cms-list-header">
+      <h2 class="cms-list-header-title">${escapeHtml(listTitle)}</h2>
+    </div>
+    <p class="cms-card-subtitle" style="margin:-8px 0 16px 0">Pulled from Blog Posts — toggle which ones show here on the homepage. Add or edit content under Blog Posts.</p>
+    ${rows || '<p class="cms-empty-hint">No blog posts yet — add one under Blog Posts first.</p>'}`;
 }
 
 function renderWorkLikeEdit(persona, cfg, index, item) {
