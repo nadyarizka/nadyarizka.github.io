@@ -14,12 +14,10 @@ function renderPost() {
 
   const work = findWork(persona, id) || { title: id, year: "", company: "", tags: [], content: "" };
 
-  const bodyHtml = work.content
-    ? work.content
-        .split(/\n{2,}/)
-        .map((p) => `<p class="post-body-text">${p}</p>`)
-        .join("")
-    : `<p class="post-empty">No content yet.</p>`;
+  const bodyHtml =
+    work.content && work.content.trim()
+      ? `<div class="post-body-rich">${work.content}</div>`
+      : `<p class="post-empty">No content yet.</p>`;
 
   const content = `
     <button class="back-btn" type="button" onclick="goBackHome('${persona}')">&larr; Back</button>

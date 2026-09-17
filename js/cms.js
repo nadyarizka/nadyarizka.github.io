@@ -541,8 +541,9 @@ function renderWorkLikeEdit(persona, cfg, index, item) {
     </div>
 
     <div class="cms-field">
-      <label class="cms-label">Content (Markdown)</label>
-      <textarea class="cms-textarea" rows="6" placeholder="Write your content here..." oninput="updateWorkLikeField('${persona}', '${cfg.listField}', ${index}, 'content', this.value)">${escapeHtml(item.content)}</textarea>
+      <label class="cms-label">Content</label>
+      ${renderRichTextToolbar(persona, cfg.listField, index)}
+      <div class="cms-richtext-editor" id="cms-content-editor-${index}" contenteditable="true" oninput="updateWorkLikeField('${persona}', '${cfg.listField}', ${index}, 'content', this.innerHTML)">${item.content || ""}</div>
     </div>
 
     <div class="cms-checkbox-row">
@@ -559,6 +560,69 @@ function updateWorkLikeField(persona, listField, index, field, value) {
   list[index] = Object.assign({}, list[index], { [field]: value });
   setPersonaList(persona, listField, list);
   showToast("Saved");
+}
+
+// ---- Rich text toolbar (Works / Posts body content) ----
+// Uses document.execCommand — deprecated but still the only dependency-free
+// way to drive a contenteditable region across browsers, and this content is
+// only ever authored by the site owner herself in her own browser.
+
+const RICHTEXT_HEADINGS = [
+  { value: "P", label: "Paragraph" },
+  { value: "H1", label: "Heading 1" },
+  { value: "H2", label: "Heading 2" },
+  { value: "H3", label: "Heading 3" },
+];
+
+function renderRichTextToolbar(persona, listField, index) {
+  const options = RICHTEXT_HEADINGS.map((h) => `<option value="${h.value}">${h.label}</option>`).join("");
+  return `
+    <div class="cms-richtext-toolbar">
+      <select class="cms-richtext-select" onchange="applyRichHeading('${persona}', '${listField}', ${index}, this.value)">${options}</select>
+      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'bold')"><b>B</b></button>
+      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'italic')"><i>I</i></button>
+      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'underline')"><u>U</u></button>
+      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'insertUnorderedList')">&bull; List</button>
+      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'insertOrderedList')">1. List</button>
+      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichLink('${persona}', '${listField}', ${index})">Link</button>
+      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'removeFormat')">Clear</button>
+    </div>`;
+}
+
+function getRichEditor(index) {
+  return document.getElementById("cms-content-editor-" + index);
+}
+
+function saveRichContent(persona, listField, index) {
+  const editor = getRichEditor(index);
+  if (!editor) return;
+  updateWorkLikeField(persona, listField, index, "content", editor.innerHTML);
+}
+
+function applyRichCommand(persona, listField, index, command, value) {
+  const editor = getRichEditor(index);
+  if (!editor) return;
+  editor.focus();
+  document.execCommand(command, false, value || null);
+  saveRichContent(persona, listField, index);
+}
+
+function applyRichHeading(persona, listField, index, tag) {
+  const editor = getRichEditor(index);
+  if (!editor) return;
+  editor.focus();
+  document.execCommand("formatBlock", false, "<" + tag + ">");
+  saveRichContent(persona, listField, index);
+}
+
+function applyRichLink(persona, listField, index) {
+  const editor = getRichEditor(index);
+  if (!editor) return;
+  const url = window.prompt("Link URL:", "https://");
+  if (!url) return;
+  editor.focus();
+  document.execCommand("createLink", false, url);
+  saveRichContent(persona, listField, index);
 }
 
 function addWorkTag(persona, listField, index, value) {
