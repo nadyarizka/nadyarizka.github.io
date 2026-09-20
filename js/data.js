@@ -66,6 +66,11 @@ const SITE = {
     aboutText:
       "I'm Nadya, a curious mind who thrives to learn new things from design, content creation, and everything in between.",
     worksHeading: "Selected Works",
+    selectedWorkIds: [
+      "sea-labs-design-system",
+      "tokopedia-travel-product-redesign",
+      "unifying-sg-customs-officer-internal-site",
+    ],
     works: [
       {
         id: "sea-labs-design-system",

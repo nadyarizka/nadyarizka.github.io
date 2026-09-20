@@ -40,8 +40,10 @@ function renderMarquee(data) {
 }
 
 function renderWorks(data) {
-  const cards = data.works
-    .filter((w) => w.published !== false)
+  const works = getSelectedWorks(data);
+  if (!works.length) return "";
+
+  const cards = works
     .map(
       (w) => `
       <div class="work-card" onclick="goToPost('${w.id}')">

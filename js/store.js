@@ -78,6 +78,23 @@ function formatExpMeta(e) {
   return [e.period, e.location].filter(Boolean).join(" • ");
 }
 
+// ---- Selected works ----
+// A persona that carries a `selectedWorkIds` array curates its homepage works
+// as references into the Blog Posts list. Personas without one just show every
+// published item, as before.
+
+function usesWorkSelection(data) {
+  return Array.isArray(data.selectedWorkIds);
+}
+
+function getSelectedWorks(data) {
+  const posts = data.works || [];
+  if (!usesWorkSelection(data)) return posts.filter((w) => w.published !== false);
+  return data.selectedWorkIds
+    .map((id) => posts.find((w) => w.id === id))
+    .filter((w) => w && w.published !== false);
+}
+
 // ---- About page content ----
 
 function getAboutData() {

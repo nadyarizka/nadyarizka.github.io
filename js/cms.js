@@ -432,10 +432,10 @@ const WORKS_CONFIG = {
   editTitle: "Edit Work",
   secondMetaLabel: "Company",
   newItemLabel: "New item",
-  // Designer authors content under Blog Posts — Selected Works there is just
-  // a picker (backed by the existing "published" flag) for which posts
-  // surface as homepage cards, not a separate list of its own.
-  selectionOnlyFor: "designer",
+  // When a persona curates its works (see usesWorkSelection), this section
+  // becomes a card list of references to published Blog Posts instead of
+  // an authoring list of its own.
+  selectable: true,
 };
 
 const POSTS_CONFIG = {
@@ -463,6 +463,11 @@ function newWorkLikeItem(label) {
 
 function renderWorkLikePanel(persona, cfg) {
   const list = getPersonaList(persona, cfg.listField);
+  if (cfg.selectable && usesWorkSelection(getPersonaData(persona))) {
+    return cmsView === "pick"
+      ? renderWorkPicker(persona, cfg, list)
+      : renderWorkSelectionList(persona, cfg, list);
+  }
   if (cmsView === "edit" && cmsEditIndex != null && list[cmsEditIndex]) {
     return renderWorkLikeEdit(persona, cfg, cmsEditIndex, list[cmsEditIndex]);
   }
@@ -470,10 +475,6 @@ function renderWorkLikePanel(persona, cfg) {
 }
 
 function renderWorkLikeList(persona, cfg, list) {
-  if (cfg.selectionOnlyFor === persona) {
-    return renderWorkSelectionList(persona, cfg, list);
-  }
-
   const rows = list
     .map(
       (item, i) => `
@@ -500,33 +501,91 @@ function renderWorkLikeList(persona, cfg, list) {
     ${rows || '<p class="cms-empty-hint">No items yet — click "New" to add one.</p>'}`;
 }
 
-// Selected Works, in selection-only mode, is just a picker over the Blog
-// Posts list: toggling "Show" flips the same `published` flag the homepage
-// already filters on — no independent add/edit/delete here.
+// Selected Works as a curated list: cards for the Blog Posts picked so far
+// (title + year), a remove button on each, and an Add button below. Removing
+// only takes a post off this list — the post itself stays under Blog Posts.
 function renderWorkSelectionList(persona, cfg, list) {
   const listTitle = typeof cfg.listTitle === "function" ? cfg.listTitle(persona) : cfg.listTitle;
+  const ids = getPersonaData(persona).selectedWorkIds || [];
 
-  const rows = list
-    .map(
-      (item, i) => `
+  const rows = ids
+    .map((id, i) => {
+      const item = list.find((w) => w.id === id);
+      if (!item) return "";
+      const meta = [item.year, item.published === false ? "Unpublished (hidden on site)" : ""]
+        .filter(Boolean)
+        .join(" • ");
+      return `
       <div class="cms-row-item">
         <div>
           <p class="cms-row-title">${escapeHtml(item.title)}</p>
-          <p class="cms-row-meta">${escapeHtml(formatWorkMeta(item))}</p>
+          <p class="cms-row-meta">${escapeHtml(meta)}</p>
         </div>
         <div class="cms-row-actions">
-          <label class="cms-checkbox-item"><input type="checkbox" ${item.published !== false ? "checked" : ""} onchange="updateWorkLikeField('${persona}', '${cfg.listField}', ${i}, 'published', this.checked)">Show</label>
+          <button class="cms-icon-btn cms-icon-btn-danger" type="button" title="Remove from ${escapeAttr(listTitle)}" onclick="removeSelectedWork('${persona}', ${i})">${iconSvg(TRASH_ICON, 15)}</button>
         </div>
-      </div>`
-    )
+      </div>`;
+    })
     .join("");
 
   return `
     <div class="cms-list-header">
       <h2 class="cms-list-header-title">${escapeHtml(listTitle)}</h2>
     </div>
-    <p class="cms-card-subtitle" style="margin:-8px 0 16px 0">Pulled from Blog Posts — toggle which ones show here on the homepage. Add or edit content under Blog Posts.</p>
-    ${rows || '<p class="cms-empty-hint">No blog posts yet — add one under Blog Posts first.</p>'}`;
+    <p class="cms-card-subtitle" style="margin:-8px 0 16px 0">Cards here come from your published Blog Posts. Removing one only takes it off the homepage — the post itself stays.</p>
+    ${rows || '<p class="cms-empty-hint">Nothing selected yet — click "Add" to pick from your blog posts.</p>'}
+    <button class="cms-add-btn" type="button" onclick="goToPick()">${iconSvg(PLUS_ICON, 14)}Add</button>`;
+}
+
+// The Add flow: published Blog Posts not already on the list. Picking one adds
+// it and returns to the card list.
+function renderWorkPicker(persona, cfg, list) {
+  const listTitle = typeof cfg.listTitle === "function" ? cfg.listTitle(persona) : cfg.listTitle;
+  const taken = getPersonaData(persona).selectedWorkIds || [];
+
+  const rows = list
+    .filter((item) => item.published !== false && taken.indexOf(item.id) === -1)
+    .map(
+      (item) => `
+      <div class="cms-row-item">
+        <div>
+          <p class="cms-row-title">${escapeHtml(item.title)}</p>
+          <p class="cms-row-meta">${escapeHtml(item.year || "")}</p>
+        </div>
+        <div class="cms-row-actions">
+          <button class="cms-upload-btn" type="button" onclick="addSelectedWork('${persona}', '${escapeAttr(item.id)}')">${iconSvg(PLUS_ICON, 14)}Add</button>
+        </div>
+      </div>`
+    )
+    .join("");
+
+  return `
+    <button class="cms-back-to-list" type="button" onclick="goBackToList()">${iconSvg(BACK_ICON, 15)}Back to list</button>
+    <h2 class="cms-edit-title">Add to ${escapeHtml(listTitle)}</h2>
+    <p class="cms-card-subtitle" style="margin:-8px 0 16px 0">Choose from your published blog posts.</p>
+    ${rows || '<p class="cms-empty-hint">No more published blog posts to add. Write or publish one under Blog Posts first.</p>'}`;
+}
+
+function goToPick() {
+  cmsView = "pick";
+  cmsEditIndex = null;
+  renderPanel();
+}
+
+function addSelectedWork(persona, id) {
+  const ids = getPersonaList(persona, "selectedWorkIds").slice();
+  if (ids.indexOf(id) === -1) ids.push(id);
+  setPersonaList(persona, "selectedWorkIds", ids);
+  goBackToList();
+  showToast("Added");
+}
+
+function removeSelectedWork(persona, index) {
+  const ids = getPersonaList(persona, "selectedWorkIds").slice();
+  ids.splice(index, 1);
+  setPersonaList(persona, "selectedWorkIds", ids);
+  renderPanel();
+  showToast("Removed");
 }
 
 function renderWorkLikeEdit(persona, cfg, index, item) {
@@ -706,8 +765,12 @@ function addWorkLikeItem(persona, listField, label) {
 
 function deleteWorkLikeItem(persona, listField, index) {
   const list = getPersonaList(persona, listField).slice();
-  list.splice(index, 1);
+  const removed = list.splice(index, 1)[0];
   setPersonaList(persona, listField, list);
+  if (removed && usesWorkSelection(getPersonaData(persona))) {
+    const ids = getPersonaList(persona, "selectedWorkIds").filter((id) => id !== removed.id);
+    setPersonaList(persona, "selectedWorkIds", ids);
+  }
   renderPanel();
   showToast("Deleted");
 }
