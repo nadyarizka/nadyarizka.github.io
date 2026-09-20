@@ -14,10 +14,14 @@ function renderPost() {
 
   const work = findWork(persona, id) || { title: id, year: "", company: "", tags: [], content: "" };
 
-  const bodyHtml =
-    work.content && work.content.trim()
-      ? `<div class="post-body-rich">${work.content}</div>`
-      : `<p class="post-empty">No content yet.</p>`;
+  const blocks = getPostBlocks(work);
+  const bodyHtml = blocksHaveContent(blocks)
+    ? `<div class="post-body-rich">${blocksToHtml(blocks)}</div>`
+    : `<p class="post-empty">No content yet.</p>`;
+
+  const root = document.getElementById("page-root");
+  if (work.layoutWidth === "wide") root.classList.add("is-wide");
+  if (work.layoutWidth === "full") root.classList.add("is-full");
 
   const content = `
     <button class="back-btn" type="button" onclick="goBackHome('${persona}')">&larr; Back</button>

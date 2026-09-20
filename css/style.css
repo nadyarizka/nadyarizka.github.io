@@ -193,6 +193,15 @@ img {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
+/* Per-post page width, chosen in the CMS editor (narrow is the default). */
+.page.page-narrow.is-wide {
+  max-width: 60rem;
+}
+
+.page.page-narrow.is-full {
+  max-width: 75rem;
+}
+
 .card {
   position: relative;
   background: #ffffff;
@@ -1107,6 +1116,78 @@ textarea.form-input {
 .post-body-rich a {
   color: var(--accent);
   text-decoration: underline;
+}
+
+.post-body-rich blockquote {
+  margin: 0 0 18px 0;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--accent);
+  font-size: 17px;
+  color: #111827;
+}
+
+.post-body-rich hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 28px 0;
+}
+
+.post-body-rich .pb-callout {
+  display: flex;
+  gap: 12px;
+  background: #f6f5f3;
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin: 0 0 18px 0;
+}
+
+.pb-callout-icon {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.pb-callout-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-body-rich .pb-image {
+  margin: 0 0 20px 0;
+}
+
+.pb-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.pb-image figcaption {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.pb-columns {
+  display: grid;
+  column-gap: 32px;
+  align-items: start;
+  margin: 0 0 18px 0;
+}
+
+.pb-col {
+  min-width: 0;
+}
+
+.pb-col > :last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .pb-columns {
+    grid-template-columns: 1fr !important;
+    row-gap: 8px;
+  }
 }
 
 @media (max-width: 480px) {

@@ -15,11 +15,21 @@ function loadOverrides() {
   }
 }
 
+// Whether the most recent write reached localStorage. The CMS reads this so a
+// full browser (easy to hit with images) is never reported as "Saved".
+let storageOk = true;
+
+function isStorageOk() {
+  return storageOk;
+}
+
 function saveOverrides(overrides) {
   try {
     localStorage.setItem(STORE_KEY, JSON.stringify(overrides));
+    storageOk = true;
   } catch (e) {
-    // Storage full or unavailable (private browsing) — edits just won't persist.
+    // Storage full or unavailable (private browsing) — edits won't persist.
+    storageOk = false;
   }
 }
 

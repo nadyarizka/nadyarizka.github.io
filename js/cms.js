@@ -90,14 +90,18 @@ let cmsView = "list";
 let cmsEditIndex = null;
 let toastTimer = null;
 
-function showToast(message) {
+function showToast(message, duration) {
   const toast = document.getElementById("cms-toast");
+  if (!isStorageOk()) {
+    message = "Not saved — browser storage is full. Remove some images and try again.";
+    duration = 6000;
+  }
   toast.textContent = message || "Saved";
   toast.classList.add("show");
   if (toastTimer) window.clearTimeout(toastTimer);
   toastTimer = window.setTimeout(() => {
     toast.classList.remove("show");
-  }, 1400);
+  }, duration || 1400);
 }
 
 // ---- Sidebar ----
@@ -180,7 +184,13 @@ function goToEdit(index) {
 // ---- Panel dispatch ----
 
 function renderPanel() {
+  // Flushes any pending edit before the editor's DOM goes away.
+  if (activeBlockEditor) {
+    activeBlockEditor.destroy();
+    activeBlockEditor = null;
+  }
   const panel = document.getElementById("cms-panel");
+  panel.classList.toggle("cms-panel-wide", cmsView === "edit" && (cmsSection === "works" || cmsSection === "posts"));
   if (cmsSection === "profile") panel.innerHTML = renderProfilePanel(cmsPersona);
   else if (cmsSection === "hero") panel.innerHTML = renderHeroPanel(cmsPersona);
   else if (cmsSection === "about") panel.innerHTML = renderAboutMePanel(cmsPersona);
@@ -192,6 +202,7 @@ function renderPanel() {
   else if (cmsSection === "socials") panel.innerHTML = renderSocialsPanel(cmsPersona);
   else if (cmsSection === "tiktok") panel.innerHTML = renderTikTokPanel(cmsPersona);
   else if (cmsSection === SITE_SECTION.id) panel.innerHTML = renderSitePanel();
+  mountBlockEditor();
 }
 
 // ---- Profile & About ----
@@ -638,8 +649,7 @@ function renderWorkLikeEdit(persona, cfg, index, item) {
 
     <div class="cms-field">
       <label class="cms-label">Content</label>
-      ${renderRichTextToolbar(persona, cfg.listField, index)}
-      <div class="cms-richtext-editor" id="cms-content-editor-${index}" contenteditable="true" oninput="updateWorkLikeField('${persona}', '${cfg.listField}', ${index}, 'content', this.innerHTML)">${item.content || ""}</div>
+      <div id="cms-block-editor"></div>
     </div>
 
     <div class="cms-checkbox-row">
@@ -658,67 +668,38 @@ function updateWorkLikeField(persona, listField, index, field, value) {
   showToast("Saved");
 }
 
-// ---- Rich text toolbar (Works / Posts body content) ----
-// Uses document.execCommand — deprecated but still the only dependency-free
-// way to drive a contenteditable region across browsers, and this content is
-// only ever authored by the site owner herself in her own browser.
+// ---- Block editor (Works / Posts body content) ----
+// The editor itself lives in editor.js; this just feeds it a post's blocks and
+// saves what it reports back (debounced there, flushed when the panel changes).
 
-const RICHTEXT_HEADINGS = [
-  { value: "P", label: "Paragraph" },
-  { value: "H1", label: "Heading 1" },
-  { value: "H2", label: "Heading 2" },
-  { value: "H3", label: "Heading 3" },
-];
+let activeBlockEditor = null;
 
-function renderRichTextToolbar(persona, listField, index) {
-  const options = RICHTEXT_HEADINGS.map((h) => `<option value="${h.value}">${h.label}</option>`).join("");
-  return `
-    <div class="cms-richtext-toolbar">
-      <select class="cms-richtext-select" onchange="applyRichHeading('${persona}', '${listField}', ${index}, this.value)">${options}</select>
-      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'bold')"><b>B</b></button>
-      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'italic')"><i>I</i></button>
-      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'underline')"><u>U</u></button>
-      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'insertUnorderedList')">&bull; List</button>
-      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'insertOrderedList')">1. List</button>
-      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichLink('${persona}', '${listField}', ${index})">Link</button>
-      <button type="button" class="cms-richtext-btn" onmousedown="event.preventDefault()" onclick="applyRichCommand('${persona}', '${listField}', ${index}, 'removeFormat')">Clear</button>
-    </div>`;
+function mountBlockEditor() {
+  const host = document.getElementById("cms-block-editor");
+  if (!host || cmsEditIndex == null) return;
+  const persona = cmsPersona;
+  const listField = "works";
+  const index = cmsEditIndex;
+  const item = getPersonaList(persona, listField)[index];
+  if (!item) return;
+
+  activeBlockEditor = BlockEditor.mount(host, {
+    blocks: getPostBlocks(item),
+    layoutWidth: item.layoutWidth || "narrow",
+    onChange: (payload) => saveBlockContent(persona, listField, index, payload),
+    onError: (message) => showToast(message, 3000),
+  });
 }
 
-function getRichEditor(index) {
-  return document.getElementById("cms-content-editor-" + index);
-}
-
-function saveRichContent(persona, listField, index) {
-  const editor = getRichEditor(index);
-  if (!editor) return;
-  updateWorkLikeField(persona, listField, index, "content", editor.innerHTML);
-}
-
-function applyRichCommand(persona, listField, index, command, value) {
-  const editor = getRichEditor(index);
-  if (!editor) return;
-  editor.focus();
-  document.execCommand(command, false, value || null);
-  saveRichContent(persona, listField, index);
-}
-
-function applyRichHeading(persona, listField, index, tag) {
-  const editor = getRichEditor(index);
-  if (!editor) return;
-  editor.focus();
-  document.execCommand("formatBlock", false, "<" + tag + ">");
-  saveRichContent(persona, listField, index);
-}
-
-function applyRichLink(persona, listField, index) {
-  const editor = getRichEditor(index);
-  if (!editor) return;
-  const url = window.prompt("Link URL:", "https://");
-  if (!url) return;
-  editor.focus();
-  document.execCommand("createLink", false, url);
-  saveRichContent(persona, listField, index);
+function saveBlockContent(persona, listField, index, payload) {
+  const list = getPersonaList(persona, listField).slice();
+  if (!list[index]) return;
+  list[index] = Object.assign({}, list[index], {
+    blocks: payload.blocks,
+    layoutWidth: payload.layoutWidth,
+  });
+  setPersonaList(persona, listField, list);
+  showToast("Saved");
 }
 
 function addWorkTag(persona, listField, index, value) {
