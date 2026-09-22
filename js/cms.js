@@ -92,7 +92,8 @@ let toastTimer = null;
 
 function showToast(message, duration) {
   const toast = document.getElementById("cms-toast");
-  if (!isStorageOk()) {
+  const savedOk = isStorageOk();
+  if (!savedOk) {
     message = "Not saved — browser storage is full. Publish or remove some images and try again.";
     duration = 6000;
   }
@@ -103,6 +104,9 @@ function showToast(message, duration) {
     toast.classList.remove("show");
   }, duration || 1400);
   refreshPublishStatusText();
+  // Every real save is a candidate to go live — schedule (or push back) an
+  // auto-publish. No-ops until a GitHub token is connected.
+  if (savedOk) scheduleAutoPublish();
 }
 
 // ---- Sidebar ----
@@ -423,10 +427,11 @@ function renderSitePanel() {
 }
 
 // ---- Publish to GitHub ----
-// Everything above is a draft saved only in this browser's localStorage.
-// This card lets the owner commit that draft straight to the live GitHub
-// repo (see publish.js/github.js) so visitors actually see it, and so the
-// ~5MB draft storage gets freed up again afterwards.
+// Once a token is connected, every save auto-publishes a few seconds after
+// you stop editing (see scheduleAutoPublish) — commits your local draft to
+// the live GitHub repo so visitors actually see it, and frees up the ~5MB
+// draft storage in the process. "Publish now" below is just a manual
+// override, for forcing it immediately or retrying after a failure.
 
 function renderPublishCard() {
   const token = getGithubToken();
@@ -435,13 +440,13 @@ function renderPublishCard() {
   const statusLine = !token
     ? "Not connected yet."
     : summary.hasChanges
-      ? formatBytes(summary.bytes) + " of changes not yet published."
+      ? formatBytes(summary.bytes) + " will auto-publish shortly."
       : "Everything is published.";
 
   return `
     <div class="cms-card">
       <h2 class="cms-card-title">Publish to GitHub</h2>
-      <p class="cms-card-subtitle">Edits everywhere in this CMS are drafts saved only in this browser. Publishing commits them to your GitHub repo (nadyarizka.github.io) so every visitor sees them — and frees up the draft storage above, since images no longer need to sit in localStorage.</p>
+      <p class="cms-card-subtitle">Once connected, edits anywhere in this CMS auto-publish to your GitHub repo (nadyarizka.github.io) a few seconds after you stop editing — no extra click needed. That's also what frees up the draft storage above, since images no longer sit in localStorage waiting.</p>
 
       <div class="cms-field">
         <label class="cms-label">GitHub personal access token</label>
@@ -495,9 +500,40 @@ function forgetGithubToken() {
 }
 
 let publishInProgress = false;
+let autoPublishTimer = null;
+let autoPublishFirstPendingAt = null;
+const AUTO_PUBLISH_DEBOUNCE_MS = 4000; // publish this long after you stop editing
+const AUTO_PUBLISH_MAX_WAIT_MS = 60000; // ...but never delay longer than this if edits keep coming
+
+// Called after every successful local save. Debounced so a run of keystrokes
+// or list edits collapses into one publish shortly after you pause, rather
+// than a commit per change — but capped so continuous editing can't push
+// publishing off indefinitely.
+function scheduleAutoPublish() {
+  if (!getGithubToken()) return; // nothing to auto-publish to yet
+  if (!getDraftSummary().hasChanges) return; // e.g. the toast after a publish itself
+  const now = Date.now();
+  if (!autoPublishFirstPendingAt) autoPublishFirstPendingAt = now;
+  if (autoPublishTimer) window.clearTimeout(autoPublishTimer);
+  const overdue = now - autoPublishFirstPendingAt >= AUTO_PUBLISH_MAX_WAIT_MS;
+  autoPublishTimer = window.setTimeout(
+    () => {
+      autoPublishTimer = null;
+      runPublish();
+    },
+    overdue ? 0 : AUTO_PUBLISH_DEBOUNCE_MS
+  );
+}
+
+function cancelScheduledAutoPublish() {
+  if (autoPublishTimer) window.clearTimeout(autoPublishTimer);
+  autoPublishTimer = null;
+  autoPublishFirstPendingAt = null;
+}
 
 async function runPublish() {
   if (publishInProgress) return;
+  cancelScheduledAutoPublish();
   if (!getGithubToken()) {
     showToast("Add a GitHub token in Site Settings first", 3000);
     selectSection(SITE_SECTION.id);
@@ -514,6 +550,12 @@ async function runPublish() {
   } catch (err) {
     setPublishStatusText(err.message || "Publish failed", "error");
     showToast("Publish failed — see Site Settings", 4000);
+    // showToast just re-armed the auto-publish timer (it can't tell this was
+    // a failure) — undo that. A persistent problem like a bad token would
+    // otherwise retry every few seconds forever. The draft isn't lost — it
+    // stays pending and gets another shot on the next real edit, or now via
+    // "Publish now".
+    cancelScheduledAutoPublish();
   } finally {
     publishInProgress = false;
   }
@@ -537,7 +579,7 @@ function refreshPublishStatusText() {
   if (!summary.hasChanges) {
     setPublishStatusText("All changes published", "success");
   } else {
-    setPublishStatusText(formatBytes(summary.bytes) + " unpublished — click to publish", "pending");
+    setPublishStatusText(formatBytes(summary.bytes) + " unpublished — auto-publishing shortly", "pending");
   }
 }
 
