@@ -100,7 +100,8 @@ function goBack(persona) {
   window.location.href = "index.html?persona=" + persona;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadPublishedContent();
   const persona = getQueryPersona();
   document.getElementById("page-root").classList.add("page-narrow");
   initNav(persona, switchPersona);

@@ -93,7 +93,7 @@ let toastTimer = null;
 function showToast(message, duration) {
   const toast = document.getElementById("cms-toast");
   if (!isStorageOk()) {
-    message = "Not saved — browser storage is full. Remove some images and try again.";
+    message = "Not saved — browser storage is full. Publish or remove some images and try again.";
     duration = 6000;
   }
   toast.textContent = message || "Saved";
@@ -102,6 +102,7 @@ function showToast(message, duration) {
   toastTimer = window.setTimeout(() => {
     toast.classList.remove("show");
   }, duration || 1400);
+  refreshPublishStatusText();
 }
 
 // ---- Sidebar ----
@@ -244,7 +245,8 @@ function renderHeroPanel(persona) {
 // Shared by both the Designer's combined "Profile & About" panel and the
 // Traveller/Mother "Hero Section" panel — same underlying hero fields either way.
 function renderHeroFields(persona, data) {
-  const isUploadedResume = data.resumeUrl && data.resumeUrl.indexOf("data:") === 0;
+  const isUploadedResume =
+    data.resumeUrl && (data.resumeUrl.indexOf("data:") === 0 || data.resumeUrl.indexOf("/assets/uploads/") === 0);
   const resumeField = isUploadedResume
     ? `<div class="cms-file-badge">${iconSvg('<path d="M14 2v6h6"></path><path d="M6 22h12a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"></path>', 15)}Resume uploaded<button type="button" class="cms-row-remove" onclick="clearResume('${persona}')">&times;</button></div>`
     : `<input class="cms-input" type="text" placeholder="https://..." value="${escapeAttr(data.resumeUrl)}" oninput="updatePersonaField('${persona}', 'resumeUrl', this.value)">`;
@@ -416,7 +418,127 @@ function renderSitePanel() {
           <input type="file" id="cms-favicon-file" accept="image/*" style="display:none" onchange="handleFaviconUpload(event)">
         </div>
       </div>
+    </div>
+    ${renderPublishCard()}`;
+}
+
+// ---- Publish to GitHub ----
+// Everything above is a draft saved only in this browser's localStorage.
+// This card lets the owner commit that draft straight to the live GitHub
+// repo (see publish.js/github.js) so visitors actually see it, and so the
+// ~5MB draft storage gets freed up again afterwards.
+
+function renderPublishCard() {
+  const token = getGithubToken();
+  const remembered = hasRememberedGithubToken();
+  const summary = getDraftSummary();
+  const statusLine = !token
+    ? "Not connected yet."
+    : summary.hasChanges
+      ? formatBytes(summary.bytes) + " of changes not yet published."
+      : "Everything is published.";
+
+  return `
+    <div class="cms-card">
+      <h2 class="cms-card-title">Publish to GitHub</h2>
+      <p class="cms-card-subtitle">Edits everywhere in this CMS are drafts saved only in this browser. Publishing commits them to your GitHub repo (nadyarizka.github.io) so every visitor sees them — and frees up the draft storage above, since images no longer need to sit in localStorage.</p>
+
+      <div class="cms-field">
+        <label class="cms-label">GitHub personal access token</label>
+        <input class="cms-input" type="password" id="cms-gh-token" placeholder="${token ? "•••••••••••••••• (saved — paste a new one to replace it)" : "ghp_… or github_pat_…"}">
+        <label class="cms-checkbox-item" style="margin-top:10px"><input type="checkbox" id="cms-gh-remember" ${remembered ? "checked" : ""}>Remember on this device</label>
+        <div class="cms-add-row" style="margin-top:10px">
+          <button class="cms-upload-btn" type="button" onclick="saveGithubTokenFromField()">Save token</button>
+          ${token ? `<button class="cms-icon-btn cms-icon-btn-danger" type="button" title="Remove saved token" onclick="forgetGithubToken()">${iconSvg(TRASH_ICON, 15)}</button>` : ""}
+        </div>
+        <p class="cms-card-subtitle" style="margin-top:12px">Create a <strong>fine-grained</strong> token at github.com → Settings → Developer settings → Personal access tokens, scoped only to the <code>nadyarizka.github.io</code> repo with "Contents: Read and write" permission. Don't share this token — it can push to your live site.</p>
+      </div>
+
+      <div class="cms-field">
+        <p id="cms-site-publish-status" class="cms-publish-status">${escapeHtml(statusLine)}</p>
+        <button class="cms-save-btn" type="button" onclick="runPublish()">${iconSvg(SAVE_ICON, 16)}Publish now</button>
+      </div>
     </div>`;
+}
+
+function saveGithubTokenFromField() {
+  const input = document.getElementById("cms-gh-token");
+  const rememberEl = document.getElementById("cms-gh-remember");
+  const value = input ? input.value.trim() : "";
+  if (!value) {
+    showToast("Paste a token first", 2500);
+    return;
+  }
+  setGithubToken(value, !!(rememberEl && rememberEl.checked));
+  showToast("Token saved — verifying…");
+  verifyGithubToken(value)
+    .then((ok) => {
+      showToast(ok ? "Token verified — ready to publish" : "Saved, but that token can't push to this repo", 3500);
+      refreshPublishStatusText();
+      if (cmsSection === SITE_SECTION.id) renderPanel();
+    })
+    .catch((err) => {
+      const message = err.message || "Couldn't verify the token";
+      showToast(message, 4500);
+      if (cmsSection === SITE_SECTION.id) renderPanel();
+      // Re-render just replaced the status line with the generic summary —
+      // overwrite it with the real reason the token didn't work.
+      setPublishStatusText(message, "error");
+    });
+}
+
+function forgetGithubToken() {
+  clearGithubToken();
+  showToast("Token removed");
+  refreshPublishStatusText();
+  if (cmsSection === SITE_SECTION.id) renderPanel();
+}
+
+let publishInProgress = false;
+
+async function runPublish() {
+  if (publishInProgress) return;
+  if (!getGithubToken()) {
+    showToast("Add a GitHub token in Site Settings first", 3000);
+    selectSection(SITE_SECTION.id);
+    return;
+  }
+  publishInProgress = true;
+  setPublishStatusText("Publishing…", "pending");
+  try {
+    await publishToGithub((message) => setPublishStatusText(message, "pending"));
+    setPublishStatusText("Published — live in about a minute", "success");
+    showToast("Published to GitHub");
+    renderSidebar();
+    renderPanel();
+  } catch (err) {
+    setPublishStatusText(err.message || "Publish failed", "error");
+    showToast("Publish failed — see Site Settings", 4000);
+  } finally {
+    publishInProgress = false;
+  }
+}
+
+function setPublishStatusText(text, state) {
+  [document.getElementById("cms-publish-status"), document.getElementById("cms-site-publish-status")].forEach((el) => {
+    if (!el) return;
+    el.textContent = text;
+    el.className = "cms-publish-status" + (state ? " is-" + state : "");
+  });
+}
+
+function refreshPublishStatusText() {
+  if (publishInProgress) return;
+  if (!getGithubToken()) {
+    setPublishStatusText("Not connected — set up in Site Settings", "");
+    return;
+  }
+  const summary = getDraftSummary();
+  if (!summary.hasChanges) {
+    setPublishStatusText("All changes published", "success");
+  } else {
+    setPublishStatusText(formatBytes(summary.bytes) + " unpublished — click to publish", "pending");
+  }
 }
 
 function handleFaviconUpload(event) {
@@ -1164,8 +1286,10 @@ function deleteTikTokVideo(persona, index) {
 
 // ---- Init ----
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadPublishedContent();
   renderSidebar();
   renderHeader();
   renderPanel();
+  refreshPublishStatusText();
 });

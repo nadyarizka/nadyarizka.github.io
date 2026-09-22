@@ -44,4 +44,7 @@ function goBackHome(persona) {
   window.location.href = "index.html?persona=" + persona;
 }
 
-document.addEventListener("DOMContentLoaded", renderPost);
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadPublishedContent();
+  renderPost();
+});

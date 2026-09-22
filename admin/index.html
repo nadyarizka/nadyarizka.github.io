@@ -36,6 +36,11 @@
       </div>
 
       <div class="cms-sidebar-footer">
+        <button class="cms-publish-btn" type="button" onclick="runPublish()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cms-icon"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
+          Publish to GitHub
+        </button>
+        <p class="cms-publish-status" id="cms-publish-status">Checking…</p>
         <a class="cms-back-link" href="../index.html">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cms-icon"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
           Back to site
@@ -55,6 +60,8 @@
 
   <script src="../js/data.js"></script>
   <script src="../js/store.js"></script>
+  <script src="../js/github.js"></script>
+  <script src="../js/publish.js"></script>
   <script src="../js/blocks.js"></script>
   <script src="../js/editor.js"></script>
   <script src="../js/cms.js"></script>

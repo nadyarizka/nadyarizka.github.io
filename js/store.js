@@ -138,7 +138,7 @@ function resetAllOverrides() {
 // ---- Site-wide settings (favicon) ----
 
 function getSiteData() {
-  return Object.assign({ favicon: "/assets/favicon.png" }, _overrides.site || {});
+  return Object.assign({}, SITE_SETTINGS, _overrides.site || {});
 }
 
 function setSiteField(field, value) {
@@ -148,10 +148,10 @@ function setSiteField(field, value) {
 }
 
 function applyStoredFavicon() {
-  const site = _overrides.site || {};
-  if (!site.favicon) return;
+  const favicon = getSiteData().favicon;
+  if (!favicon) return;
   const link = document.querySelector('link[rel="icon"]');
-  if (link) link.href = site.favicon;
+  if (link) link.href = favicon;
 }
 
 applyStoredFavicon();

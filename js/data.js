@@ -333,3 +333,10 @@ const ABOUT = {
   ],
   tools: ["Figma", "Protopie", "Notion", "FigJam", "Figma", "Protopie", "Notion", "FigJam"],
 };
+
+// Site-wide settings that aren't tied to a persona (currently just the
+// favicon). Overwritten in place by publish.js once a published
+// data/content.json has been fetched — see getSiteData() in store.js.
+const SITE_SETTINGS = {
+  favicon: "/assets/favicon.png",
+};

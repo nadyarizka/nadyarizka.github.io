@@ -319,7 +319,8 @@ function goToPost(id) {
   window.location.href = "post.html?persona=" + currentPersona + "&id=" + encodeURIComponent(id);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadPublishedContent();
   const persona = getQueryPersona();
   initNav(persona, switchPersona);
   transitionToPersona(persona, () => renderHomeContent(persona), true);
