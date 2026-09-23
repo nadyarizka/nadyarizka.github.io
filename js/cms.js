@@ -104,9 +104,15 @@ function showToast(message, duration) {
     toast.classList.remove("show");
   }, duration || 1400);
   refreshPublishStatusText();
-  // Every real save is a candidate to go live — schedule (or push back) an
-  // auto-publish. No-ops until a GitHub token is connected.
-  if (savedOk) scheduleAutoPublish();
+  // Every save (even a failed one) is a candidate to go live — schedule (or
+  // push back) an auto-publish. Deliberately NOT gated on savedOk: once
+  // localStorage is full, a failed write is exactly when auto-publish is
+  // most needed to dig out of it — the edit still exists in the in-memory
+  // draft (only the localStorage persist failed), and publishing reads from
+  // that live state and goes straight to GitHub, bypassing localStorage's
+  // cap entirely. Gating this on savedOk would mean the one thing that can
+  // free up storage stops triggering right when storage is full.
+  scheduleAutoPublish();
 }
 
 // ---- Sidebar ----
@@ -1336,4 +1342,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   renderHeader();
   renderPanel();
   refreshPublishStatusText();
+  // If there's already a pending draft from a previous visit (e.g. the tab
+  // was closed before the debounce fired, or a publish failed and nothing
+  // since re-armed it), don't just display "unpublished" and leave it there
+  // — actually schedule the publish. Otherwise the status text implies
+  // something is in progress when nothing is.
+  scheduleAutoPublish();
 });
