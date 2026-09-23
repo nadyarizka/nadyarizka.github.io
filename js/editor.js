@@ -64,38 +64,10 @@
     return c;
   }
 
-  // Images are downscaled and re-encoded so a handful fit in localStorage.
+  // Downscale/re-encode lives in blocks.js now, shared with the CMS's other
+  // upload buttons (avatar, favicon, marquee, cover image) — see there.
   function readImage(file) {
-    return new Promise((resolve, reject) => {
-      if (file.type === "image/svg+xml" || (file.type === "image/gif" && file.size < 400000)) {
-        const fr = new FileReader();
-        fr.onload = () => resolve(fr.result);
-        fr.onerror = reject;
-        fr.readAsDataURL(file);
-        return;
-      }
-      const url = URL.createObjectURL(file);
-      const img = new Image();
-      img.onload = () => {
-        const scale = Math.min(1, 1200 / img.naturalWidth);
-        const w = Math.max(1, Math.round(img.naturalWidth * scale));
-        const h = Math.max(1, Math.round(img.naturalHeight * scale));
-        const canvas = document.createElement("canvas");
-        canvas.width = w;
-        canvas.height = h;
-        const ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, w, h);
-        ctx.drawImage(img, 0, 0, w, h);
-        URL.revokeObjectURL(url);
-        resolve(canvas.toDataURL("image/jpeg", 0.78));
-      };
-      img.onerror = () => {
-        URL.revokeObjectURL(url);
-        reject(new Error("unreadable image"));
-      };
-      img.src = url;
-    });
+    return readAndCompressImage(file);
   }
 
   function caretAtStart(t) {

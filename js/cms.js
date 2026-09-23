@@ -328,15 +328,14 @@ function updateFullAboutMe(persona, value) {
 function handleAvatarUpload(event, persona) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    const dataUrl = reader.result;
-    setPersonaField(persona, "avatar", dataUrl);
-    const img = document.getElementById("cms-avatar-img");
-    if (img) img.src = dataUrl;
-    showToast("Photo updated");
-  };
-  reader.readAsDataURL(file);
+  readAndCompressImage(file)
+    .then((dataUrl) => {
+      setPersonaField(persona, "avatar", dataUrl);
+      const img = document.getElementById("cms-avatar-img");
+      if (img) img.src = dataUrl;
+      showToast("Photo updated");
+    })
+    .catch(() => showToast("Couldn't read that image", 3000));
 }
 
 function handleResumeUpload(event, persona) {
@@ -383,15 +382,17 @@ function renderMarqueeImagesField(persona, data) {
 function handleMarqueeUpload(event, persona) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    const list = getPersonaList(persona, "marqueeImages").slice();
-    list.push(reader.result);
-    setPersonaList(persona, "marqueeImages", list);
-    renderPanel();
-    showToast("Image added");
-  };
-  reader.readAsDataURL(file);
+  // Marquee cards render at 360px wide — 900px covers retina with room to
+  // spare, no need to keep a full-resolution copy.
+  readAndCompressImage(file, 900)
+    .then((dataUrl) => {
+      const list = getPersonaList(persona, "marqueeImages").slice();
+      list.push(dataUrl);
+      setPersonaList(persona, "marqueeImages", list);
+      renderPanel();
+      showToast("Image added");
+    })
+    .catch(() => showToast("Couldn't read that image", 3000));
 }
 
 function removeMarqueeImage(persona, index) {
@@ -586,17 +587,18 @@ function refreshPublishStatusText() {
 function handleFaviconUpload(event) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    const dataUrl = reader.result;
-    setSiteField("favicon", dataUrl);
-    const img = document.getElementById("cms-favicon-img");
-    if (img) img.src = dataUrl;
-    const headLink = document.querySelector('link[rel="icon"]');
-    if (headLink) headLink.href = dataUrl;
-    showToast("Favicon updated");
-  };
-  reader.readAsDataURL(file);
+  // Keep PNG (transparency intact) — a favicon commonly relies on it, and
+  // 512px is generous headroom for something normally shown at 16-180px.
+  readAndCompressImage(file, 512, { format: "png" })
+    .then((dataUrl) => {
+      setSiteField("favicon", dataUrl);
+      const img = document.getElementById("cms-favicon-img");
+      if (img) img.src = dataUrl;
+      const headLink = document.querySelector('link[rel="icon"]');
+      if (headLink) headLink.href = dataUrl;
+      showToast("Favicon updated");
+    })
+    .catch(() => showToast("Couldn't read that image", 3000));
 }
 
 // ---- Selected Works / Blog Posts (share the same underlying "works" list) ----
@@ -892,12 +894,12 @@ function removeWorkTag(persona, listField, index, tagIndex) {
 function handleCoverUpload(event, persona, listField, index) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    updateWorkLikeField(persona, listField, index, "coverImage", reader.result);
-    showToast("Image updated");
-  };
-  reader.readAsDataURL(file);
+  readAndCompressImage(file)
+    .then((dataUrl) => {
+      updateWorkLikeField(persona, listField, index, "coverImage", dataUrl);
+      showToast("Image updated");
+    })
+    .catch(() => showToast("Couldn't read that image", 3000));
 }
 
 function addWorkLikeItem(persona, listField, label) {

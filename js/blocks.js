@@ -9,6 +9,51 @@
 const BLOCK_TEXT_TYPES = ["p", "h1", "h2", "h3", "ul", "ol", "quote", "callout"];
 const LAYOUT_WIDTHS = ["narrow", "wide", "full"];
 
+// Downscales and re-encodes an uploaded image so a phone photo (routinely
+// several MB straight off the camera) doesn't sit in localStorage as a
+// multi-megabyte data: URI. Shared by every CMS upload button (avatar,
+// favicon, marquee, cover image) and the block editor's own image blocks —
+// see readImage() in editor.js, which now just delegates here.
+//   opts.format: "png" keeps transparency (e.g. a favicon on any background)
+//   at the cost of a larger file; default "jpeg" flattens onto white, which
+//   is fine (and much smaller) for ordinary photos.
+function readAndCompressImage(file, maxDimension, opts) {
+  maxDimension = maxDimension || 1200;
+  const keepAlpha = opts && opts.format === "png";
+  return new Promise((resolve, reject) => {
+    if (file.type === "image/svg+xml" || (file.type === "image/gif" && file.size < 400000)) {
+      const fr = new FileReader();
+      fr.onload = () => resolve(fr.result);
+      fr.onerror = reject;
+      fr.readAsDataURL(file);
+      return;
+    }
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => {
+      const scale = Math.min(1, maxDimension / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.max(1, Math.round(img.naturalWidth * scale));
+      const h = Math.max(1, Math.round(img.naturalHeight * scale));
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d");
+      if (!keepAlpha) {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, w, h);
+      }
+      ctx.drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+      resolve(keepAlpha ? canvas.toDataURL("image/png") : canvas.toDataURL("image/jpeg", 0.78));
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      reject(new Error("unreadable image"));
+    };
+    img.src = url;
+  });
+}
+
 function makeBlockId() {
   return "b" + Math.random().toString(36).slice(2, 9);
 }
