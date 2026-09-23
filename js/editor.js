@@ -65,9 +65,22 @@
   }
 
   // Downscale/re-encode lives in blocks.js now, shared with the CMS's other
-  // upload buttons (avatar, favicon, marquee, cover image) — see there.
-  function readImage(file) {
-    return readAndCompressImage(file);
+  // upload buttons (avatar, favicon, marquee, cover image) — see there. If a
+  // GitHub token is connected, the compressed image is uploaded straight to
+  // the repo (publish.js) and only its short path is kept — so a dropped
+  // image never has to sit as a big base64 string in localStorage at all.
+  // Falls back to the old behavior (return the data: URI itself) with no
+  // token, or if the direct upload fails for any reason.
+  async function readImage(file) {
+    const dataUrl = await readAndCompressImage(file);
+    try {
+      const uploaded = await uploadImageDirectly(dataUrl, "Upload post image via CMS");
+      if (uploaded) return uploaded;
+    } catch (e) {
+      // Upload failed (offline, bad token, etc.) — fall through to the
+      // local draft, which the normal auto-publish flow will pick up later.
+    }
+    return dataUrl;
   }
 
   function caretAtStart(t) {

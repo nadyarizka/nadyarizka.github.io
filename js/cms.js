@@ -331,15 +331,34 @@ function updateFullAboutMe(persona, value) {
   showToast("Saved");
 }
 
+// Shared by every image-upload button in the CMS: compress, then try
+// uploading straight to GitHub so it never has to sit as base64 in
+// localStorage at all — only a short path does. Falls back to the local
+// draft (old behavior) with no token connected, or if the upload fails.
+async function uploadCompressedImage(file, opts) {
+  opts = opts || {};
+  const dataUrl = await readAndCompressImage(file, opts.maxDimension, opts.formatOpts);
+  if (!getGithubToken()) return { url: dataUrl, uploaded: false };
+  try {
+    const uploaded = await uploadImageDirectly(dataUrl, opts.commitMessage);
+    if (uploaded) return { url: uploaded, uploaded: true };
+  } catch (e) {
+    // Upload failed (offline, bad token, GitHub hiccup) — keep it as a local
+    // draft; the normal auto-publish flow will pick it up and retry later.
+  }
+  return { url: dataUrl, uploaded: false };
+}
+
 function handleAvatarUpload(event, persona) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  readAndCompressImage(file)
-    .then((dataUrl) => {
-      setPersonaField(persona, "avatar", dataUrl);
+  showToast("Uploading photo…", 10000);
+  uploadCompressedImage(file, { commitMessage: "Upload avatar via CMS" })
+    .then(({ url, uploaded }) => {
+      setPersonaField(persona, "avatar", url);
       const img = document.getElementById("cms-avatar-img");
-      if (img) img.src = dataUrl;
-      showToast("Photo updated");
+      if (img) img.src = url;
+      showToast(uploaded ? "Photo uploaded" : "Photo saved as draft — will publish shortly");
     })
     .catch(() => showToast("Couldn't read that image", 3000));
 }
@@ -388,15 +407,16 @@ function renderMarqueeImagesField(persona, data) {
 function handleMarqueeUpload(event, persona) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
+  showToast("Uploading image…", 10000);
   // Marquee cards render at 360px wide — 900px covers retina with room to
   // spare, no need to keep a full-resolution copy.
-  readAndCompressImage(file, 900)
-    .then((dataUrl) => {
+  uploadCompressedImage(file, { maxDimension: 900, commitMessage: "Upload marquee image via CMS" })
+    .then(({ url, uploaded }) => {
       const list = getPersonaList(persona, "marqueeImages").slice();
-      list.push(dataUrl);
+      list.push(url);
       setPersonaList(persona, "marqueeImages", list);
       renderPanel();
-      showToast("Image added");
+      showToast(uploaded ? "Image uploaded" : "Image saved as draft — will publish shortly");
     })
     .catch(() => showToast("Couldn't read that image", 3000));
 }
@@ -470,7 +490,37 @@ function renderPublishCard() {
         <p id="cms-site-publish-status" class="cms-publish-status">${escapeHtml(statusLine)}</p>
         <button class="cms-save-btn" type="button" onclick="runPublish()">${iconSvg(SAVE_ICON, 16)}Publish now</button>
       </div>
+
+      ${summary.hasChanges ? renderUnstickField() : ""}
     </div>`;
+}
+
+// A jammed draft (storage full, or publishing keeps failing for some other
+// reason) shouldn't be a dead end. This clears out any image/file data
+// sitting in the local draft — which is what actually eats the ~5MB, now
+// that new uploads go straight to GitHub instead — while leaving every
+// typed text edit untouched.
+function renderUnstickField() {
+  return `
+    <div class="cms-field" style="margin-top:22px;padding-top:22px;border-top:1px solid #eeece8">
+      <label class="cms-label">Stuck?</label>
+      <p class="cms-card-subtitle" style="margin:0 0 12px 0">If storage is full and publishing won't go through, this clears any image data waiting in your local draft — your typed text edits are kept. You'll just need to re-add any images that get cleared.</p>
+      <button class="cms-icon-btn cms-icon-btn-danger" type="button" style="width:auto;padding:10px 16px;gap:8px" onclick="handleClearLocalImageDrafts()">${iconSvg(TRASH_ICON, 15)}Clear stuck local images</button>
+    </div>`;
+}
+
+function handleClearLocalImageDrafts() {
+  if (!window.confirm("Clear any unpublished images sitting in this browser's local draft? Your typed text edits are kept — only images that haven't been uploaded yet will need to be re-added.")) {
+    return;
+  }
+  const result = clearLocalImageDrafts();
+  refreshPublishStatusText();
+  if (cmsSection === SITE_SECTION.id) renderPanel();
+  if (result.clearedCount > 0) {
+    showToast(`Cleared ${result.clearedCount} stuck image${result.clearedCount === 1 ? "" : "s"} (${formatBytes(result.freedBytes)} freed)`, 4000);
+  } else {
+    showToast("Nothing to clear — no image data found in the local draft", 3000);
+  }
 }
 
 function saveGithubTokenFromField() {
@@ -593,16 +643,21 @@ function refreshPublishStatusText() {
 function handleFaviconUpload(event) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
+  showToast("Uploading favicon…", 10000);
   // Keep PNG (transparency intact) — a favicon commonly relies on it, and
   // 512px is generous headroom for something normally shown at 16-180px.
-  readAndCompressImage(file, 512, { format: "png" })
-    .then((dataUrl) => {
-      setSiteField("favicon", dataUrl);
+  uploadCompressedImage(file, {
+    maxDimension: 512,
+    formatOpts: { format: "png" },
+    commitMessage: "Upload favicon via CMS",
+  })
+    .then(({ url, uploaded }) => {
+      setSiteField("favicon", url);
       const img = document.getElementById("cms-favicon-img");
-      if (img) img.src = dataUrl;
+      if (img) img.src = url;
       const headLink = document.querySelector('link[rel="icon"]');
-      if (headLink) headLink.href = dataUrl;
-      showToast("Favicon updated");
+      if (headLink) headLink.href = url;
+      showToast(uploaded ? "Favicon uploaded" : "Favicon saved as draft — will publish shortly");
     })
     .catch(() => showToast("Couldn't read that image", 3000));
 }
@@ -900,10 +955,11 @@ function removeWorkTag(persona, listField, index, tagIndex) {
 function handleCoverUpload(event, persona, listField, index) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  readAndCompressImage(file)
-    .then((dataUrl) => {
-      updateWorkLikeField(persona, listField, index, "coverImage", dataUrl);
-      showToast("Image updated");
+  showToast("Uploading image…", 10000);
+  uploadCompressedImage(file, { commitMessage: "Upload cover image via CMS" })
+    .then(({ url, uploaded }) => {
+      updateWorkLikeField(persona, listField, index, "coverImage", url);
+      showToast(uploaded ? "Image uploaded" : "Image saved as draft — will publish shortly");
     })
     .catch(() => showToast("Couldn't read that image", 3000));
 }
