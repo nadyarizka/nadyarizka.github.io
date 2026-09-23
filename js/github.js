@@ -65,6 +65,12 @@ async function ghRequest(token, method, path, body) {
     method,
     headers: ghHeaders(token),
     body: body ? JSON.stringify(body) : undefined,
+    // Without this, a retried GET (e.g. re-reading the branch ref after a
+    // non-fast-forward conflict) can be served straight from the browser's
+    // HTTP cache instead of hitting the network — silently handing back the
+    // exact same stale SHA that just caused the conflict, so every retry
+    // fails identically no matter how many times it tries.
+    cache: "no-store",
   });
   if (!res.ok) {
     let detail = "";
