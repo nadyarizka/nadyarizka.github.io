@@ -1,5 +1,8 @@
-// Bespoke Content CMS — edits are saved to localStorage (via store.js) and
-// read back by index.html / about.html / post.html at render time.
+// Bespoke Content CMS. GitHub is the only place edits persist — there is no
+// local draft. Editing requires a connected GitHub token (see the connect
+// gate at the bottom of this file); every change mutates the in-memory
+// SITE/ABOUT/SITE_SETTINGS objects (store.js) directly and schedules a
+// debounced save straight to the repo (see the "Save scheduling" section).
 
 function escapeAttr(str) {
   return String(str == null ? "" : str)
@@ -83,6 +86,8 @@ const SAVE_ICON =
 const UPLOAD_ICON =
   '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line>';
 const BACK_ICON = '<path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path>';
+const CLOUD_ICON =
+  '<path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>';
 
 let cmsPersona = "designer";
 let cmsSection = "profile";
@@ -92,27 +97,86 @@ let toastTimer = null;
 
 function showToast(message, duration) {
   const toast = document.getElementById("cms-toast");
-  const savedOk = isStorageOk();
-  if (!savedOk) {
-    message = "Not saved — browser storage is full. Publish or remove some images and try again.";
-    duration = 6000;
-  }
-  toast.textContent = message || "Saved";
+  toast.textContent = message || "";
   toast.classList.add("show");
   if (toastTimer) window.clearTimeout(toastTimer);
   toastTimer = window.setTimeout(() => {
     toast.classList.remove("show");
-  }, duration || 1400);
-  refreshPublishStatusText();
-  // Every save (even a failed one) is a candidate to go live — schedule (or
-  // push back) an auto-publish. Deliberately NOT gated on savedOk: once
-  // localStorage is full, a failed write is exactly when auto-publish is
-  // most needed to dig out of it — the edit still exists in the in-memory
-  // draft (only the localStorage persist failed), and publishing reads from
-  // that live state and goes straight to GitHub, bypassing localStorage's
-  // cap entirely. Gating this on savedOk would mean the one thing that can
-  // free up storage stops triggering right when storage is full.
-  scheduleAutoPublish();
+  }, duration || 1800);
+}
+
+// ---- Save scheduling ----
+// Every mutation calls noteChange(), which debounces a save to GitHub a
+// couple of seconds after the last edit (so a run of keystrokes collapses
+// into one commit) and drives the small ambient status pill in the sidebar
+// footer ("Saving… / Saved") — no toast needed for routine edits, no draft
+// byte-counts, nothing to get "stuck": there is no local copy to reconcile,
+// just the one in-memory state and GitHub.
+
+const SAVE_DEBOUNCE_MS = 1500;
+const SAVE_RETRY_BACKOFF_MS = 8000;
+const MAX_AUTO_RETRIES = 5;
+
+let saveTimer = null;
+let saveInFlight = false;
+let saveQueued = false;
+let retryAfterInFlight = false;
+let consecutiveFailures = 0;
+
+function noteChange() {
+  saveQueued = true;
+  setSaveStatus("pending", "Saving…");
+  if (saveTimer) window.clearTimeout(saveTimer);
+  saveTimer = window.setTimeout(flushSave, SAVE_DEBOUNCE_MS);
+}
+
+async function flushSave() {
+  if (saveTimer) {
+    window.clearTimeout(saveTimer);
+    saveTimer = null;
+  }
+  if (saveInFlight) {
+    retryAfterInFlight = true;
+    return;
+  }
+  if (!saveQueued) return;
+  saveQueued = false;
+  saveInFlight = true;
+  setSaveStatus("pending", "Saving…");
+  try {
+    await saveToGithub();
+    consecutiveFailures = 0;
+    setSaveStatus("saved", "Saved");
+  } catch (err) {
+    consecutiveFailures++;
+    saveQueued = true; // keep it pending — nothing was lost, just not saved yet
+    if (consecutiveFailures <= MAX_AUTO_RETRIES) {
+      setSaveStatus("error", (err.message || "Save failed") + " — retrying");
+      saveTimer = window.setTimeout(flushSave, SAVE_RETRY_BACKOFF_MS);
+    } else {
+      setSaveStatus("error", (err.message || "Save failed") + " — see Site Settings");
+    }
+  } finally {
+    saveInFlight = false;
+    if (retryAfterInFlight) {
+      retryAfterInFlight = false;
+      flushSave();
+    }
+  }
+}
+
+function setSaveStatus(state, text) {
+  const el = document.getElementById("cms-save-status");
+  if (!el) return;
+  el.textContent = text;
+  el.className = "cms-save-status is-" + state;
+}
+
+function beforeUnloadHandler(e) {
+  if (saveQueued || saveInFlight) {
+    e.preventDefault();
+    e.returnValue = "";
+  }
 }
 
 // ---- Sidebar ----
@@ -158,6 +222,7 @@ function selectPersona(persona) {
   renderSidebar();
   renderHeader();
   renderPanel();
+  flushSave();
 }
 
 function selectSection(section) {
@@ -167,6 +232,7 @@ function selectSection(section) {
   renderSidebar();
   renderHeader();
   renderPanel();
+  flushSave();
 }
 
 function renderHeader() {
@@ -183,7 +249,8 @@ function renderHeader() {
 function goBackToList() {
   cmsView = "list";
   cmsEditIndex = null;
-  renderPanel();
+  renderPanel(); // destroys any active block editor, flushing its final edit into memory first
+  flushSave(); // ...then push everything, including that, immediately
 }
 
 function goToEdit(index) {
@@ -255,8 +322,7 @@ function renderHeroPanel(persona) {
 // Shared by both the Designer's combined "Profile & About" panel and the
 // Traveller/Mother "Hero Section" panel — same underlying hero fields either way.
 function renderHeroFields(persona, data) {
-  const isUploadedResume =
-    data.resumeUrl && (data.resumeUrl.indexOf("data:") === 0 || data.resumeUrl.indexOf("/assets/uploads/") === 0);
+  const isUploadedResume = data.resumeUrl && data.resumeUrl.indexOf("/assets/uploads/") === 0;
   const resumeField = isUploadedResume
     ? `<div class="cms-file-badge">${iconSvg('<path d="M14 2v6h6"></path><path d="M6 22h12a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2z"></path>', 15)}Resume uploaded<button type="button" class="cms-row-remove" onclick="clearResume('${persona}')">&times;</button></div>`
     : `<input class="cms-input" type="text" placeholder="https://..." value="${escapeAttr(data.resumeUrl)}" oninput="updatePersonaField('${persona}', 'resumeUrl', this.value)">`;
@@ -323,62 +389,71 @@ function renderAboutMePanel(persona) {
 
 function updatePersonaField(persona, field, value) {
   setPersonaField(persona, field, value);
-  showToast("Saved");
+  noteChange();
 }
 
 function updateFullAboutMe(persona, value) {
   setAboutPersonaText(persona, value);
-  showToast("Saved");
+  noteChange();
 }
 
-// Shared by every image-upload button in the CMS: compress, then try
-// uploading straight to GitHub so it never has to sit as base64 in
-// localStorage at all — only a short path does. Falls back to the local
-// draft (old behavior) with no token connected, or if the upload fails.
-async function uploadCompressedImage(file, opts) {
+// ---- Uploads ----
+// Every image is compressed client-side, then uploaded straight to GitHub —
+// there's no local fallback. Either it lands and the field gets a real
+// path, or it fails cleanly and the field is left untouched so the user can
+// just try again.
+
+async function uploadImage(file, opts) {
   opts = opts || {};
   const dataUrl = await readAndCompressImage(file, opts.maxDimension, opts.formatOpts);
-  if (!getGithubToken()) return { url: dataUrl, uploaded: false };
-  try {
-    const uploaded = await uploadImageDirectly(dataUrl, opts.commitMessage);
-    if (uploaded) return { url: uploaded, uploaded: true };
-  } catch (e) {
-    // Upload failed (offline, bad token, GitHub hiccup) — keep it as a local
-    // draft; the normal auto-publish flow will pick it up and retry later.
-  }
-  return { url: dataUrl, uploaded: false };
+  const uploaded = await uploadFileDirectly(dataUrl, opts.commitMessage);
+  if (!uploaded) throw new Error("Couldn't upload — check your connection in Site Settings");
+  return uploaded;
 }
 
 function handleAvatarUpload(event, persona) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  showToast("Uploading photo…", 10000);
-  uploadCompressedImage(file, { commitMessage: "Upload avatar via CMS" })
-    .then(({ url, uploaded }) => {
+  setSaveStatus("pending", "Uploading photo…");
+  uploadImage(file, { commitMessage: "Upload avatar via CMS" })
+    .then((url) => {
       setPersonaField(persona, "avatar", url);
       const img = document.getElementById("cms-avatar-img");
       if (img) img.src = url;
-      showToast(uploaded ? "Photo uploaded" : "Photo saved as draft — will publish shortly");
+      noteChange();
     })
-    .catch(() => showToast("Couldn't read that image", 3000));
+    .catch((err) => {
+      setSaveStatus("error", "Upload failed");
+      showToast(err.message || "Couldn't upload that image", 4000);
+    });
 }
 
 function handleResumeUpload(event, persona) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
+  setSaveStatus("pending", "Uploading resume…");
   const reader = new FileReader();
   reader.onload = () => {
-    setPersonaField(persona, "resumeUrl", reader.result);
-    renderPanel();
-    showToast("Resume uploaded");
+    uploadFileDirectly(reader.result, "Upload resume via CMS")
+      .then((url) => {
+        if (!url) throw new Error("Couldn't upload — check your connection in Site Settings");
+        setPersonaField(persona, "resumeUrl", url);
+        renderPanel();
+        noteChange();
+      })
+      .catch((err) => {
+        setSaveStatus("error", "Upload failed");
+        showToast(err.message || "Couldn't upload that file", 4000);
+      });
   };
+  reader.onerror = () => showToast("Couldn't read that file", 3000);
   reader.readAsDataURL(file);
 }
 
 function clearResume(persona) {
   setPersonaField(persona, "resumeUrl", "");
   renderPanel();
-  showToast("Resume removed");
+  noteChange();
 }
 
 // ---- Marquee images (per persona) ----
@@ -407,18 +482,21 @@ function renderMarqueeImagesField(persona, data) {
 function handleMarqueeUpload(event, persona) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  showToast("Uploading image…", 10000);
+  setSaveStatus("pending", "Uploading image…");
   // Marquee cards render at 360px wide — 900px covers retina with room to
   // spare, no need to keep a full-resolution copy.
-  uploadCompressedImage(file, { maxDimension: 900, commitMessage: "Upload marquee image via CMS" })
-    .then(({ url, uploaded }) => {
+  uploadImage(file, { maxDimension: 900, commitMessage: "Upload marquee image via CMS" })
+    .then((url) => {
       const list = getPersonaList(persona, "marqueeImages").slice();
       list.push(url);
       setPersonaList(persona, "marqueeImages", list);
       renderPanel();
-      showToast(uploaded ? "Image uploaded" : "Image saved as draft — will publish shortly");
+      noteChange();
     })
-    .catch(() => showToast("Couldn't read that image", 3000));
+    .catch((err) => {
+      setSaveStatus("error", "Upload failed");
+      showToast(err.message || "Couldn't upload that image", 4000);
+    });
 }
 
 function removeMarqueeImage(persona, index) {
@@ -426,10 +504,10 @@ function removeMarqueeImage(persona, index) {
   list.splice(index, 1);
   setPersonaList(persona, "marqueeImages", list);
   renderPanel();
-  showToast("Image removed");
+  noteChange();
 }
 
-// ---- Site Settings (favicon) ----
+// ---- Site Settings (favicon + GitHub connection) ----
 
 function renderSitePanel() {
   const site = getSiteData();
@@ -450,216 +528,51 @@ function renderSitePanel() {
         </div>
       </div>
     </div>
-    ${renderPublishCard()}`;
+    ${renderConnectionCard()}`;
 }
 
-// ---- Publish to GitHub ----
-// Once a token is connected, every save auto-publishes a few seconds after
-// you stop editing (see scheduleAutoPublish) — commits your local draft to
-// the live GitHub repo so visitors actually see it, and frees up the ~5MB
-// draft storage in the process. "Publish now" below is just a manual
-// override, for forcing it immediately or retrying after a failure.
-
-function renderPublishCard() {
-  const token = getGithubToken();
+function renderConnectionCard() {
   const remembered = hasRememberedGithubToken();
-  const summary = getDraftSummary();
-  const statusLine = !token
-    ? "Not connected yet."
-    : summary.hasChanges
-      ? formatBytes(summary.bytes) + " will auto-publish shortly."
-      : "Everything is published.";
-
   return `
     <div class="cms-card">
-      <h2 class="cms-card-title">Publish to GitHub</h2>
-      <p class="cms-card-subtitle">Once connected, edits anywhere in this CMS auto-publish to your GitHub repo (nadyarizka.github.io) a few seconds after you stop editing — no extra click needed. That's also what frees up the draft storage above, since images no longer sit in localStorage waiting.</p>
+      <h2 class="cms-card-title">GitHub Connection</h2>
+      <p class="cms-card-subtitle">Connected to <code>nadyarizka.github.io</code> — every edit saves straight there. Replace the token below if it expires, or disconnect to switch accounts.</p>
 
       <div class="cms-field">
         <label class="cms-label">GitHub personal access token</label>
-        <input class="cms-input" type="password" id="cms-gh-token" placeholder="${token ? "•••••••••••••••• (saved — paste a new one to replace it)" : "ghp_… or github_pat_…"}">
+        <input class="cms-input" type="password" id="cms-gh-token" placeholder="•••••••••••••••• (saved — paste a new one to replace it)">
         <label class="cms-checkbox-item" style="margin-top:10px"><input type="checkbox" id="cms-gh-remember" ${remembered ? "checked" : ""}>Remember on this device</label>
         <div class="cms-add-row" style="margin-top:10px">
-          <button class="cms-upload-btn" type="button" onclick="saveGithubTokenFromField()">Save token</button>
-          ${token ? `<button class="cms-icon-btn cms-icon-btn-danger" type="button" title="Remove saved token" onclick="forgetGithubToken()">${iconSvg(TRASH_ICON, 15)}</button>` : ""}
+          <button class="cms-upload-btn" type="button" onclick="saveGithubTokenFromField()">Update token</button>
+          <button class="cms-icon-btn cms-icon-btn-danger" type="button" title="Disconnect" onclick="disconnectGithub()">${iconSvg(TRASH_ICON, 15)}</button>
         </div>
-        <p class="cms-card-subtitle" style="margin-top:12px">Create a <strong>fine-grained</strong> token at github.com → Settings → Developer settings → Personal access tokens, scoped only to the <code>nadyarizka.github.io</code> repo with "Contents: Read and write" permission. Don't share this token — it can push to your live site.</p>
       </div>
-
-      <div class="cms-field">
-        <p id="cms-site-publish-status" class="cms-publish-status">${escapeHtml(statusLine)}</p>
-        <button class="cms-save-btn" type="button" onclick="runPublish()">${iconSvg(SAVE_ICON, 16)}Publish now</button>
-      </div>
-
-      ${summary.hasChanges ? renderUnstickField() : ""}
     </div>`;
-}
-
-// A jammed draft (storage full, or publishing keeps failing for some other
-// reason) shouldn't be a dead end. This clears out any image/file data
-// sitting in the local draft — which is what actually eats the ~5MB, now
-// that new uploads go straight to GitHub instead — while leaving every
-// typed text edit untouched.
-function renderUnstickField() {
-  return `
-    <div class="cms-field" style="margin-top:22px;padding-top:22px;border-top:1px solid #eeece8">
-      <label class="cms-label">Stuck?</label>
-      <p class="cms-card-subtitle" style="margin:0 0 12px 0">If storage is full and publishing won't go through, this clears any image data waiting in your local draft — your typed text edits are kept. You'll just need to re-add any images that get cleared.</p>
-      <button class="cms-icon-btn cms-icon-btn-danger" type="button" style="width:auto;padding:10px 16px;gap:8px" onclick="handleClearLocalImageDrafts()">${iconSvg(TRASH_ICON, 15)}Clear stuck local images</button>
-    </div>`;
-}
-
-function handleClearLocalImageDrafts() {
-  if (!window.confirm("Clear any unpublished images sitting in this browser's local draft? Your typed text edits are kept — only images that haven't been uploaded yet will need to be re-added.")) {
-    return;
-  }
-  const result = clearLocalImageDrafts();
-  refreshPublishStatusText();
-  if (cmsSection === SITE_SECTION.id) renderPanel();
-  if (result.clearedCount > 0) {
-    showToast(`Cleared ${result.clearedCount} stuck image${result.clearedCount === 1 ? "" : "s"} (${formatBytes(result.freedBytes)} freed)`, 4000);
-  } else {
-    showToast("Nothing to clear — no image data found in the local draft", 3000);
-  }
-}
-
-function saveGithubTokenFromField() {
-  const input = document.getElementById("cms-gh-token");
-  const rememberEl = document.getElementById("cms-gh-remember");
-  const value = input ? input.value.trim() : "";
-  if (!value) {
-    showToast("Paste a token first", 2500);
-    return;
-  }
-  setGithubToken(value, !!(rememberEl && rememberEl.checked));
-  showToast("Token saved — verifying…");
-  verifyGithubToken(value)
-    .then((ok) => {
-      showToast(ok ? "Token verified — ready to publish" : "Saved, but that token can't push to this repo", 3500);
-      refreshPublishStatusText();
-      if (cmsSection === SITE_SECTION.id) renderPanel();
-    })
-    .catch((err) => {
-      const message = err.message || "Couldn't verify the token";
-      showToast(message, 4500);
-      if (cmsSection === SITE_SECTION.id) renderPanel();
-      // Re-render just replaced the status line with the generic summary —
-      // overwrite it with the real reason the token didn't work.
-      setPublishStatusText(message, "error");
-    });
-}
-
-function forgetGithubToken() {
-  clearGithubToken();
-  showToast("Token removed");
-  refreshPublishStatusText();
-  if (cmsSection === SITE_SECTION.id) renderPanel();
-}
-
-let publishInProgress = false;
-let autoPublishTimer = null;
-let autoPublishFirstPendingAt = null;
-const AUTO_PUBLISH_DEBOUNCE_MS = 4000; // publish this long after you stop editing
-const AUTO_PUBLISH_MAX_WAIT_MS = 60000; // ...but never delay longer than this if edits keep coming
-
-// Called after every successful local save. Debounced so a run of keystrokes
-// or list edits collapses into one publish shortly after you pause, rather
-// than a commit per change — but capped so continuous editing can't push
-// publishing off indefinitely.
-function scheduleAutoPublish() {
-  if (!getGithubToken()) return; // nothing to auto-publish to yet
-  if (!getDraftSummary().hasChanges) return; // e.g. the toast after a publish itself
-  const now = Date.now();
-  if (!autoPublishFirstPendingAt) autoPublishFirstPendingAt = now;
-  if (autoPublishTimer) window.clearTimeout(autoPublishTimer);
-  const overdue = now - autoPublishFirstPendingAt >= AUTO_PUBLISH_MAX_WAIT_MS;
-  autoPublishTimer = window.setTimeout(
-    () => {
-      autoPublishTimer = null;
-      runPublish();
-    },
-    overdue ? 0 : AUTO_PUBLISH_DEBOUNCE_MS
-  );
-}
-
-function cancelScheduledAutoPublish() {
-  if (autoPublishTimer) window.clearTimeout(autoPublishTimer);
-  autoPublishTimer = null;
-  autoPublishFirstPendingAt = null;
-}
-
-async function runPublish() {
-  if (publishInProgress) return;
-  cancelScheduledAutoPublish();
-  if (!getGithubToken()) {
-    showToast("Add a GitHub token in Site Settings first", 3000);
-    selectSection(SITE_SECTION.id);
-    return;
-  }
-  publishInProgress = true;
-  setPublishStatusText("Publishing…", "pending");
-  try {
-    await publishToGithub((message) => setPublishStatusText(message, "pending"));
-    setPublishStatusText("Published — live in about a minute", "success");
-    showToast("Published to GitHub");
-    renderSidebar();
-    renderPanel();
-  } catch (err) {
-    setPublishStatusText(err.message || "Publish failed", "error");
-    showToast("Publish failed — see Site Settings", 4000);
-    // showToast just re-armed the auto-publish timer (it can't tell this was
-    // a failure) — undo that. A persistent problem like a bad token would
-    // otherwise retry every few seconds forever. The draft isn't lost — it
-    // stays pending and gets another shot on the next real edit, or now via
-    // "Publish now".
-    cancelScheduledAutoPublish();
-  } finally {
-    publishInProgress = false;
-  }
-}
-
-function setPublishStatusText(text, state) {
-  [document.getElementById("cms-publish-status"), document.getElementById("cms-site-publish-status")].forEach((el) => {
-    if (!el) return;
-    el.textContent = text;
-    el.className = "cms-publish-status" + (state ? " is-" + state : "");
-  });
-}
-
-function refreshPublishStatusText() {
-  if (publishInProgress) return;
-  if (!getGithubToken()) {
-    setPublishStatusText("Not connected — set up in Site Settings", "");
-    return;
-  }
-  const summary = getDraftSummary();
-  if (!summary.hasChanges) {
-    setPublishStatusText("All changes published", "success");
-  } else {
-    setPublishStatusText(formatBytes(summary.bytes) + " unpublished — auto-publishing shortly", "pending");
-  }
 }
 
 function handleFaviconUpload(event) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  showToast("Uploading favicon…", 10000);
+  setSaveStatus("pending", "Uploading favicon…");
   // Keep PNG (transparency intact) — a favicon commonly relies on it, and
   // 512px is generous headroom for something normally shown at 16-180px.
-  uploadCompressedImage(file, {
+  uploadImage(file, {
     maxDimension: 512,
     formatOpts: { format: "png" },
     commitMessage: "Upload favicon via CMS",
   })
-    .then(({ url, uploaded }) => {
+    .then((url) => {
       setSiteField("favicon", url);
       const img = document.getElementById("cms-favicon-img");
       if (img) img.src = url;
       const headLink = document.querySelector('link[rel="icon"]');
       if (headLink) headLink.href = url;
-      showToast(uploaded ? "Favicon uploaded" : "Favicon saved as draft — will publish shortly");
+      noteChange();
     })
-    .catch(() => showToast("Couldn't read that image", 3000));
+    .catch((err) => {
+      setSaveStatus("error", "Upload failed");
+      showToast(err.message || "Couldn't upload that image", 4000);
+    });
 }
 
 // ---- Selected Works / Blog Posts (share the same underlying "works" list) ----
@@ -823,6 +736,7 @@ function removeSelectedWork(persona, index) {
   ids.splice(index, 1);
   setPersonaList(persona, "selectedWorkIds", ids);
   renderPanel();
+  noteChange();
   showToast("Removed");
 }
 
@@ -884,7 +798,7 @@ function renderWorkLikeEdit(persona, cfg, index, item) {
       <label class="cms-checkbox-item"><input type="checkbox" ${item.published !== false ? "checked" : ""} onchange="updateWorkLikeField('${persona}', '${cfg.listField}', ${index}, 'published', this.checked)">Published</label>
     </div>
 
-    <button class="cms-save-btn" type="button" onclick="showToast('Saved'); goBackToList();">${iconSvg(SAVE_ICON, 16)}Save</button>`;
+    <button class="cms-save-btn" type="button" onclick="goBackToList();">${iconSvg(SAVE_ICON, 16)}Save</button>`;
 }
 
 function updateWorkLikeField(persona, listField, index, field, value) {
@@ -892,7 +806,7 @@ function updateWorkLikeField(persona, listField, index, field, value) {
   if (!list[index]) return;
   list[index] = Object.assign({}, list[index], { [field]: value });
   setPersonaList(persona, listField, list);
-  showToast("Saved");
+  noteChange();
 }
 
 // ---- Block editor (Works / Posts body content) ----
@@ -926,7 +840,7 @@ function saveBlockContent(persona, listField, index, payload) {
     layoutWidth: payload.layoutWidth,
   });
   setPersonaList(persona, listField, list);
-  showToast("Saved");
+  noteChange();
 }
 
 function addWorkTag(persona, listField, index, value) {
@@ -938,7 +852,7 @@ function addWorkTag(persona, listField, index, value) {
   list[index] = Object.assign({}, list[index], { tags });
   setPersonaList(persona, listField, list);
   renderPanel();
-  showToast("Saved");
+  noteChange();
 }
 
 function removeWorkTag(persona, listField, index, tagIndex) {
@@ -949,19 +863,21 @@ function removeWorkTag(persona, listField, index, tagIndex) {
   list[index] = Object.assign({}, list[index], { tags });
   setPersonaList(persona, listField, list);
   renderPanel();
-  showToast("Saved");
+  noteChange();
 }
 
 function handleCoverUpload(event, persona, listField, index) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
-  showToast("Uploading image…", 10000);
-  uploadCompressedImage(file, { commitMessage: "Upload cover image via CMS" })
-    .then(({ url, uploaded }) => {
+  setSaveStatus("pending", "Uploading image…");
+  uploadImage(file, { commitMessage: "Upload cover image via CMS" })
+    .then((url) => {
       updateWorkLikeField(persona, listField, index, "coverImage", url);
-      showToast(uploaded ? "Image uploaded" : "Image saved as draft — will publish shortly");
     })
-    .catch(() => showToast("Couldn't read that image", 3000));
+    .catch((err) => {
+      setSaveStatus("error", "Upload failed");
+      showToast(err.message || "Couldn't upload that image", 4000);
+    });
 }
 
 function addWorkLikeItem(persona, listField, label) {
@@ -969,6 +885,7 @@ function addWorkLikeItem(persona, listField, label) {
   list.push(newWorkLikeItem(label));
   setPersonaList(persona, listField, list);
   goToEdit(list.length - 1);
+  noteChange();
   showToast("Added");
 }
 
@@ -981,6 +898,7 @@ function deleteWorkLikeItem(persona, listField, index) {
     setPersonaList(persona, "selectedWorkIds", ids);
   }
   renderPanel();
+  noteChange();
   showToast("Deleted");
 }
 
@@ -1089,7 +1007,7 @@ function renderExperienceEdit(persona, index, e) {
       </div>
     </div>
 
-    <button class="cms-save-btn" type="button" onclick="showToast('Saved'); goBackToList();">${iconSvg(SAVE_ICON, 16)}Save Experience</button>`;
+    <button class="cms-save-btn" type="button" onclick="goBackToList();">${iconSvg(SAVE_ICON, 16)}Save Experience</button>`;
 }
 
 function updateExperienceField(persona, index, field, value) {
@@ -1097,7 +1015,7 @@ function updateExperienceField(persona, index, field, value) {
   if (!list[index]) return;
   list[index] = Object.assign({}, list[index], { [field]: value });
   setPersonaList(persona, "experience", list);
-  showToast("Saved");
+  noteChange();
 }
 
 function addHighlight(persona, index, value) {
@@ -1109,7 +1027,7 @@ function addHighlight(persona, index, value) {
   list[index] = Object.assign({}, list[index], { highlights });
   setPersonaList(persona, "experience", list);
   renderPanel();
-  showToast("Saved");
+  noteChange();
 }
 
 function removeHighlight(persona, index, highlightIndex) {
@@ -1120,7 +1038,7 @@ function removeHighlight(persona, index, highlightIndex) {
   list[index] = Object.assign({}, list[index], { highlights });
   setPersonaList(persona, "experience", list);
   renderPanel();
-  showToast("Saved");
+  noteChange();
 }
 
 function addExperience(persona) {
@@ -1128,6 +1046,7 @@ function addExperience(persona) {
   list.push(newExperienceItem());
   setPersonaList(persona, "experience", list);
   goToEdit(list.length - 1);
+  noteChange();
   showToast("Added");
 }
 
@@ -1136,6 +1055,7 @@ function deleteExperience(persona, index) {
   list.splice(index, 1);
   setPersonaList(persona, "experience", list);
   renderPanel();
+  noteChange();
   showToast("Deleted");
 }
 
@@ -1198,7 +1118,7 @@ function renderTestimonialEdit(persona, index, t) {
       <input class="cms-input" type="text" placeholder="Engineering Lead @ Company" value="${escapeAttr(t.role)}" oninput="updateTestimonialField('${persona}', ${index}, 'role', this.value)">
     </div>
 
-    <button class="cms-save-btn" type="button" onclick="showToast('Saved'); goBackToList();">${iconSvg(SAVE_ICON, 16)}Save</button>`;
+    <button class="cms-save-btn" type="button" onclick="goBackToList();">${iconSvg(SAVE_ICON, 16)}Save</button>`;
 }
 
 function updateTestimonialField(persona, index, field, value) {
@@ -1206,7 +1126,7 @@ function updateTestimonialField(persona, index, field, value) {
   if (!list[index]) return;
   list[index] = Object.assign({}, list[index], { [field]: value });
   setPersonaList(persona, "testimonials", list);
-  showToast("Saved");
+  noteChange();
 }
 
 function addTestimonial(persona) {
@@ -1214,6 +1134,7 @@ function addTestimonial(persona) {
   list.push(newTestimonialItem());
   setPersonaList(persona, "testimonials", list);
   goToEdit(list.length - 1);
+  noteChange();
   showToast("Added");
 }
 
@@ -1222,6 +1143,7 @@ function deleteTestimonial(persona, index) {
   list.splice(index, 1);
   setPersonaList(persona, "testimonials", list);
   renderPanel();
+  noteChange();
   showToast("Deleted");
 }
 
@@ -1258,7 +1180,7 @@ function updateCountryField(persona, index, field, value) {
   if (!list[index]) return;
   list[index] = Object.assign({}, list[index], { [field]: value });
   setPersonaList(persona, "countriesVisited", list);
-  showToast("Saved");
+  noteChange();
 }
 
 function addCountry(persona) {
@@ -1266,6 +1188,7 @@ function addCountry(persona) {
   list.push({ flag: "🏳️", name: "New country" });
   setPersonaList(persona, "countriesVisited", list);
   renderPanel();
+  noteChange();
   showToast("Added");
 }
 
@@ -1274,6 +1197,7 @@ function deleteCountry(persona, index) {
   list.splice(index, 1);
   setPersonaList(persona, "countriesVisited", list);
   renderPanel();
+  noteChange();
   showToast("Deleted");
 }
 
@@ -1316,7 +1240,7 @@ function updateSocialField(persona, index, field, value) {
   if (!list[index]) return;
   list[index] = Object.assign({}, list[index], { [field]: value });
   setPersonaList(persona, "socials", list);
-  showToast("Saved");
+  noteChange();
 }
 
 function addSocial(persona) {
@@ -1324,6 +1248,7 @@ function addSocial(persona) {
   list.push({ platform: "website", url: "" });
   setPersonaList(persona, "socials", list);
   renderPanel();
+  noteChange();
   showToast("Added");
 }
 
@@ -1332,6 +1257,7 @@ function deleteSocial(persona, index) {
   list.splice(index, 1);
   setPersonaList(persona, "socials", list);
   renderPanel();
+  noteChange();
   showToast("Deleted");
 }
 
@@ -1371,7 +1297,7 @@ function updateTikTokField(persona, index, value) {
   if (!list[index]) return;
   list[index] = Object.assign({}, list[index], { url: value });
   setPersonaList(persona, "tiktokVideos", list);
-  showToast("Saved");
+  noteChange();
 }
 
 function addTikTokVideo(persona) {
@@ -1379,6 +1305,7 @@ function addTikTokVideo(persona) {
   list.push({ url: "" });
   setPersonaList(persona, "tiktokVideos", list);
   renderPanel();
+  noteChange();
   showToast("Added");
 }
 
@@ -1387,21 +1314,87 @@ function deleteTikTokVideo(persona, index) {
   list.splice(index, 1);
   setPersonaList(persona, "tiktokVideos", list);
   renderPanel();
+  noteChange();
   showToast("Deleted");
+}
+
+// ---- GitHub connection (gate screen + Site Settings card) ----
+
+function saveGithubTokenFromField() {
+  const input = document.getElementById("cms-gh-token");
+  const rememberEl = document.getElementById("cms-gh-remember");
+  const value = input ? input.value.trim() : "";
+  if (!value) {
+    showToast("Paste a token first", 2500);
+    return;
+  }
+  showToast("Verifying token…", 8000);
+  verifyGithubToken(value)
+    .then((ok) => {
+      if (!ok) {
+        showToast("That token can't push to this repo", 3500);
+        return;
+      }
+      setGithubToken(value, !!(rememberEl && rememberEl.checked));
+      showToast("Connected");
+      bootCms();
+    })
+    .catch((err) => {
+      showToast(err.message || "Couldn't verify the token", 4000);
+    });
+}
+
+function disconnectGithub() {
+  if (
+    !window.confirm(
+      "Disconnect this browser from GitHub? You won't be able to save edits until you reconnect."
+    )
+  ) {
+    return;
+  }
+  clearGithubToken();
+  window.location.reload();
 }
 
 // ---- Init ----
 
-document.addEventListener("DOMContentLoaded", async () => {
-  await loadPublishedContent();
+function renderConnectGate() {
+  document.getElementById("cms-shell").style.display = "none";
+  const gate = document.getElementById("cms-gate");
+  gate.style.display = "flex";
+  gate.innerHTML = `
+    <div class="cms-gate-card">
+      <div class="cms-logo-icon">${iconSvg(CLOUD_ICON, 26)}</div>
+      <h1 class="cms-gate-title">Connect to GitHub</h1>
+      <p class="cms-gate-subtitle">This CMS saves everything straight to your live site's repo — nothing sits as a draft in this browser. Connect once with a GitHub token to start editing.</p>
+
+      <div class="cms-field">
+        <label class="cms-label">GitHub personal access token</label>
+        <input class="cms-input" type="password" id="cms-gh-token" placeholder="ghp_… or github_pat_…">
+        <label class="cms-checkbox-item" style="margin-top:10px"><input type="checkbox" id="cms-gh-remember" checked>Remember on this device</label>
+      </div>
+
+      <button class="cms-save-btn" type="button" onclick="saveGithubTokenFromField()">${iconSvg(CLOUD_ICON, 16)}Connect</button>
+
+      <p class="cms-card-subtitle" style="margin-top:16px">Create a <strong>fine-grained</strong> token at github.com → Settings → Developer settings → Personal access tokens, scoped only to the <code>nadyarizka.github.io</code> repo with "Contents: Read and write" permission. Don't share this token — it can push to your live site.</p>
+    </div>`;
+}
+
+function bootCms() {
+  document.getElementById("cms-gate").style.display = "none";
+  document.getElementById("cms-shell").style.display = "";
   renderSidebar();
   renderHeader();
   renderPanel();
-  refreshPublishStatusText();
-  // If there's already a pending draft from a previous visit (e.g. the tab
-  // was closed before the debounce fired, or a publish failed and nothing
-  // since re-armed it), don't just display "unpublished" and leave it there
-  // — actually schedule the publish. Otherwise the status text implies
-  // something is in progress when nothing is.
-  scheduleAutoPublish();
+  setSaveStatus("saved", "All changes saved");
+  window.addEventListener("beforeunload", beforeUnloadHandler);
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadPublishedContent();
+  if (getGithubToken()) {
+    bootCms();
+  } else {
+    renderConnectGate();
+  }
 });

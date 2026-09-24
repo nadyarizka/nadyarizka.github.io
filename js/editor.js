@@ -65,22 +65,16 @@
   }
 
   // Downscale/re-encode lives in blocks.js now, shared with the CMS's other
-  // upload buttons (avatar, favicon, marquee, cover image) — see there. If a
-  // GitHub token is connected, the compressed image is uploaded straight to
-  // the repo (publish.js) and only its short path is kept — so a dropped
-  // image never has to sit as a big base64 string in localStorage at all.
-  // Falls back to the old behavior (return the data: URI itself) with no
-  // token, or if the direct upload fails for any reason.
+  // upload buttons (avatar, favicon, marquee, cover image) — see there. The
+  // CMS gates editing behind a connected GitHub token, so this always
+  // uploads straight to the repo (publish.js) and returns the resulting
+  // path — nothing sits as base64 in this browser. Throws on failure, which
+  // the caller below already surfaces via onError.
   async function readImage(file) {
     const dataUrl = await readAndCompressImage(file);
-    try {
-      const uploaded = await uploadImageDirectly(dataUrl, "Upload post image via CMS");
-      if (uploaded) return uploaded;
-    } catch (e) {
-      // Upload failed (offline, bad token, etc.) — fall through to the
-      // local draft, which the normal auto-publish flow will pick up later.
-    }
-    return dataUrl;
+    const uploaded = await uploadFileDirectly(dataUrl, "Upload post image via CMS");
+    if (!uploaded) throw new Error("upload failed");
+    return uploaded;
   }
 
   function caretAtStart(t) {
@@ -183,8 +177,7 @@
       widthGroup.appendChild(b);
     });
     barLeft.appendChild(widthGroup);
-    const usage = el("span", "be-usage");
-    bar.append(barLeft, usage);
+    bar.append(barLeft);
 
     const scroller = el("div", "be-scroll");
     const surface = el("div", "be-surface");
@@ -249,16 +242,6 @@
 
     // ---- Persistence ----
 
-    function updateUsage() {
-      let used = 0;
-      try {
-        used = (localStorage.getItem(STORE_KEY) || "").length;
-      } catch (e) {}
-      const mb = used / 1048576;
-      usage.textContent = "Browser storage: " + mb.toFixed(1) + " MB of ~5 MB";
-      usage.classList.toggle("warn", mb > 3.8);
-    }
-
     function flush() {
       if (timer == null) return;
       clearTimeout(timer);
@@ -269,7 +252,6 @@
           layoutWidth: state.layoutWidth,
         });
       }
-      updateUsage();
     }
 
     function notify() {
@@ -1185,7 +1167,6 @@
     // ---- Start ----
 
     render();
-    updateUsage();
 
     return {
       flush,

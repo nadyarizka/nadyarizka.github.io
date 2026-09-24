@@ -1,25 +1,25 @@
-// Bridges the localStorage CMS drafts (store.js) to the live GitHub Pages
-// site. Two jobs:
+// Bridges the CMS's single in-memory working copy (SITE/ABOUT/SITE_SETTINGS
+// from data.js, mutated directly by store.js's setters) to the live GitHub
+// Pages site. There is no separate local draft/override layer — GitHub is
+// the only place edits persist. Two jobs:
 //
 //   1. loadPublishedContent() — on every page (public + admin), fetch the
-//      last-published snapshot (data/content.json) and merge it into the
-//      SITE/ABOUT/SITE_SETTINGS objects from data.js *before* anything
-//      renders, so visitors see real published content and not just the
-//      hardcoded defaults baked into data.js at build time.
+//      last-saved snapshot (data/content.json) and merge it into SITE/
+//      ABOUT/SITE_SETTINGS *before* anything renders, so visitors (and a
+//      freshly opened CMS) see real saved content, not just the hardcoded
+//      defaults baked into data.js.
 //
-//   2. publishToGithub() — CMS-only. Takes the current merged state
-//      (published content + local drafts), uploads any base64 images/files
-//      as real repo files, writes the result to data/content.json, and
-//      commits everything in one push via github.js. Local drafts are then
-//      cleared, since content.json now *is* the published truth — which is
-//      also what frees up the ~5MB localStorage cap.
+//   2. saveToGithub() — CMS-only. Snapshots the current in-memory state and
+//      commits it to data/content.json. Called by cms.js's debounced
+//      scheduleSave()/flushSave() — see cms.js for the "Saving… / Saved"
+//      status flow that wraps this.
 
 const PUBLISHED_CONTENT_PATH = "/data/content.json";
 
 async function loadPublishedContent() {
   try {
     const res = await fetch(PUBLISHED_CONTENT_PATH + "?v=" + Date.now(), { cache: "no-store" });
-    if (!res.ok) return; // nothing published yet (or running from file://) — data.js defaults stand
+    if (!res.ok) return; // nothing saved yet (or running from file://) — data.js defaults stand
     const published = await res.json();
     if (!published || typeof published !== "object") return;
 
@@ -37,33 +37,12 @@ async function loadPublishedContent() {
   }
 }
 
-// ---- Draft size, shown in the CMS so "unpublished changes" isn't a mystery ----
-
-function getDraftSummary() {
-  const overrides = getOverrides();
-  const keys = Object.keys(overrides);
-  let bytes = 0;
-  try {
-    bytes = new Blob([JSON.stringify(overrides)]).size;
-  } catch (e) {
-    bytes = JSON.stringify(overrides).length;
-  }
-  return { hasChanges: keys.length > 0, bytes };
-}
-
-function formatBytes(bytes) {
-  if (bytes < 1024) return bytes + " B";
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
-  return (bytes / 1024 / 1024).toFixed(2) + " MB";
-}
-
-// ---- Base64 asset extraction ----
-// Any string field anywhere in the snapshot that looks like a data: URI
-// (avatar/favicon/resume uploads, marquee images, cover images, and every
-// image block dropped into the Notion-style editor, however deeply nested
-// inside columns) gets pulled out, uploaded as a real file, and swapped for
-// its resulting path — walked generically so new fields don't need this file
-// touched again.
+// ---- File uploads ----
+// Every image (and the resume) uploads straight to GitHub the moment it's
+// picked in the CMS — see uploadFileDirectly. Nothing waits around as
+// base64 anywhere. extractDataUris/substituteTokens below exist purely as a
+// defense-in-depth sweep over the save snapshot (e.g. rich text pasted with
+// an embedded image data: URI), not as the primary path.
 
 const DATA_URI_RE = /^data:([^;,]+)(?:;charset=[^;,]+)?;base64,([\s\S]*)$/;
 
@@ -82,8 +61,6 @@ function extensionForMime(mime) {
   return MIME_EXTENSIONS[mime] || "bin";
 }
 
-// Pass 1: deep-clone the snapshot, replacing each data: URI with a unique
-// placeholder token and collecting the originals in `found`.
 function extractDataUris(node, found) {
   if (Array.isArray(node)) return node.map((item) => extractDataUris(item, found));
   if (node && typeof node === "object") {
@@ -94,6 +71,9 @@ function extractDataUris(node, found) {
     return out;
   }
   if (typeof node === "string" && DATA_URI_RE.test(node)) {
+    // U+E000 (Private Use Area) — printable, valid UTF-8, never appears in
+    // real content, and doesn't make tools mistake this file for binary the
+    // way a literal NULL byte would.
     const token = "ASSET" + found.length + "";
     found.push(node);
     return token;
@@ -101,7 +81,6 @@ function extractDataUris(node, found) {
   return node;
 }
 
-// Pass 3: swap each placeholder token back out for its final uploaded path.
 function substituteTokens(node, pathByIndex) {
   if (Array.isArray(node)) return node.map((item) => substituteTokens(item, pathByIndex));
   if (node && typeof node === "object") {
@@ -135,15 +114,14 @@ async function shortHashFromBase64(base64) {
   return h.toString(16);
 }
 
-// Uploads one already-compressed image straight to the repo as its own tiny
-// commit and returns the resulting path. This is the real fix for the
-// storage-full wall: an image never has to sit as a multi-hundred-KB base64
-// string in localStorage at all once a token is connected — it leaves the
-// browser the moment it's picked, and only a short path (~40 bytes) ever
-// touches local storage. Returns null if there's no token yet or the upload
-// fails, so callers can fall back to the old behavior (store the data: URI
-// locally, let the debounced publish pick it up later).
-async function uploadImageDirectly(dataUrl, message) {
+// Uploads one already-prepared file (an image, the resume, anything) straight
+// to the repo as its own small commit and returns the resulting path. This
+// is the only way a file reaches the CMS now — there's no local fallback,
+// which is the point: nothing sits as base64 in this browser waiting to be
+// saved later. Returns null if there's no token (the CMS gates editing
+// behind having one, so this is mainly a defensive check) or `dataUrl` isn't
+// actually a data: URI.
+async function uploadFileDirectly(dataUrl, message) {
   const token = getGithubToken();
   if (!token) return null;
   const match = DATA_URI_RE.exec(dataUrl);
@@ -153,52 +131,8 @@ async function uploadImageDirectly(dataUrl, message) {
   const ext = extensionForMime(mime);
   const hash = await shortHashFromBase64(base64);
   const path = `assets/uploads/${hash}.${ext}`;
-  await commitFilesToGitHub(token, [{ path, content: base64, encoding: "base64" }], message || "Upload image via CMS");
+  await commitFilesToGitHub(token, [{ path, content: base64, encoding: "base64" }], message || "Upload file via CMS");
   return "/" + path;
-}
-
-// Emergency escape hatch for a draft that's already jammed full (or that
-// keeps failing to auto-publish for some other reason) — strips any base64
-// image/file data out of the local draft, which is what actually eats the
-// ~5MB, while leaving every typed text edit exactly as it was. A cleared
-// image field just falls back to whatever's already published (see
-// getPersonaData's base+override merge), so nothing already live disappears
-// — only an unpublished image that was stuck goes back to needing a re-add.
-function clearLocalImageDrafts() {
-  const overrides = getOverrides();
-  let clearedCount = 0;
-  let freedBytes = 0;
-
-  function strip(parent, key) {
-    const val = parent[key];
-    if (typeof val === "string" && DATA_URI_RE.test(val)) {
-      freedBytes += val.length;
-      clearedCount++;
-      if (Array.isArray(parent)) parent[key] = "";
-      else delete parent[key];
-      return;
-    }
-    if (Array.isArray(val)) val.forEach((_, i) => strip(val, i));
-    else if (val && typeof val === "object") Object.keys(val).forEach((k) => strip(val, k));
-  }
-  strip({ root: overrides }, "root");
-
-  // Second pass: drop now-empty slots left behind in arrays (e.g. a cleared
-  // marqueeImages entry), without disturbing anything else.
-  function pruneEmpty(node) {
-    if (Array.isArray(node)) {
-      for (let i = node.length - 1; i >= 0; i--) {
-        if (node[i] === "") node.splice(i, 1);
-        else pruneEmpty(node[i]);
-      }
-    } else if (node && typeof node === "object") {
-      Object.keys(node).forEach((k) => pruneEmpty(node[k]));
-    }
-  }
-  pruneEmpty(overrides);
-
-  if (clearedCount > 0) saveOverrides(overrides);
-  return { clearedCount, freedBytes };
 }
 
 function computeCurrentSnapshot() {
@@ -213,26 +147,26 @@ function computeCurrentSnapshot() {
   };
 }
 
-// ---- The publish flow itself ----
-
-async function publishToGithub(onProgress) {
-  const report = typeof onProgress === "function" ? onProgress : () => {};
+// ---- The save flow ----
+// One content.json commit reflecting the current in-memory state exactly —
+// no merging, no pruning, nothing to reconcile with a separate draft, since
+// there isn't one.
+async function saveToGithub() {
   const token = getGithubToken();
-  if (!token) throw new Error("Add a GitHub token first (Site Settings → Publish to GitHub).");
+  if (!token) throw new Error("Connect a GitHub token first.");
 
-  report("Preparing content…");
   const snapshot = computeCurrentSnapshot();
 
+  // Defense-in-depth sweep — see the comment above extractDataUris. Normally
+  // finds nothing, since every upload path already goes straight to GitHub.
   const foundAssets = [];
   const withTokens = extractDataUris(snapshot, foundAssets);
-
   const files = [];
   const pathByIndex = [];
   for (let i = 0; i < foundAssets.length; i++) {
-    report(`Uploading image ${i + 1} of ${foundAssets.length}…`);
     const match = DATA_URI_RE.exec(foundAssets[i]);
     if (!match) {
-      pathByIndex[i] = foundAssets[i]; // not actually a data URI somehow — leave as-is
+      pathByIndex[i] = foundAssets[i];
       continue;
     }
     try {
@@ -244,16 +178,14 @@ async function publishToGithub(onProgress) {
       pathByIndex[i] = "/" + path;
       files.push({ path, content: base64, encoding: "base64" });
     } catch (e) {
-      // A corrupted/malformed entry somewhere in the draft (bad base64,
-      // etc.) shouldn't take down the whole publish with a cryptic browser
-      // error — drop just that one field back to whatever it already was
-      // and keep going with everything else.
+      // Malformed/corrupted entry — leave it as-is rather than failing the
+      // whole save over one bad field.
       pathByIndex[i] = foundAssets[i];
     }
   }
 
   const finalSnapshot = substituteTokens(withTokens, pathByIndex);
-  finalSnapshot.publishedAt = new Date().toISOString();
+  finalSnapshot.savedAt = new Date().toISOString();
 
   files.push({
     path: "data/content.json",
@@ -261,83 +193,15 @@ async function publishToGithub(onProgress) {
     encoding: "utf-8",
   });
 
-  report("Committing to GitHub…");
-  await commitFilesToGitHub(token, files, "Publish content via CMS");
+  await commitFilesToGitHub(token, files, "Save content via CMS");
 
-  // Reflect the published state immediately so the CMS doesn't flash back to
-  // stale defaults, then drop local drafts that are now redundant with what
-  // just got committed. This is a prune, not a blind wipe: publishing can
-  // take a few seconds (image uploads, several API calls), and auto-publish
-  // means edits can keep landing in localStorage while that's in flight —
-  // wiping everything unconditionally at the end would silently throw those
-  // away. Anything that doesn't match what we just published (i.e. was
-  // edited after this snapshot was captured) is left in place as a pending
-  // draft, which the next auto-publish picks up.
-  PERSONAS.forEach((persona) => Object.assign(SITE[persona], finalSnapshot.site[persona]));
-  Object.assign(ABOUT, finalSnapshot.about);
-  Object.assign(SITE_SETTINGS, finalSnapshot.siteSettings);
-  pruneOverridesMatchingPublished(finalSnapshot);
+  // If the sweep caught anything, swap the in-memory state over to the
+  // uploaded paths so the next save doesn't re-upload identical base64.
+  if (foundAssets.length) {
+    PERSONAS.forEach((persona) => Object.assign(SITE[persona], finalSnapshot.site[persona]));
+    Object.assign(ABOUT, finalSnapshot.about);
+    Object.assign(SITE_SETTINGS, finalSnapshot.siteSettings);
+  }
 
   return finalSnapshot;
-}
-
-// Removes only the override fields that are now identical to what was just
-// published, leaving anything edited mid-publish untouched as a draft.
-function pruneOverridesMatchingPublished(snapshot) {
-  const overrides = getOverrides();
-  let changed = false;
-  const sameValue = (a, b) => JSON.stringify(a) === JSON.stringify(b);
-
-  if (overrides.personas) {
-    PERSONAS.forEach((persona) => {
-      const personaOv = overrides.personas[persona];
-      if (!personaOv) return;
-      const published = snapshot.site[persona] || {};
-      Object.keys(personaOv).forEach((field) => {
-        if (sameValue(personaOv[field], published[field])) {
-          delete personaOv[field];
-          changed = true;
-        }
-      });
-      if (Object.keys(personaOv).length === 0) delete overrides.personas[persona];
-    });
-    if (Object.keys(overrides.personas).length === 0) delete overrides.personas;
-  }
-
-  if (overrides.about) {
-    // personaText is a nested { persona: text } object, so it needs a
-    // per-persona comparison rather than one whole-object comparison —
-    // otherwise a change to one persona's text would block clearing every
-    // other persona's already-published text too.
-    if (overrides.about.personaText) {
-      const publishedText = snapshot.about.personaText || {};
-      Object.keys(overrides.about.personaText).forEach((persona) => {
-        if (overrides.about.personaText[persona] === publishedText[persona]) {
-          delete overrides.about.personaText[persona];
-          changed = true;
-        }
-      });
-      if (Object.keys(overrides.about.personaText).length === 0) delete overrides.about.personaText;
-    }
-    Object.keys(overrides.about).forEach((field) => {
-      if (field === "personaText") return;
-      if (sameValue(overrides.about[field], snapshot.about[field])) {
-        delete overrides.about[field];
-        changed = true;
-      }
-    });
-    if (Object.keys(overrides.about).length === 0) delete overrides.about;
-  }
-
-  if (overrides.site) {
-    Object.keys(overrides.site).forEach((field) => {
-      if (sameValue(overrides.site[field], snapshot.siteSettings[field])) {
-        delete overrides.site[field];
-        changed = true;
-      }
-    });
-    if (Object.keys(overrides.site).length === 0) delete overrides.site;
-  }
-
-  if (changed) saveOverrides(overrides);
 }

@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../css/cms.css">
 </head>
 <body>
-  <div class="cms-shell">
+  <div class="cms-shell" id="cms-shell" style="display:none">
     <aside class="cms-sidebar">
       <div class="cms-sidebar-header">
         <div class="cms-logo-icon">
@@ -36,11 +36,12 @@
       </div>
 
       <div class="cms-sidebar-footer">
-        <button class="cms-publish-btn" type="button" onclick="runPublish()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cms-icon"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m16 16-4-4-4 4"></path></svg>
-          Publish to GitHub
-        </button>
-        <p class="cms-publish-status" id="cms-publish-status">Checking…</p>
+        <div class="cms-save-row">
+          <p class="cms-save-status" id="cms-save-status">Saved</p>
+          <button class="cms-save-now-btn" type="button" onclick="flushSave()" title="Save now">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cms-icon"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path><path d="M7 3v4a1 1 0 0 0 1 1h7"></path></svg>
+          </button>
+        </div>
         <a class="cms-back-link" href="../index.html">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cms-icon"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
           Back to site
@@ -55,6 +56,8 @@
       <div id="cms-panel" class="cms-panel"></div>
     </main>
   </div>
+
+  <div class="cms-gate" id="cms-gate"></div>
 
   <div class="cms-toast" id="cms-toast">Saved</div>
 

@@ -1,81 +1,39 @@
-// Local persistence layer for the CMS. Since this is a static site with no
-// backend, edits made in admin/index.html are saved to localStorage and merged over
-// the defaults in data.js whenever a page reads persona/about content.
-// Both the CMS and the public pages (index/about/post) go through here so
-// there is exactly one source of truth at runtime.
+// Data-access layer over SITE / ABOUT / SITE_SETTINGS (from data.js).
+//
+// There is no separate local draft anymore. GitHub is the only place edits
+// persist — the CMS mutates these objects directly in memory as its one
+// working copy, and cms.js's debounced scheduleSave()/flushSave() (backed
+// by publish.js's saveToGithub()) is responsible for getting that state
+// onto the live repo. Every page — public and admin — starts from whatever
+// loadPublishedContent() merged in from data/content.json, so these
+// getters always reflect "the last thing that was actually saved," plus
+// whatever the CMS has changed in this tab since.
 
-const STORE_KEY = "nadyaCmsOverrides";
-
-function loadOverrides() {
-  try {
-    const raw = localStorage.getItem(STORE_KEY);
-    return raw ? JSON.parse(raw) : {};
-  } catch (e) {
-    return {};
-  }
-}
-
-// Whether the most recent write reached localStorage. The CMS reads this so a
-// full browser (easy to hit with images) is never reported as "Saved".
-let storageOk = true;
-
-function isStorageOk() {
-  return storageOk;
-}
-
-function saveOverrides(overrides) {
-  try {
-    localStorage.setItem(STORE_KEY, JSON.stringify(overrides));
-    storageOk = true;
-  } catch (e) {
-    // Storage full or unavailable (private browsing) — edits won't persist.
-    storageOk = false;
-  }
-}
-
-let _overrides = loadOverrides();
-
-function getOverrides() {
-  return _overrides;
+function makeId(prefix) {
+  return prefix + "-" + Math.random().toString(36).slice(2, 9);
 }
 
 // ---- Persona profile + content ----
 
 function getPersonaData(persona) {
-  const base = SITE[persona] || {};
-  const ov = (_overrides.personas && _overrides.personas[persona]) || {};
-  return Object.assign({}, base, ov);
+  return SITE[persona] || {};
 }
 
 function setPersonaField(persona, field, value) {
-  if (!_overrides.personas) _overrides.personas = {};
-  if (!_overrides.personas[persona]) _overrides.personas[persona] = {};
-  _overrides.personas[persona][field] = value;
-  saveOverrides(_overrides);
+  if (!SITE[persona]) SITE[persona] = {};
+  SITE[persona][field] = value;
 }
 
-function getPersonaField(persona, field) {
-  const ov = _overrides.personas && _overrides.personas[persona];
-  if (ov && Object.prototype.hasOwnProperty.call(ov, field)) return ov[field];
-  return (SITE[persona] || {})[field];
-}
-
-// ---- List fields (works / experience / testimonials / countriesVisited) ----
+// ---- List fields (works / experience / testimonials / countriesVisited / socials / etc.) ----
 // Stored as a full-array replacement once touched, so add/edit/remove/reorder
 // in the CMS is just "write the whole array back".
 
 function getPersonaList(persona, field) {
-  const ov = _overrides.personas && _overrides.personas[persona];
-  if (ov && Array.isArray(ov[field])) return ov[field];
   return (SITE[persona] && SITE[persona][field]) || [];
 }
 
 function setPersonaList(persona, field, list) {
   setPersonaField(persona, field, list);
-}
-
-function makeId(prefix) {
-  return prefix + "-" + Math.random().toString(36).slice(2, 9);
 }
 
 // ---- Display formatting shared by public pages + the CMS ----
@@ -108,43 +66,22 @@ function getSelectedWorks(data) {
 // ---- About page content ----
 
 function getAboutData() {
-  const ov = _overrides.about || {};
-  return {
-    intro: ov.intro || ABOUT.intro,
-    personaText: Object.assign({}, ABOUT.personaText, ov.personaText || {}),
-    skills: ov.skills || ABOUT.skills,
-    tools: ov.tools || ABOUT.tools,
-  };
+  return ABOUT;
 }
 
 function setAboutPersonaText(persona, value) {
-  if (!_overrides.about) _overrides.about = {};
-  if (!_overrides.about.personaText) _overrides.about.personaText = {};
-  _overrides.about.personaText[persona] = value;
-  saveOverrides(_overrides);
-}
-
-function setAboutList(field, list) {
-  if (!_overrides.about) _overrides.about = {};
-  _overrides.about[field] = list;
-  saveOverrides(_overrides);
-}
-
-function resetAllOverrides() {
-  _overrides = {};
-  saveOverrides(_overrides);
+  if (!ABOUT.personaText) ABOUT.personaText = {};
+  ABOUT.personaText[persona] = value;
 }
 
 // ---- Site-wide settings (favicon) ----
 
 function getSiteData() {
-  return Object.assign({}, SITE_SETTINGS, _overrides.site || {});
+  return SITE_SETTINGS;
 }
 
 function setSiteField(field, value) {
-  if (!_overrides.site) _overrides.site = {};
-  _overrides.site[field] = value;
-  saveOverrides(_overrides);
+  SITE_SETTINGS[field] = value;
 }
 
 function applyStoredFavicon() {
