@@ -1044,7 +1044,7 @@ textarea.form-input {
 
 /* Post detail page */
 .post-cover {
-  margin: 20px -24px 48px -24px;
+  margin: 20px 0 48px 0;
 }
 
 .post-cover img {
@@ -1052,6 +1052,7 @@ textarea.form-input {
   width: 100%;
   height: 360px;
   object-fit: cover;
+  border-radius: 10px;
 }
 
 .post-tags {
