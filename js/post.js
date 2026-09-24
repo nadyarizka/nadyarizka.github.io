@@ -23,8 +23,13 @@ function renderPost() {
   if (work.layoutWidth === "wide") root.classList.add("is-wide");
   if (work.layoutWidth === "full") root.classList.add("is-full");
 
+  const coverHtml = work.coverImage
+    ? `<div class="post-cover"><img src="${work.coverImage}" alt=""></div>`
+    : "";
+
   const content = `
     <button class="back-btn" type="button" onclick="goBackHome('${persona}')">&larr; Back</button>
+    ${coverHtml}
     <div class="post-tags">
       ${work.tags.map((t) => `<span class="tag">${t}</span>`).join("")}
     </div>

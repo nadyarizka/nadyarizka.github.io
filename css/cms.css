@@ -41,11 +41,25 @@ a {
 .cms-sidebar {
   width: 260px;
   flex-shrink: 0;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
   background: #ffffff;
   border-right: 1px solid #eeece8;
   display: flex;
   flex-direction: column;
   padding: 24px 16px;
+  overflow: hidden;
+}
+
+/* Persona / Content / Site nav groups are the only part that scrolls — the
+   header and footer above/below stay put regardless of how many items are
+   in the list. */
+.cms-nav-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .cms-sidebar-header {
@@ -504,10 +518,20 @@ a {
   }
   .cms-sidebar {
     width: 100%;
+    height: auto;
+    position: static;
+    overflow: visible;
     flex-direction: row;
     flex-wrap: wrap;
     border-right: none;
     border-bottom: 1px solid #eeece8;
+  }
+  .cms-nav-scroll {
+    flex: none;
+    overflow: visible;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
   .cms-sidebar-footer {
     margin-top: 0;
