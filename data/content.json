@@ -35,7 +35,17 @@
       "selectedWorkIds": [
         "sea-labs-design-system",
         "tokopedia-travel-product-redesign",
-        "unifying-sg-customs-officer-internal-site"
+        "unifying-sg-customs-officer-internal-site",
+        "tokopedias-flight-new-booking-process",
+        "tokopedia-top-up-e-money",
+        "redesign-tokopedias-train-booking-platform",
+        "mall-sampah-redesign-a-ux-case-study",
+        "antrian-imigrasi-app",
+        "find-your-tutor-in-cari-ilmu-a-ux-case-study",
+        "seas-infrastructure-management-system",
+        "standardizing-200-internal-modules-for-singapore-customs",
+        "tokopedia-sellers-campaign-participation",
+        "standardizing-travel-products-at-tokopedia"
       ],
       "works": [
         {
@@ -295,6 +305,3223 @@
             "Design System"
           ],
           "content": "",
+          "coverImage": "",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "tokopedias-flight-new-booking-process",
+          "title": "Tokopedia's Flight New Booking Process",
+          "description": "A Project to improve Tokopedia's Flight booking process in order to minimize information redundancy and an additional step when users try to book flights. This project aims to improve the previous…",
+          "year": "2019",
+          "company": "Tokopedia",
+          "tags": [
+            "Portfolio",
+            "Mobile App",
+            "UX"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "bqsm6vv7",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "brv3dm7a",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bv2lysra",
+                    "type": "p",
+                    "html": "A Project to improve Tokopedia's Flight booking process in order to minimize information redundancy and an additional step when users try to book flights. This project aims to improve the previous experience which expected to have an impact on increasing CVR on each funnel."
+                  },
+                  {
+                    "id": "b5z9cwno",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "b8x3evmy",
+                    "type": "ul",
+                    "html": "Reduced flight booking step"
+                  },
+                  {
+                    "id": "b3xy1ajq",
+                    "type": "ul",
+                    "html": "Increased CVR and reduced drop-off on each funnel"
+                  },
+                  {
+                    "id": "bjytglki",
+                    "type": "ul",
+                    "html": "New and improved user interface creating a unified look and experience across all Tokopedia's travel products"
+                  },
+                  {
+                    "id": "bdxc7xa6",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  },
+                  {
+                    "id": "bux449tp",
+                    "type": "ul",
+                    "html": "Main User Experience Designer for this project"
+                  },
+                  {
+                    "id": "btj3uvtf",
+                    "type": "ul",
+                    "html": "Initiated the idea to improve this particular experience on flight's booking process"
+                  },
+                  {
+                    "id": "bbwwykq4",
+                    "type": "ul",
+                    "html": "Collaborated and worked together with PMs, Engineers, and involved stakeholders to define requirements for this project"
+                  },
+                  {
+                    "id": "bykb4kh7",
+                    "type": "ul",
+                    "html": "Designed the end to end journey and user flow"
+                  },
+                  {
+                    "id": "bh9h3j32",
+                    "type": "ul",
+                    "html": "Conducted user testing &amp; user in-depth interview on end to end journey."
+                  },
+                  {
+                    "id": "b3h8c79c",
+                    "type": "ul",
+                    "html": "Conducted quality assurance regular check to make sure the live design is as expected"
+                  }
+                ],
+                [
+                  {
+                    "id": "bi81mivh",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "bm0zyreu",
+                    "type": "p",
+                    "html": "2019"
+                  },
+                  {
+                    "id": "bfwylplz",
+                    "type": "h3",
+                    "html": "🏢 Stakeholder"
+                  },
+                  {
+                    "id": "b3zlaxmu",
+                    "type": "ul",
+                    "html": "<a href=\"http://tokopedia.com\">Tokopedia</a>"
+                  },
+                  {
+                    "id": "b63ngeet",
+                    "type": "h3",
+                    "html": "🧩 Team"
+                  },
+                  {
+                    "id": "bzt2g89f",
+                    "type": "ul",
+                    "html": "Travel &amp; Entertainment"
+                  },
+                  {
+                    "id": "by4gqv9j",
+                    "type": "h3",
+                    "html": "🔗 Related Links"
+                  },
+                  {
+                    "id": "bq9bag5b",
+                    "type": "ul",
+                    "html": "<a href=\"http://tokopedia.com/flight\">Tokopedia Flight</a>"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "bg2hiknj",
+              "type": "divider"
+            },
+            {
+              "id": "bwubrjap",
+              "type": "image",
+              "src": "/assets/uploads/9cd595b270c942e36870.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "b2ma5cxy",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "bmar2nm8",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "b0kuv1gl",
+              "type": "p",
+              "html": "Tokopedia has had a Flight Booking feature for around 2 years now. Since Tokopedia always strives to create a better experience for our users, we tried to evaluate what has been a setback in Tokopedia Flight all this time. We did this by not only do competitive benchmarking but also dig deep within our customer service complaints and we also did some in-depth research to gather what our users think of the existing Tokopedia Flight. Based on the existing data, we found out that the drop-off on a particular funnel is really big."
+            },
+            {
+              "id": "b2gyno7j",
+              "type": "p",
+              "html": "Based on all methods and insights above, we concluded that there are several areas that can be improved one of them was the booking process itself. Booking process represents the step where users have to inputs all passenger data, add extra necessities like baggage, meal, etc. And so we focus our development specifically on the Flight booking process with the goal of increasing CVR on each funnel/step in the booking process."
+            },
+            {
+              "id": "b7ln13u7",
+              "type": "h2",
+              "html": "Design Process"
+            },
+            {
+              "id": "bnl0x28o",
+              "type": "h3",
+              "html": "Research"
+            },
+            {
+              "id": "ba8sfz42",
+              "type": "p",
+              "html": "On our existing design, users would have to go through 2 step (involving 2 different pages including: Fill Passenger Data page &amp; Summary page)."
+            },
+            {
+              "id": "bigp7e6n",
+              "type": "ul",
+              "html": "<b>Fill Passenger Data page<br></b>Represent the page that we use to prompt users to input their passenger data such as passenger name, passport detail, id, etc."
+            },
+            {
+              "id": "b3ib7kua",
+              "type": "ul",
+              "html": "<b>Summary Page<br></b>Represent the overall booking summary including Flight’s detail that users have selected, passenger data that has been filled, any extra amenities (baggage, meal, etc), detail of the total price."
+            },
+            {
+              "id": "bz8aenfv",
+              "type": "image",
+              "src": "/assets/uploads/a1dfcf63176b8dc10ccc.jpg",
+              "caption": "",
+              "widthPct": 81
+            },
+            {
+              "id": "boq4gnuy",
+              "type": "p",
+              "html": "Upon doing the competitive research, we found out that most of \"other players\" who have the same Flight Ticket feature didn’t have Summary page. So we took this finding into consideration, if we end up wanting to reduce the step of booking flight, we might able to remove our Summary page as well. But before we even quick to decide, in order to ensure that what we're proposing is correct, we did in-depth research to our Tokopedia's flight user. In the research, we asked the participants about their habit and expectation towards the process of flight booking. Not only that, we also asked whether they have any difficulties when trying to book flight ticket through Tokopedia."
+            },
+            {
+              "id": "bvd56odk",
+              "type": "p",
+              "html": "Based on the result, it showed that our users have a particular behavior where they fill in the required data carefully on the passenger data form. It's because users think that the nature of filling in passenger form that has data (like ID number, Full name) is a very sensitive and important part in booking flight tickets since the passenger ticket &amp; boarding pass will be referring to these data. Therefore the step of filling in the passenger form requires the user's full attention. Most participants even stated that they usually take a second look to make sure that all the data they input are correct during the steps of filling the passenger form."
+            },
+            {
+              "id": "bc3qtbb2",
+              "type": "callout",
+              "html": "Users treat the <b>Fill Passenger Data page</b> as the most important page since it contains sensitive passenger data. Thus they don't need an additional <b>Summary page</b> which basically a redundant page.",
+              "icon": "💡"
+            },
+            {
+              "id": "bqnk2nec",
+              "type": "h2",
+              "html": "Ideate"
+            },
+            {
+              "id": "b2tqbue6",
+              "type": "p",
+              "html": "With the insight that we've gathered from in-depth research and competitive analysis, we try to ideate and come up with possible solutions that might be feasible and impactful to this problem. For this, we try to refer back to our original idea where we try to remove one of the steps (which is Booking Summary) since users think that the <b>Summary page </b>doesn't really matter for them anyway. Based on the internal discussion on impact/effort mapping, we think that the idea of reducing steps in the booking process can be impactful towards achieving the goal of increased CVR with lesser effort. In additional notes, we also think that the Summary page is quite a redundant page with redundant information presented. Therefore, the new flow of flight booking won't be a painful change for users since most of them would probably disregard the Summary page anyway."
+            },
+            {
+              "id": "btbp1zej",
+              "type": "image",
+              "src": "/assets/uploads/abe8366e560b448e46cf.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bu8u0jkz",
+              "type": "h2",
+              "html": "Sketch Time!"
+            },
+            {
+              "id": "b2b0sbzc",
+              "type": "p",
+              "html": "With the idea and solution in mind, we faced some challenges like:"
+            },
+            {
+              "id": "bgjbelhc",
+              "type": "ul",
+              "html": "How to gracefully communicate these changes to our current users"
+            },
+            {
+              "id": "bp6m1jrf",
+              "type": "ul",
+              "html": "How to let our new users carefully fill in their passenger data."
+            },
+            {
+              "id": "b5bjxs1a",
+              "type": "p",
+              "html": "So we tried to map out all information needed by the user to finish Job to be done (which is fill passenger data &amp; review their order) based on the order of importance. We come up with information mapping and a rough sketch below:"
+            },
+            {
+              "id": "ba14huwy",
+              "type": "columns",
+              "ratio": 31,
+              "columns": [
+                [
+                  {
+                    "id": "bc2q1u9d",
+                    "type": "image",
+                    "src": "/assets/uploads/5c2408775f820e7d5e33.jpg",
+                    "caption": "",
+                    "widthPct": 100
+                  }
+                ],
+                [
+                  {
+                    "id": "b6tr9kha",
+                    "type": "image",
+                    "src": "/assets/uploads/15f154531fc3696a0c85.jpg",
+                    "caption": "",
+                    "widthPct": 100
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "bt7vshv1",
+              "type": "p",
+              "html": "After that we tried some design iteration to solve the challenge and finally we managed to get to the final design after some back and forth discussion with the team."
+            },
+            {
+              "id": "bzp4kspy",
+              "type": "h2",
+              "html": "Features"
+            },
+            {
+              "id": "bkendr3j",
+              "type": "p",
+              "html": "So how's the final design look and what are the components that we changed from the current flight design?"
+            },
+            {
+              "id": "b2asocuy",
+              "type": "columns",
+              "ratio": 56,
+              "columns": [
+                [
+                  {
+                    "id": "bc94iawm",
+                    "type": "image",
+                    "src": "/assets/uploads/8be87b9ce2565d4b02c7.gif",
+                    "caption": "",
+                    "widthPct": 100
+                  }
+                ],
+                [
+                  {
+                    "id": "bihalnmk",
+                    "type": "image",
+                    "src": "/assets/uploads/c8d201e53a4eb18400a3.jpg",
+                    "caption": "New Design for Flight Booking Step",
+                    "widthPct": 100
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "b0z6we3s",
+              "type": "h3",
+              "html": "1. Loading State"
+            },
+            {
+              "id": "bc7ili5b",
+              "type": "p",
+              "html": "First thing first, when you get into the booking step of Tokopedia Flight, you will realize that we updated our loading state. Instead of having only 1 type of loading state, we provided 2 types of loading."
+            },
+            {
+              "id": "b0ydt5r9",
+              "type": "ul",
+              "html": "The first one being a spinner (with a sprinkle of cute phrases)."
+            },
+            {
+              "id": "bai8d73s",
+              "type": "ul",
+              "html": "Followed by the second loading which is the shimmer."
+            },
+            {
+              "id": "bowtpikk",
+              "type": "p",
+              "html": "You might wonder, <b>why 2 states</b>? The initial problem of why we put 2 loading states was, there was this possibility of a long process load. Well, since there’s still a possibility of a long loading process, we obviously don’t want our users to feel like they have to wait for a long time. So our way around this problem was to present 2 loading state. These 2 loaders can give an illusion to our users that something is processing and that there’s something happening. So we showed the first state for about 4–5 seconds and the shimmering one will load the rest of the process."
+            },
+            {
+              "id": "bqwchh7p",
+              "type": "callout",
+              "html": "This can give users a sense of loading progress instead of just showing a load spinner with no progress at all.",
+              "icon": "💡"
+            },
+            {
+              "id": "bh5ngrli",
+              "type": "p",
+              "html": "Within this loading state, we also updated our loading copywriting. Since Tokopedia has also rebranded our tone of voice, <i>(all kudos to our copywriter team)</i>, we want to give our copywriting for our Flight product a breath of fresh air too! So that’s exactly what we did. If you can see on the loading state, there’s not only just a good ol’ loading spinner, but there’s also a message that says “Your booking is being processed” but with a little fun twist which is a rhymed poem that was crafted with love by copywriter team."
+            },
+            {
+              "id": "bez77xwb",
+              "type": "h3",
+              "html": "2. No Summary Page"
+            },
+            {
+              "id": "buwhv84e",
+              "type": "p",
+              "html": "As you can see on the image above, it shows that we have removed the summary page as a result of our benchmarking and in depth research that i’ve explained above. So, we basically cut off 1 extra step for users to achieve the final goal which is booking flight ticket."
+            },
+            {
+              "id": "bowrmtle",
+              "type": "p",
+              "html": "This also will bring us to the third point below…."
+            },
+            {
+              "id": "bjzjxsiz",
+              "type": "h3",
+              "html": "3. Highlight Selected Flight information"
+            },
+            {
+              "id": "bilc6fl6",
+              "type": "callout",
+              "html": "<b>Selected Flight Information</b> is the information detail of the flight schedule based on what the user has selected previously on the search result page.",
+              "icon": "💡"
+            },
+            {
+              "id": "brjx4g4f",
+              "type": "p",
+              "html": "Since we no longer have \"Summary page\", we need to somehow display flight detail information clearly on the Passenger Data page. Because that’s going to be the only page we provide to our user before they actually proceed to payment. In order to do that, we laid out user’s selected flight information on top and make it more detailed. The challenge here is to make it not too cluttered compare to our existing design. So we come up with solution of the new design."
+            },
+            {
+              "id": "bdv3z08a",
+              "type": "p",
+              "html": "With the new design, we expected that users can actually scan through their selected flight schedule first THEN, fill in their passenger data."
+            },
+            {
+              "id": "brpxpjmw",
+              "type": "image",
+              "src": "/assets/uploads/21b111444e6ffaf3713e.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bl9hhc3a",
+              "type": "h3",
+              "html": "<b>4. Contact Info</b>"
+            },
+            {
+              "id": "bhk49gyy",
+              "type": "callout",
+              "html": "<b>Contact info: </b>The email/contact that we’re going to send the e-tickets to",
+              "icon": "💡"
+            },
+            {
+              "id": "bo1qrwu4",
+              "type": "p",
+              "html": "Since our goal was to improve our flight’s booking process, so while we’re at it might as well improve the “Contact Info” section. The problem with this section is that the old one occupied so much space only to display contact information based on our research, users barely even change it. So to reserve space for the new flight detail info, we cut down on the contact info space by making it like a preview only but users can still change it if they want to (which almost never)."
+            },
+            {
+              "id": "b30dkl14",
+              "type": "image",
+              "src": "/assets/uploads/3fed793c8114ea1ee635.jpg",
+              "caption": "",
+              "widthPct": 75
+            },
+            {
+              "id": "bbcpaxu8",
+              "type": "h2",
+              "html": "Challenge"
+            },
+            {
+              "id": "b5fgb0ag",
+              "type": "p",
+              "html": "The challenge with this project was since flight booking involving a lot of backend validation process, we have to figure out and list every single corner cases that might happen while the booking process took place. This might be the most corner cases I’ve found in a project compared to the previous product that I’ve handled. Cases like:"
+            },
+            {
+              "id": "bxam69wd",
+              "type": "ul",
+              "html": "How do we gracefully inform the users that the flight they book are empty whilst the booking process is loading."
+            },
+            {
+              "id": "bpj2a89k",
+              "type": "ul",
+              "html": "Possibility of price surge when booking process is loading"
+            },
+            {
+              "id": "bng0s24h",
+              "type": "p",
+              "html": "Any many more cases that pop out throughout the way of designing this. Going into this project, we didn’t realize that we’re going to find a lot of corner cases. These challenges can be tackled by properly gathering all possible cases and discussing it with our tech team so that we laid out all cases upfront. This is done to avoid a never-ending back and forth between UX, UI, and developers."
+            },
+            {
+              "id": "bznziosv",
+              "type": "h2",
+              "html": "Result &amp; Impact"
+            },
+            {
+              "id": "brr7ghm3",
+              "type": "p",
+              "html": "So, after all the hassle of back and forth discussion, negotiations with PM, and tech team, we’ve finally launched this feature in late 2019. Since then, there hasn’t been any major and crucial complain about the new and improved booking itself. Even though statistically i haven’t get the number of our total flight transactions, but we’ve pretty much managed to improve the overall experience of our flight’s booking process 🎉🎉 [kudos to all team involved!]"
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "/assets/uploads/bae4b919987e476236c6.jpg",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "tokopedia-top-up-e-money",
+          "title": "Tokopedia Top Up E-Money",
+          "description": "In 2017, the Indonesian Government has mandated that all cars paying for toll must utilize e-cash cards.",
+          "year": "2018",
+          "company": "Tokopedia",
+          "tags": [
+            "Portfolio",
+            "Mobile App",
+            "UX"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "b8208ml7",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "bxbwq30k",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bmki3544",
+                    "type": "ul",
+                    "html": "A project to design the first-ever service to top up e-money (electric money) in Indonesia where we partnered with Bank Mandiri (one of the banks that has the largest customer-based in Indonesia)."
+                  },
+                  {
+                    "id": "bwxaztib",
+                    "type": "ul",
+                    "html": "E-Money is an ATM-like card that can hold a limited amount of balance which can be used as a payment tool at various places (Jakarta's highway entrance fee, MRT, Jakarta city bus, etc.)"
+                  },
+                  {
+                    "id": "b3sjo00n",
+                    "type": "ul",
+                    "html": "The top up service that Tokopedia provided, utilizing embedded NFC technology on user's phones as a tool to update the balance on their e-money cards."
+                  },
+                  {
+                    "id": "b8lb4y6w",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "bi1ls1cf",
+                    "type": "ul",
+                    "html": "Acquired trust from users which resulted in numerous transactions despite being the first platform to provide this service."
+                  },
+                  {
+                    "id": "baw7du5z",
+                    "type": "ul",
+                    "html": "Currently, Tokopedia Topup e-money has contributed numerous transactions on a daily basis."
+                  },
+                  {
+                    "id": "b52jbel6",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  },
+                  {
+                    "id": "bankz3s2",
+                    "type": "ul",
+                    "html": "Main User Experience Designer for this project"
+                  },
+                  {
+                    "id": "br309ak2",
+                    "type": "ul",
+                    "html": "Collaborated and worked together with PMs, Engineers, and UI Designer to bring the design to life"
+                  },
+                  {
+                    "id": "brohdi7e",
+                    "type": "ul",
+                    "html": "Handled end to end journey and user flow"
+                  },
+                  {
+                    "id": "b257v34a",
+                    "type": "ul",
+                    "html": "Conducted user testing &amp; research"
+                  },
+                  {
+                    "id": "b1k0xi6x",
+                    "type": "ul",
+                    "html": "Conducted quality assurance regular check to make sure the live design is as expected"
+                  }
+                ],
+                [
+                  {
+                    "id": "b7v6xjo2",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "bi5z4nb4",
+                    "type": "p",
+                    "html": "2018"
+                  },
+                  {
+                    "id": "bixl4rf5",
+                    "type": "h3",
+                    "html": "🏢 Stakeholder"
+                  },
+                  {
+                    "id": "bi3vda0c",
+                    "type": "ul",
+                    "html": "<a href=\"http://tokopedia.com\">Tokopedia</a>"
+                  },
+                  {
+                    "id": "bd1yberr",
+                    "type": "h3",
+                    "html": "🧩 Team"
+                  },
+                  {
+                    "id": "bbiuxmju",
+                    "type": "ul",
+                    "html": "Digital Goods"
+                  },
+                  {
+                    "id": "blqcsbvm",
+                    "type": "h3",
+                    "html": "🔗 Related Links"
+                  },
+                  {
+                    "id": "brt86vky",
+                    "type": "ul",
+                    "html": "<a href=\"https://www.tokopedia.com/top-up/emoney/\">Tokopedia E-Money</a>"
+                  },
+                  {
+                    "id": "bxzopply",
+                    "type": "ul",
+                    "html": "<a href=\"https://www.bankmandiri.co.id/top-up-emoney-tokopedia\">Bank Mandiri Press Release</a>"
+                  },
+                  {
+                    "id": "bh8qthwz",
+                    "type": "ul",
+                    "html": "<a href=\"https://www.youtube.com/watch?v=S9QLOdDIkbc\">Youtube Press Release</a>"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "bow98s2j",
+              "type": "divider"
+            },
+            {
+              "id": "bp2hp3n8",
+              "type": "image",
+              "src": "/assets/uploads/7370dbfec1d652d6f34c.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bfw85meo",
+              "type": "p",
+              "html": "<a href=\"https://www.youtube.com/watch?v=S9QLOdDIkbc\">▶ Watch the video</a>"
+            },
+            {
+              "id": "b92gp0db",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "bw0ewr9m",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "bz0e4j1w",
+              "type": "p",
+              "html": "In 2017, the Indonesian Government has mandated that all cars paying for toll must utilize e-cash cards."
+            },
+            {
+              "id": "bjbntonx",
+              "type": "callout",
+              "html": "E-cash card is an ATM-like card that can hold the balance in a limited amount.",
+              "icon": "💡"
+            },
+            {
+              "id": "by063r8v",
+              "type": "p",
+              "html": "To use it, people can tap the card to the card reader. Following this mandate, several banks in Indonesia have come out and provided a new product in form of e-cash cards. One of the banks with the largest market share for e-cash cards is Mandiri with its popular e-cash card called e-Money. In this case, e-cash cards can be used to not only pay the toll but also as a payment method in various merchants and places (convenient store, a ticket for city train, city bus &amp; MRT)."
+            },
+            {
+              "id": "bs70ku52",
+              "type": "h2",
+              "html": "Problem &amp; Challenges"
+            },
+            {
+              "id": "bxc41qzv",
+              "type": "p",
+              "html": "At that time, the usage of e-cash card has skyrocketed since the mandate is implemented."
+            },
+            {
+              "id": "bzf8sjhg",
+              "type": "quote",
+              "html": "The problem with e-cash cards is that when people want to use it, they have to make sure that they have enough balance on their card. To do that (as well as top up the balance) people need to go to an offline convenient store (Indomaret or Alfamart), or even have to go to the ATM and tap their ecash card to NFC reader."
+            },
+            {
+              "id": "bir0nkcq",
+              "type": "p",
+              "html": "This problem is the main pain point that people have faced since the booming of e-cash cards. Not only that, since e-cash cards also used as a payment tool in various toll gates (esp. In Jakarta), there have been many occurrences where people got stuck in front of the toll gate because they forgot to check whether they have insufficient balance or not."
+            },
+            {
+              "id": "bwyj43mv",
+              "type": "p",
+              "html": "To solve just that, we provide a new payment service via Tokopedia where people can top up their e-cash card any amount and anywhere they want. This can help to solve the problem where people having difficulties to top up their e-cash card even when there’s no ATM or convenient store to be found nearby. This can be done with the help of NFC technology that’s embedded in today’s smartphones."
+            },
+            {
+              "id": "bgyb8rmw",
+              "type": "p",
+              "html": "On the business side, this particular payment service benefited both Tokopedia and Bank Mandiri as the service provider for e-Money."
+            },
+            {
+              "id": "bzvk6mza",
+              "type": "h2",
+              "html": "Design Process"
+            },
+            {
+              "id": "biv7lh4p",
+              "type": "p",
+              "html": "<b>1. Collaborated and teamed up with research team to find out user's habit and behavior when they want to use e-Money</b>"
+            },
+            {
+              "id": "b404wm2w",
+              "type": "p",
+              "html": "<b>2. Synthesize research result to gather some insights like:</b>"
+            },
+            {
+              "id": "bkztv9m7",
+              "type": "ul",
+              "html": "People usually top up their e-money or e-cash only when they want to use it. Often times they don't know when they have insufficient balance."
+            },
+            {
+              "id": "b7rgadqs",
+              "type": "ul",
+              "html": "People having difficulties because they can't see their card balance on the go. (They have to tap their card on the NFC reader on ATM or convenient store)."
+            },
+            {
+              "id": "b91o1qqy",
+              "type": "ul",
+              "html": "People usually have specific amount of money to top up"
+            },
+            {
+              "id": "bhsaaavp",
+              "type": "p",
+              "html": "<b>3. Iterate the design as the solution based on the insight and the requirement that are provided from Bank Mandiri as a stakeholder. We divide the main function of TopUp E-Money into 2 Top Up &amp; Check balance. So I try and create the user flow based on these two function.</b>"
+            },
+            {
+              "id": "bvx2qgpp",
+              "type": "h2",
+              "html": "Features"
+            },
+            {
+              "id": "bwz1ptnn",
+              "type": "p",
+              "html": "Top up e-money via Tokopedia can be done by utilizing NFC service that available in many android devices. So, after user successfully transacted via Tokopedia, they’d have to tap their e-money to their phone (that has NFC) to update their balance. If not, their new balance will not be updated on their e-money. This was one of the challenge that we need to tackle in developing this product. How do we communicate to users that once they’ve paid for their top up e-money on Tokopedia, there’s one more step left to do."
+            },
+            {
+              "id": "bkhbgz0o",
+              "type": "p",
+              "html": "To figure out the right solution to this challenge, we ran some usability testing and user research to gather user’s perspective of the matter. And we came up with these sets of features and full flow below."
+            },
+            {
+              "id": "bd8oohn2",
+              "type": "image",
+              "src": "/assets/uploads/ddbee5cedd10ebf40f84.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bf5b1u9q",
+              "type": "p",
+              "html": "1. <b>Top Up E-Money</b>"
+            },
+            {
+              "id": "br3p04at",
+              "type": "p",
+              "html": "Users can choose the amount of nominal they want to top up (can be as small as IDR 20K to IDR 500K. One of several corner cases that we found on this was that there’s a maximum amount of balance that can be saved in one e-money card (which is IDR 1mio) and so user shouldn’t be able to top up their card with more than IDR 1 Mio in total."
+            },
+            {
+              "id": "bsfwrdy7",
+              "type": "image",
+              "src": "/assets/uploads/e5e717929da868a0ca55.jpg",
+              "caption": "",
+              "widthPct": 47
+            },
+            {
+              "id": "bwtlto61",
+              "type": "p",
+              "html": "2. <b>Check Balance</b>"
+            },
+            {
+              "id": "bli407oq",
+              "type": "p",
+              "html": "Other main feature that we provide in this product was the ability to check e-money balance before or after transaction. To do this, we added graphic interaction to communicate how user can actually use the NFC on their phone to check/update their balance."
+            },
+            {
+              "id": "b4j2c3ca",
+              "type": "image",
+              "src": "/assets/uploads/0e3548d4e07957f77034.png",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "b41htji2",
+              "type": "h2",
+              "html": "Learning"
+            },
+            {
+              "id": "bypbjfut",
+              "type": "p",
+              "html": "After launching for some time, top up e-money has acquired numerous transaction for Tokopedia. But it’s also followed by a number of complaint tickets from various users. Later we found out that,"
+            },
+            {
+              "id": "bmkiw001",
+              "type": "callout",
+              "html": "Many were not accustomed to the process of “updating their e-money balance after successful transaction”.",
+              "icon": "⚠️"
+            },
+            {
+              "id": "bnmmefco",
+              "type": "p",
+              "html": "So we think that there needs to be a clearer and more straightforward way to communicate this to our users. We then added a new feature to communicate this message to our users. The message says along the lines of “One more step to complete your top-up! Don’t forget to tap your card on your phone with NFC”. With that improvement, we managed to reduce our complaint tickets to Top Up E-money."
+            },
+            {
+              "id": "b13qjx6l",
+              "type": "h2",
+              "html": "Challenges"
+            },
+            {
+              "id": "b2s7zuc0",
+              "type": "ul",
+              "html": "<b>Educating new behavior<br></b>One of the challenge that we face while designing this is to educate users with a new behavior where they need to tap their e-Money card on the back of their phone to update their balance. This should be done to connect the card with the NFC reader that embedded in their smartphone. To tackle this, we come up with an animation to help users understand the action they need to do to update their balance from their phones."
+            },
+            {
+              "id": "b5u0iv5l",
+              "type": "ul",
+              "html": "<b>Tight deadline</b><br>This project had a really tight schedule (around 2 weeks) because we need the extra time to have a back and forth sync up with our partner. So we really pushed ourselves to be able to achieve the set goal by working overtime. At last, this project was done according to our plan and everything run smoothly just as we expected."
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "/assets/uploads/7370dbfec1d652d6f34c.jpg",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "redesign-tokopedias-train-booking-platform",
+          "title": "Redesign Tokopedia's Train Booking Platform",
+          "description": "This project was done to fully revamp the old Tokopedia's Train booking platform that has never been touched since its first launch in 2017.",
+          "year": "2019",
+          "company": "Tokopedia",
+          "tags": [
+            "Portfolio",
+            "Web",
+            "Mobile App",
+            "UX"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "baqjabww",
+              "type": "callout",
+              "html": "<b>On progress in providing the best content...</b>",
+              "icon": "🚧"
+            },
+            {
+              "id": "b0ckvg50",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "br9edmvo",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bzw9yf4t",
+                    "type": "p",
+                    "html": "This project was done to fully revamp the old Tokopedia's Train booking platform that has never been touched since its first launch in 2017."
+                  },
+                  {
+                    "id": "bmmisfsn",
+                    "type": "p",
+                    "html": "The revamp aimed to improve the overall flow of train booking experience, update the UI components, as well as rewriting the whole codebase on these 2 years old pages to make it scalable and easier to maintain."
+                  },
+                  {
+                    "id": "bl7i596p",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "bnjkte4i",
+                    "type": "ul",
+                    "html": "New and improved end-to-end flow of train ticket booking"
+                  },
+                  {
+                    "id": "b5gv9c75",
+                    "type": "ul",
+                    "html": "Updated UI to standardize it with the rest of Tokopedia new design components."
+                  },
+                  {
+                    "id": "bdapxdqg",
+                    "type": "ul",
+                    "html": "Number of complaint tickets (CS ticket) dropped a lot after the successful revamp"
+                  },
+                  {
+                    "id": "bdt8ynnu",
+                    "type": "ul",
+                    "html": "Increased CVR on train booking funnel"
+                  },
+                  {
+                    "id": "bu3hm2o5",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  },
+                  {
+                    "id": "bjn178gc",
+                    "type": "ul",
+                    "html": "Main UX designer for this project"
+                  },
+                  {
+                    "id": "bqunlo9v",
+                    "type": "ul",
+                    "html": "Teamed up with Developer team to make sure this project is being prioritized for the development within 2019"
+                  },
+                  {
+                    "id": "bqnjf4re",
+                    "type": "ul",
+                    "html": "Conducted and assisted multiple usability testing and user research as well as desk research and competitive analysis together with research team"
+                  },
+                  {
+                    "id": "b0vly8am",
+                    "type": "ul",
+                    "html": "Conducted design QA (bugbash) to make sure the design is being implemented correctly"
+                  },
+                  {
+                    "id": "ba2tnuto",
+                    "type": "ul",
+                    "html": "Facilitated design sprint session involving ~15 people from different function to align the vision on the new Tokopedia Train"
+                  }
+                ],
+                [
+                  {
+                    "id": "bvutyflo",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "b3wtso3b",
+                    "type": "p",
+                    "html": "2019"
+                  },
+                  {
+                    "id": "bmy0cnm7",
+                    "type": "h3",
+                    "html": "🏢 Stakeholder"
+                  },
+                  {
+                    "id": "boofoagz",
+                    "type": "ul",
+                    "html": "<a href=\"http://tokopedia.com\">Tokopedia</a>"
+                  },
+                  {
+                    "id": "b4jlaizk",
+                    "type": "h3",
+                    "html": "🧩 Team"
+                  },
+                  {
+                    "id": "bm7me7n1",
+                    "type": "ul",
+                    "html": "Travel"
+                  },
+                  {
+                    "id": "b0asjt03",
+                    "type": "h3",
+                    "html": "🔗 Links"
+                  },
+                  {
+                    "id": "byvaace5",
+                    "type": "ul",
+                    "html": "<a href=\"https://tiket.tokopedia.com/kereta-api/\">Tokopedia Train</a>"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "brcbo9e2",
+              "type": "divider"
+            },
+            {
+              "id": "bqockizt",
+              "type": "image",
+              "src": "/assets/uploads/81f3dd75fdffb3efc447.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bst1z88x",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "bat4ty89",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "bu2mdl5g",
+              "type": "h2",
+              "html": "Define The Problem"
+            },
+            {
+              "id": "bt0255yl",
+              "type": "h3",
+              "html": "Research &amp; Competitive Analysis"
+            },
+            {
+              "id": "b0l6bp7d",
+              "type": "h3",
+              "html": "Current Version"
+            },
+            {
+              "id": "bcs69s1i",
+              "type": "h2",
+              "html": "Ideate"
+            },
+            {
+              "id": "b4l7ucv6",
+              "type": "h2",
+              "html": "Features"
+            },
+            {
+              "id": "bjddttxl",
+              "type": "h2",
+              "html": "Challenge"
+            },
+            {
+              "id": "bsum9fh1",
+              "type": "h2",
+              "html": "Result &amp; Impact"
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "/assets/uploads/81f3dd75fdffb3efc447.jpg",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "mall-sampah-redesign-a-ux-case-study",
+          "title": "Mall Sampah Redesign: A UX Case Study",
+          "description": "A personal exploration to improve MallSampah app from a UX point of view. Mall Sampah is an app that aims to make recycling easier for people. Their main mission is to encourage people to help our…",
+          "year": "2019",
+          "company": "",
+          "tags": [
+            "Case Study",
+            "Mobile App",
+            "UX",
+            "UI"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "bsipb9io",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "bvl8ymdz",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "b3rx8b72",
+                    "type": "p",
+                    "html": "A personal exploration to improve MallSampah app from a UX point of view. Mall Sampah is an app that aims to make recycling easier for people. Their main mission is to encourage people to help our planet by collecting and recycling waste. They do this by providing pickup services to help people sell their recyclable waste."
+                  },
+                  {
+                    "id": "bjgomkfj",
+                    "type": "p",
+                    "html": "<b>Objective</b>"
+                  },
+                  {
+                    "id": "b3gs4rm9",
+                    "type": "p",
+                    "html": "The objective here is to improve the information architecture, the flow of selling waste and encourage people to regularly recycle their waste using this app."
+                  },
+                  {
+                    "id": "b7fxpier",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "b88lx71r",
+                    "type": "ul",
+                    "html": "New and improved user experience for Mall Sampah App with validated design."
+                  },
+                  {
+                    "id": "b73pwdbn",
+                    "type": "ul",
+                    "html": "New layout and user interface"
+                  },
+                  {
+                    "id": "bvytl4yp",
+                    "type": "ul",
+                    "html": "Got recognized by MallSampah team and they consider to implement and assess the problem &amp; solution that I provided into their live app."
+                  },
+                  {
+                    "id": "bxucxv0b",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  },
+                  {
+                    "id": "bijlpxie",
+                    "type": "ul",
+                    "html": "UX Designer and UI Designer"
+                  },
+                  {
+                    "id": "bghii87u",
+                    "type": "ul",
+                    "html": "Conducted user research"
+                  },
+                  {
+                    "id": "bigf4xd7",
+                    "type": "ul",
+                    "html": "Defining problem"
+                  },
+                  {
+                    "id": "b5rr272w",
+                    "type": "ul",
+                    "html": "Conducted usability testing"
+                  }
+                ],
+                [
+                  {
+                    "id": "b1t6o3pj",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "byvie8qp",
+                    "type": "p",
+                    "html": "2019"
+                  },
+                  {
+                    "id": "b22mxw8x",
+                    "type": "h3",
+                    "html": "🔗 Related Links"
+                  },
+                  {
+                    "id": "bvabetzl",
+                    "type": "ul",
+                    "html": "<a href=\"https://medium.muz.li/mallsampah-a-ux-case-study-dd39b7557ee3\">Medium Article</a>"
+                  },
+                  {
+                    "id": "birv0wt4",
+                    "type": "ul",
+                    "html": "<a href=\"https://www.mallsampah.com/\">MallSampah Website</a>"
+                  },
+                  {
+                    "id": "bcas2ar0",
+                    "type": "ul",
+                    "html": "<a href=\"https://dribbble.com/shots/8891670-Redesign-Mall-Sampah-Mobile-App\">Dribbble post</a>"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "b5pn2l5v",
+              "type": "divider"
+            },
+            {
+              "id": "bq0e1h9y",
+              "type": "image",
+              "src": "/assets/uploads/c4c41a84b4418d86b9e7.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bkjxf4vt",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "bv6donek",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "bo3h9zh5",
+              "type": "p",
+              "html": "A small step towards greener earth is all we need within our society to help kickstart others to do the same. That's what an app called MallSampah aims to do. Their main mission is to encourage people to help our planet by collecting and recycling waste (one small step at a time). If you haven’t heard about MallSampah and all the amazing things that they do please check out their website MallSampah."
+            },
+            {
+              "id": "b8ygjvl8",
+              "type": "h2",
+              "html": "General Idea"
+            },
+            {
+              "id": "buk31oh9",
+              "type": "p",
+              "html": "Upon discovering Mall Sampah App, I tried their main feature called “Jual Sampah”. And in general, I think the feature is easy to understand and serves its purpose as a platform to sell your recyclable waste. But in my personal opinion, MallSampah can still be improved to solve a more wholistic problem which is a waste management problem. Though the current app has all these usable features"
+            },
+            {
+              "id": "bsat34by",
+              "type": "callout",
+              "html": "I think that the app can integrate what so-called <code>variable reward</code>to get people to be more excited to collect their waste regularly. Which eventually lead to MallSampah’s user retention.",
+              "icon": "💡"
+            },
+            {
+              "id": "bwnrv0l5",
+              "type": "p",
+              "html": "If you’re curious to know more about variable rewards, you can read a related article about The Hook framework."
+            },
+            {
+              "id": "bp7xe4lt",
+              "type": "image",
+              "src": "/assets/uploads/78c0120ee666cc503067.jpg",
+              "caption": "https://www.alexandercowan.com/the-hook-framework/",
+              "widthPct": 63
+            },
+            {
+              "id": "bcunkoyo",
+              "type": "p",
+              "html": "Why do I think variable rewards are something that the app needed? Well, I think most Indonesians would know that currently, many people here may or may not familiar with the habit of collecting their recyclable waste. I mean the proof can be seen by the amount of waste that piled up each day. It’s obviously a challenge to break through that unfamiliarity."
+            },
+            {
+              "id": "b4ilhfxv",
+              "type": "p",
+              "html": "<a href=\"https://www.thejakartapost.com/academia/2019/03/01/the-waste-challenge-is-indonesia-at-a-tipping-point-1551431355.html\">The waste challenge: Is Indonesia at a tipping point?</a>"
+            },
+            {
+              "id": "bvw2oivp",
+              "type": "p",
+              "html": "That’s why I think MallSampah app can be improved to help encourage people to do waste management by integrating variable rewards. So that people see the benefit of the app and actually come back to use MallSampah app."
+            },
+            {
+              "id": "btbqauws",
+              "type": "h2",
+              "html": "Defining The Problem"
+            },
+            {
+              "id": "bl5wxnwb",
+              "type": "p",
+              "html": "In order to gather and understand the real problems (not just the one I just mentioned above), I interviewed several of my friends to hear their take on waste management in general and what they think of MallSampah app. Based on my quick interview session with my friends I found out that the actual main problem is:"
+            },
+            {
+              "id": "b9pqx2rk",
+              "type": "quote",
+              "html": "<i><b>None of them has ever collect recyclable waste before. (and so do many other Indonesians)</b></i>"
+            },
+            {
+              "id": "brlf58w1",
+              "type": "p",
+              "html": "This proves my point above where I assumed that the act of collecting waste and selling them is still hasn’t applied fully in Indonesia. Though most of them understand the basic concept of Reuse, Reduce, Recycle, they had never done it before. Since none of them are used to collect recyclable waste, they have little to no knowledge on how they supposed to collect their waste. Unfortunately, there is no such information presented in the app."
+            },
+            {
+              "id": "bltxt7p6",
+              "type": "image",
+              "src": "/assets/uploads/21a614181327c0f93452.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "btve3agk",
+              "type": "p",
+              "html": "Then, I asked them to try the app themselves and ask their opinion about the app. And to try if they wanted to sell their recyclable waste, how’d they do that in the app. Based on all of that interview sesh with my friends, I gathered several problems that I’d like to explore the solution to."
+            },
+            {
+              "id": "bscjmibz",
+              "type": "image",
+              "src": "/assets/uploads/1502afe3acf955927436.png",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "b6kfz6qq",
+              "type": "ol",
+              "html": "No such information present in the app that explains about how we should collect our waste and categorize them before we want to sell them."
+            },
+            {
+              "id": "bvyb3u5v",
+              "type": "ol",
+              "html": "Lack of variable rewards that can get people to be more excited to collect their waste regularly"
+            },
+            {
+              "id": "b2j8bac2",
+              "type": "ol",
+              "html": "MallSampah provides two options for us to sell our waste. One of them is done by waste pick-up. To use the pick-up service, we had to have a minimum of 20kgs waste collected. Though, this crucial information wasn’t clearly stated in the first step of the selling process, so all of my friends (including me) who tried to use the app for the first time, had to go through several steps first to later find out that the waste pick-up service is unavailable for waste under 20kgs. Upon finding this problem, I realized that if Mall Sampah wanted to target the app for individual family houses, then I think it would make more sense to reduce the minimum per pick up to 5-10kgs instead of a whopping 20kgs per pick up. Unless, if MallSampah wants to target it to a residential complex with one collector in charge of the whole complex."
+            },
+            {
+              "id": "bg1eyezd",
+              "type": "ol",
+              "html": "All of the participants who tried the app would like to know at least the estimation of the price if they wanted to sell their waste."
+            },
+            {
+              "id": "bmvv2i81",
+              "type": "ol",
+              "html": "They were hesitant to go to the next step because the button that redirects them to the next step said “Send”. They were afraid if they click it, it would immediately submit their form. They would like to have some sort of reassurance/reconfirmation."
+            },
+            {
+              "id": "bfwjzdgu",
+              "type": "ol",
+              "html": "Too many steps that users have to go through just to sell the waste"
+            },
+            {
+              "id": "bmzdhvx6",
+              "type": "h2",
+              "html": "Design The Solution"
+            },
+            {
+              "id": "bkztxygs",
+              "type": "p",
+              "html": "And so? I went and meditated in a cave to get some answer and revelation for the problems that I mentioned above, then I pour it all out in a weirdly looking raw sketch:"
+            },
+            {
+              "id": "bms6mrz0",
+              "type": "p",
+              "html": "<b>Problem #1: No info on how user can collect and sell their waste</b>"
+            },
+            {
+              "id": "bg8e975b",
+              "type": "p",
+              "html": "<b>Solution: </b>"
+            },
+            {
+              "id": "b1vm5qqi",
+              "type": "p",
+              "html": "Have some steps/tutorial on how people should collect their waste into several categories before they can sell them. I figured the tutorial / such a information can be placed on:"
+            },
+            {
+              "id": "bjwzei13",
+              "type": "ul",
+              "html": "On the first on boarding tutorial"
+            },
+            {
+              "id": "bwfh24hc",
+              "type": "ul",
+              "html": "the very first step of selling waste"
+            },
+            {
+              "id": "bp4xh9v7",
+              "type": "ul",
+              "html": "User account under FAQ menu"
+            },
+            {
+              "id": "bdkvs9f6",
+              "type": "columns",
+              "ratio": 44,
+              "columns": [
+                [
+                  {
+                    "id": "bjkdnuwf",
+                    "type": "image",
+                    "src": "/assets/uploads/6be80b84692e53f86e7e.jpg",
+                    "caption": "Weirdly lookin sketch for Problem #1",
+                    "widthPct": 100
+                  }
+                ],
+                [
+                  {
+                    "id": "bin7wxib",
+                    "type": "image",
+                    "src": "/assets/uploads/4b71f1f7d9638f4daf81.jpg",
+                    "caption": "High fidelity Solution for Problem #1",
+                    "widthPct": 100
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "b3z21ng1",
+              "type": "p",
+              "html": "<b>Problem #2: Lack of variable rewards</b>"
+            },
+            {
+              "id": "btd6rb3v",
+              "type": "p",
+              "html": "<b>Solution: </b>Create rewards for user to get them encouraged to collect waste"
+            },
+            {
+              "id": "b4ext1j8",
+              "type": "p",
+              "html": "In addition to getting the money from selling recyclable waste, i suggested to also have a levelling for each user. So everytime they get to sell their waste, they’ll get coins and collect them to later be exchanged to some reusable stuff or other things."
+            },
+            {
+              "id": "bdkk846t",
+              "type": "columns",
+              "ratio": 56,
+              "columns": [
+                [
+                  {
+                    "id": "bf7pwvwc",
+                    "type": "image",
+                    "src": "/assets/uploads/881e5a51f06b6cc8f366.jpg",
+                    "caption": "",
+                    "widthPct": 100
+                  }
+                ],
+                [
+                  {
+                    "id": "ba590ebs",
+                    "type": "image",
+                    "src": "/assets/uploads/3754e30b2208a0023262.png",
+                    "caption": "",
+                    "widthPct": 65
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "b7jduus4",
+              "type": "p",
+              "html": "<b>Problem #3: Crucial information of minimum 20kgs waste per pick up wasn’t clearly stated upfront.</b>"
+            },
+            {
+              "id": "bk6cdjml",
+              "type": "p",
+              "html": "<b>Solution: </b>State the information upfront so that user immediately know if they want to use pick up service, their waste needs to be minimum 20kgs, even before the user fill all the information and click submit"
+            },
+            {
+              "id": "buai3f79",
+              "type": "image",
+              "src": "/assets/uploads/1bb12e9648c77a1662af.jpg",
+              "caption": "Clearer info on minimum kgs for pick up service",
+              "widthPct": 53
+            },
+            {
+              "id": "bn1fz16f",
+              "type": "p",
+              "html": "<b>Problem #4–6: No estimation on how much money the users will get when they sell their waste, too many steps, and hesitant to go to the next step because of unclear button.</b>"
+            },
+            {
+              "id": "by6vevbr",
+              "type": "p",
+              "html": "<b>Solution:</b>"
+            },
+            {
+              "id": "bgyn3c0z",
+              "type": "p",
+              "html": "To solve this problem, i tried to display estimation on how much money user will get selling their waste on the detail page. Since i suggested to reduce the step into 3 main steps:"
+            },
+            {
+              "id": "b2sx1loh",
+              "type": "ol",
+              "html": "Fill in essential info (amount &amp; type of waste, pick up address, time of pick up). In this first step, I also change the copywriting button to “Choose Payment Method” to best describe the next step and to avoid any confusion on the user’s end."
+            },
+            {
+              "id": "b9k477ri",
+              "type": "ol",
+              "html": "Summary &amp; Payment (Display selling price estimation, choose a payment method and short summary of what you’ve filled in the previous step)"
+            },
+            {
+              "id": "bsrafhcu",
+              "type": "ol",
+              "html": "Thank you page to identifies whether or not your request is successfully submitted."
+            },
+            {
+              "id": "bkl5i4k7",
+              "type": "image",
+              "src": "/assets/uploads/3099b21d669796ab3477.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bano05pc",
+              "type": "h2",
+              "html": "Final Look"
+            },
+            {
+              "id": "bosqa6rm",
+              "type": "p",
+              "html": "In addition to 6 solutions i’ve explained above, i also tweak and redesign some other pages too, here’s an overview."
+            },
+            {
+              "id": "bak0f532",
+              "type": "image",
+              "src": "/assets/uploads/beedd60606b4d4088a29.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bez6top0",
+              "type": "h2",
+              "html": "Validation"
+            },
+            {
+              "id": "bse5e4rq",
+              "type": "p",
+              "html": "To validate whether or not the solutions that i provided has solved the problem, i tested the new design to 5 people to gather their inputs on the new design. The result was all of them think that the new design has answered some problems that were stated before. They think that the new design has a much clearer information in regards to the process of selling waste. They also feel much more convinced to use the app since they can see at least the price estimation. In conclusion, the new design more or less has solved the problem above."
+            },
+            {
+              "id": "bb8381ta",
+              "type": "p",
+              "html": "====================================================================="
+            },
+            {
+              "id": "b360vv10",
+              "type": "p",
+              "html": "Thank you for reading :) Hope you enjoy reading this as much I enjoy writing it. Feel free to leave any feedback or if you simply wanna say hi you can reach me via my <a href=\"https://www.linkedin.com/in/nadyarizka/\">LinkedIn</a>. While you’re at it, you can also follow my <a href=\"https://dribbble.com/nadyarizka\">dribbble</a> or like my <a href=\"https://dribbble.com/shots/8891670-Redesign-Mall-Sampah-Mobile-App\">dribbble post</a> for MallSampah too. Cheers."
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "/assets/uploads/c4c41a84b4418d86b9e7.jpg",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "antrian-imigrasi-app",
+          "title": "Antrian Imigrasi App",
+          "description": "An unsolicited redesign that I did to improve the overall experience of Antrian Imigrasi app. This app is a government-run app that serves the purpose to help users apply or renew their passport at…",
+          "year": "2020",
+          "company": "",
+          "tags": [
+            "Case Study",
+            "Mobile App",
+            "UX",
+            "UI"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "b4tzy1rq",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "be6y70tx",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bcj55g1y",
+                    "type": "p",
+                    "html": "An unsolicited redesign that I did to improve the overall experience of Antrian Imigrasi app. This app is a government-run app that serves the purpose to help users apply or renew their passport at the immigration office."
+                  },
+                  {
+                    "id": "boc56ddl",
+                    "type": "p",
+                    "html": "<b>Objective</b>"
+                  },
+                  {
+                    "id": "bserpyso",
+                    "type": "p",
+                    "html": "The objective of this project is how to create a seamless offline-to-online process of the passport application process and how might we cut off unnecessary offline activity that can be done online."
+                  },
+                  {
+                    "id": "bnhi63u6",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "b8epqs63",
+                    "type": "ul",
+                    "html": "A new and improved end to end journey of the Antrian Imigrasi App"
+                  },
+                  {
+                    "id": "bja6pg04",
+                    "type": "ul",
+                    "html": "New and improved user interface design and overall layout"
+                  },
+                  {
+                    "id": "bia54sm4",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  },
+                  {
+                    "id": "baewna7p",
+                    "type": "ul",
+                    "html": "Main UX &amp; UI Designer for this project"
+                  },
+                  {
+                    "id": "bhn3k1wu",
+                    "type": "ul",
+                    "html": "Designed the end to end journey and user flow"
+                  },
+                  {
+                    "id": "bl1uedny",
+                    "type": "ul",
+                    "html": "Conducted user research and desk research to gather insight regarding current app version"
+                  }
+                ],
+                [
+                  {
+                    "id": "b3nyeuso",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "b8bv1jvm",
+                    "type": "p",
+                    "html": "2020"
+                  },
+                  {
+                    "id": "b4tnz4gr",
+                    "type": "h3",
+                    "html": "🔗 Related Links"
+                  },
+                  {
+                    "id": "biny3lb9",
+                    "type": "ul",
+                    "html": "<a href=\"https://medium.com/@nadyarizka/antrian-imigrasi-online-helpful-or-painful-a-ux-case-study-b354fe5038b4\">Medium Article</a>"
+                  },
+                  {
+                    "id": "bcqvx8qw",
+                    "type": "ul",
+                    "html": "<a href=\"https://dribbble.com/shots/12424124-Antrian-Imigrasi-App-Redesign\">Dribbble Post</a>"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "bijkp5bi",
+              "type": "divider"
+            },
+            {
+              "id": "bggwwt1v",
+              "type": "image",
+              "src": "/assets/uploads/0416c7152cfbeef25cf1.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bjxavtnm",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "be36o8du",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "bjy34ium",
+              "type": "p",
+              "html": "About 2 years ago I got a chance to try Indonesia’s public service app for passport renewal. The app is called Antrian Imigrasi. When I was preparing documents for my journey abroad, I got panicked because I just realized that my passport was 4 months away from being expired. So I went online to search for any info on how to renew my passport. Then, I stumbled upon a website (not even govt official website) that has all information on how to renew my passport. The first step of the process was:"
+            },
+            {
+              "id": "bc4lbwu9",
+              "type": "callout",
+              "html": "<b>“You have to schedule a visit and get your online queue number before you can go directly to the Immigration office. Because since August 2017, Immigration Office in Indonesia no longer accepts any walk-in registrants to apply/renew their passport”. </b>",
+              "icon": "💡"
+            },
+            {
+              "id": "be1jeops",
+              "type": "p",
+              "html": "Antrian Imigrasi is launched to help provide solution to this exact process."
+            },
+            {
+              "id": "basdtw27",
+              "type": "h2",
+              "html": "Existing Process"
+            },
+            {
+              "id": "bfg2bmna",
+              "type": "p",
+              "html": "As I was going through the app to try to renew my passport, I found that there are a lot of missed opportunities that can be improved to achieve the app's full potential. To give you a sense of what I kind of process I was going through to renew my passport, I drew a user story that represents the passport renewal process."
+            },
+            {
+              "id": "bzq4wr5m",
+              "type": "image",
+              "src": "/assets/uploads/faa7585f7aa4c4581160.jpg",
+              "caption": "",
+              "widthPct": 54
+            },
+            {
+              "id": "bkf7sn8e",
+              "type": "p",
+              "html": "Based on the information that I got off of google, combined with my own experience, the process of renewing a passport consist of several steps including:"
+            },
+            {
+              "id": "bl7pbcae",
+              "type": "ol",
+              "html": "Go to <a href=\"https://antrian.imigrasi.go.id/\">antrian.imigrasi.go.id</a> or their Antrian Imigrasi app to schedule a visit and get a queue number at the nearest Immigration office"
+            },
+            {
+              "id": "bhvm4t77",
+              "type": "ol",
+              "html": "Physically go to the Immigration office to fill out a loooong requirement form (see image below) and bring required physical documents"
+            },
+            {
+              "id": "beyhcm24",
+              "type": "ol",
+              "html": "Wait till your queue number is called"
+            },
+            {
+              "id": "bxx7ahga",
+              "type": "ol",
+              "html": "You’ll be interviewed &amp; get your picture taken when it’s your turn."
+            },
+            {
+              "id": "b4u2vuhk",
+              "type": "ol",
+              "html": "Then they’ll give you a receipt with the amount of money to be paid"
+            },
+            {
+              "id": "b22d0chs",
+              "type": "ol",
+              "html": "Once you’ve paid, you can go home, and wait for 3–7 days"
+            },
+            {
+              "id": "bpedsf1m",
+              "type": "ol",
+              "html": "After 7 days, you have to send a Whatsapp chat (with a predefined format) to their official Whatsapp number, to get info on your passport status, if the status is DONE you can go back to the immigration office to get your new passport by showing your payment receipt."
+            },
+            {
+              "id": "bb2d618n",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "b7ut6183",
+                    "type": "image",
+                    "src": "/assets/uploads/75c7ba5e83f567f42775.jpg",
+                    "caption": "Whatsapp message that I have to send to find out my current passport status",
+                    "widthPct": 100
+                  }
+                ],
+                [
+                  {
+                    "id": "bbyov7sz",
+                    "type": "image",
+                    "src": "/assets/uploads/61a4e332b436151d8e67.jpg",
+                    "caption": "Long form that we need to fill at the immigration office",
+                    "widthPct": 100
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "bzcpjpjc",
+              "type": "h2",
+              "html": "Current Design of Antrian Imigrasi App"
+            },
+            {
+              "id": "bvekhcji",
+              "type": "p",
+              "html": "The overall journey of Antrian Imigrasi app wasn’t that MUCH of a pain, even though it is <b>STILL kinda painful</b>."
+            },
+            {
+              "id": "b3wwr6nk",
+              "type": "callout",
+              "html": "<b>The problem here doesn’t merely lie within the app but it also lies within the offline process. </b>",
+              "icon": "💡"
+            },
+            {
+              "id": "b2nid1x8",
+              "type": "p",
+              "html": "Surely, with today’s technology, some steps in this journey can be simplified and improved from a UX point of view. Below is the current state of Antrian Imigrasi App design"
+            },
+            {
+              "id": "bb43t1lh",
+              "type": "image",
+              "src": "/assets/uploads/d648cb368f80bc7e3e49.jpg",
+              "caption": "",
+              "widthPct": 68
+            },
+            {
+              "id": "bv0keal4",
+              "type": "h2",
+              "html": "The Redesign Process"
+            },
+            {
+              "id": "bk9rbpxn",
+              "type": "p",
+              "html": "I followed d.school's design process which describes the design thinking process as a five-stage process Empathize, Define, Ideate, Prototype, and Test."
+            },
+            {
+              "id": "btc41bus",
+              "type": "image",
+              "src": "/assets/uploads/c73c606abb5f4d086849.jpg",
+              "caption": "",
+              "widthPct": 68
+            },
+            {
+              "id": "bpyy1nog",
+              "type": "p",
+              "html": "Naturally, the first order of process is Empathizing with the users. So I did some research and interview some of my friends who have tried the app. The research aims to better understand the user's needs and behavior towards renewing passports in general. Also to pinpoint and validate the problem that I faced while using the app as well as experiencing the whole offline process of passport renewal. You can see the result below. <a href=\"https://docs.google.com/document/d/1c6ZHxN7dRi3aR4V_4LSR4_Wx4FnMQnySw73GI7ri1I0/edit?usp=sharing\">(Full research notes)</a>"
+            },
+            {
+              "id": "bg8vo4ck",
+              "type": "image",
+              "src": "/assets/uploads/22fd4c91cfd7c63044b9.jpg",
+              "caption": "",
+              "widthPct": 68
+            },
+            {
+              "id": "b5nzgam3",
+              "type": "p",
+              "html": "On top of the interview that I did, I dug up ugly reviews on Antrian Imigrasi in both Playstore and App store. Basically, what I found in these reviews wasn't surprising for me. Here are some of the critics that I managed to gather:"
+            },
+            {
+              "id": "bibtgb63",
+              "type": "image",
+              "src": "/assets/uploads/4caadce4552c12d2c000.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "b7cg6pfw",
+              "type": "image",
+              "src": "/assets/uploads/50cad3b33080a6884a29.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "b4fbvoqg",
+              "type": "h2",
+              "html": "Define the Problem"
+            },
+            {
+              "id": "b6rejm0y",
+              "type": "p",
+              "html": "Based on my personal experience, user interview session with my friends, and the reviews that I gathered, below I listed down some of the most problematic aspects of the whole experience of passport renewal in Antrian Imigrasi App in which I would like to address the solutions to in this article."
+            },
+            {
+              "id": "bohq16yp",
+              "type": "h3",
+              "html": "Problem #1: General Goal of The App"
+            },
+            {
+              "id": "b8hp62wh",
+              "type": "p",
+              "html": "Currently, Antrian Imigrasi App just acts as a tool that provides a “queue number” for people who want to go to the immigration office to make a new passport or renew them. But as I, my friends, and many people on the internet believe, <br>"
+            },
+            {
+              "id": "bywr40qi",
+              "type": "p",
+              "html": "This app supposed to be able to serve a broader purpose in this whole scheme of the passport application process."
+            },
+            {
+              "id": "bltbtt4t",
+              "type": "p",
+              "html": "<br>The app itself can be improved in a way so that users don’t have to physically fill in long-form and bring physical documents to the immigration office. For instance, users can use the app to fill in their e-KTP then the app can sync that to all data related to that ID so that everything is safely stored in a centralized database. With this feature not only the users will feel much easier doing this whole process, but also the immigration office worker would surely be helped by not having to go through stacks of paper with ugly looking handwriting. (p.s it’ll save our planet too with less paper used).<br>"
+            },
+            {
+              "id": "bphalh6t",
+              "type": "h3",
+              "html": "Problem #2: Overall offline to online journey of passport renewal process"
+            },
+            {
+              "id": "bgvm6bv9",
+              "type": "p",
+              "html": "The overall journey of the passport renewal process is quite ineffective. Not only that the app purpose is only for us to get a queue number, and we also have to bring physical documents to the immigration office. There’s a broken flow within the current process."
+            },
+            {
+              "id": "bxrs2dur",
+              "type": "p",
+              "html": "For example, the fact that users have to wait for 3–7 days and didn’t even get any notification on their current passport status is basically a pain! I mean these days, who even got time to check in every now and then and type in a 16-digits request-id into WhatsApp only to find out your passport hasn’t finished?"
+            },
+            {
+              "id": "bgv7q2p1",
+              "type": "h3",
+              "html": "Problem #3: Lack of crucial information on each screen-flow"
+            },
+            {
+              "id": "b66p6sag",
+              "type": "p",
+              "html": "On top of the general goal of the app that needed a new and refined goal, I also found several crucial touchpoints that I believe can be improved in order for them to function effectively. As you can see in the image below, I’ve highlighted some of the flow that might need improvement. Below is the detailed explanation on each issue I found:"
+            },
+            {
+              "id": "bgnkal0h",
+              "type": "p",
+              "html": "<b>Issue #1: Login/Create a New Account Flow</b>"
+            },
+            {
+              "id": "b2rmq7gq",
+              "type": "image",
+              "src": "/assets/uploads/11efa060304350ee263f.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bahgumae",
+              "type": "p",
+              "html": "Currently, in order for users to access the app, users have to login or create an account in which they have to fill in all these account-related information (email, password, username, etc) and personal information about the user’s ID number (e-KTP: Indonesia’s Electronic ID card), Full Name, Full address, state, province, etc. When I first fill all this information, I thought"
+            },
+            {
+              "id": "bio52x6p",
+              "type": "quote",
+              "html": "<i>“Oh, ok I have to fill all these so that I don’t have to fill these in later?” </i>."
+            },
+            {
+              "id": "bhfs8u9y",
+              "type": "p",
+              "html": "But I was wrong. Later down the step, I still need to fill another form that basically has the same info to be filled. The same form showed up within the flow when users want to schedule their visit to the immigration office. I believe this can be reduced by using centralised database that our governments have on our e-KTP. So, once users fill in their e-KTP number, the app will have access to the existing database and link everything so that users no longer have to fill any redundant form.<br>"
+            },
+            {
+              "id": "bcobbrdx",
+              "type": "p",
+              "html": "<b>Issue #2 : Redundant information</b>"
+            },
+            {
+              "id": "bkppjnc8",
+              "type": "image",
+              "src": "/assets/uploads/cc5bb524602181f48663.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bpujeffq",
+              "type": "p",
+              "html": "After analyzing the detail on the apps, I realized that antrian imigrasi app has redundant info presented on its hamburger menu and on its homepage. So to get rid of confusion, we’re going to remove the hamburger menu completely."
+            },
+            {
+              "id": "bjbqmcum",
+              "type": "p",
+              "html": "<b>Issue #3 : Ineffective Map feature</b>"
+            },
+            {
+              "id": "b51pallg",
+              "type": "image",
+              "src": "/assets/uploads/ab17c613ae99d32bca1c.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bwo1kxjx",
+              "type": "p",
+              "html": "As we all can see on the image above, even though a map feature is present on the app, I don’t think it’s being used effectively since the map itself didn’t even show the location of the immigration office that user selected. Instead, it only showed my current location. The other problem with this is as I find out some reviews on the app store, I realized that this app is bound to your current location."
+            },
+            {
+              "id": "bw4wcnzf",
+              "type": "p",
+              "html": "<b><i>“But what does that even mean?”</i></b>"
+            },
+            {
+              "id": "b6nuiy3t",
+              "type": "p",
+              "html": "Well, it means this application detects users' current location from our phone’s GPS and then only shows the nearest immigration office."
+            },
+            {
+              "id": "b6vb8s4g",
+              "type": "p",
+              "html": "<b><i>“But, what if I want to get a queue number for the immigration office in my city for next week but now I’m currently out of town?”</i></b>"
+            },
+            {
+              "id": "b4tnve8r",
+              "type": "p",
+              "html": "It’s sad to say that it’s currently impossible to cater to this use case with this version of the app. I personally think the apps should give the users flexible access to all immigration offices but still validates whether users have duplicate queue number on different immigration offices in the same month."
+            },
+            {
+              "id": "bnvow8gl",
+              "type": "p",
+              "html": "<b>Issue #4 : No information on available slots</b>"
+            },
+            {
+              "id": "b3ugfbin",
+              "type": "image",
+              "src": "/assets/uploads/52451aeb0fef019f3572.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "b0u8k7b8",
+              "type": "p",
+              "html": "Despite the fact that each immigration office has a limited number of slots, there is no information stated on how many slots are available in each office for each week. Turns out in order for you to find out this information, you have to click each immigration office first only to find out that there are no longer slots for this office. Users often have to struggle and fight their way to find the available slots since the slots only open up every Friday to Sunday each week."
+            },
+            {
+              "id": "bbz73fzl",
+              "type": "p",
+              "html": "<br><b>Issue #5 &amp; #6 : Crucial information is not presented clearly</b>"
+            },
+            {
+              "id": "b3c6sqox",
+              "type": "image",
+              "src": "/assets/uploads/edfffeec7c5be6afa4d0.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bhtpt5s8",
+              "type": "p",
+              "html": "There is still some crucial information that supposed to be stated clearly upfront. For example, the fact that 1 user account can only register up to 5 people in the same Kartu Keluarga is presented later down the flow where it should be presented upfront."
+            },
+            {
+              "id": "bhyn0jxn",
+              "type": "h2",
+              "html": "Ideate the Solution"
+            },
+            {
+              "id": "b0thv7w8",
+              "type": "p",
+              "html": "Based on the list of problems above, I tried to come up with several solutions that hopefully can improve the overall use of the Antrian Imigrasi app. After doing a little bit of IA mapping to find out which information goes on each page I arrived at my solution below."
+            },
+            {
+              "id": "bn9793ly",
+              "type": "h3",
+              "html": "<b>Improving User Journey</b>"
+            },
+            {
+              "id": "b4c4rx0v",
+              "type": "p",
+              "html": "With the current long and winding journey of the passport renewal process, I tried to cut down some ineffective processes and it comes down to the improved main journey that you can see on the image below. I tried to minimize the friction between online-to-offline process by transforming most of the ineffective offline process to an in-app experience which relies heavily on the e-KTP centralized databases."
+            },
+            {
+              "id": "b1pikknk",
+              "type": "p",
+              "html": "Below is a little bit of explanation on each flow and what I did to improve the current flow:"
+            },
+            {
+              "id": "bn3vu843",
+              "type": "p",
+              "html": "<b>1. Login &amp; Signup Flow</b>"
+            },
+            {
+              "id": "bacuqmft",
+              "type": "image",
+              "src": "/assets/uploads/e2ae3294b2dd5b866030.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bcx2ucvm",
+              "type": "p",
+              "html": "On the new and improved flow, I added a new onboarding screen to welcome new users to the app. On top of that, I also change the login flow so that users can choose from 3 options to login to the app. For new users who haven’t created a new account, they can fill in their personal data to sign up for the app. I integrated e-KTP scanning system to read the data of user’s e-KTP. Users can choose between scanning their e-KTP or type in their e-KTP (id number). Once the scan completed, we will generate the respective data and all required fields will automatically be filled based on the data integrated with user’s e-KTP. Later down the flow, users don’t even have to fill the same exact form because we can easily generate the information from user’s e-KTP."
+            },
+            {
+              "id": "bip74y4g",
+              "type": "p",
+              "html": "<b>2. Schedule a visit and get queue number</b>"
+            },
+            {
+              "id": "bpt8t93z",
+              "type": "image",
+              "src": "/assets/uploads/0bd8a56f60a44336a35b.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bhe78xnc",
+              "type": "p",
+              "html": "Once users successfully sign up or login to the app, they can access the homepage to schedule their visit to the immigration office and generate a queue number. As you can see on the image below, I tried to improve some details on each screen:"
+            },
+            {
+              "id": "b4ozt1o4",
+              "type": "ul",
+              "html": "<b>Homepage</b> <br>I improved the information displayed on the homepage so that there won’t be any redundant information or confusion on the user’s end"
+            },
+            {
+              "id": "bgxbmb3e",
+              "type": "ul",
+              "html": "<b>Map Feature<br></b>The new map feature is now not restricted to the user’s current location. So, now users can schedule a visit to the immigration office in their home town even when they’re out of town. I also added information on how many slots left on each Immigration office. For those offices that have no slot available for a particular month, I added a Remind Me feature too, since this has become one of the pain points that I discovered based on user’s interview."
+            },
+            {
+              "id": "by3meroy",
+              "type": "ul",
+              "html": "<b>Integrated Database in Form Request Schedule<br></b>Since we’ve integrated e-KTP scan feature on the signup flow, might as well have the same feature available in the form request so users can easily scan their e-KTP or input their ID number to access all information related.Users can also choose a family member based on their Kartu Keluarga, so they don’t need to call their family to find out about their 15 digits long ID number. This will also be helpful for the users because it will minimize their effort to bring physical copy of documents"
+            },
+            {
+              "id": "bg4gw7xu",
+              "type": "ul",
+              "html": "<b>Successful Page<br></b>Improve the detail of the successful page so that the button to cancel isn’t located side by side to the main action on that page."
+            },
+            {
+              "id": "b91oe5do",
+              "type": "p",
+              "html": "<b>3.     Post Interview / Immigration Office Visit</b>"
+            },
+            {
+              "id": "bjki2g2u",
+              "type": "image",
+              "src": "/assets/uploads/49c6da518d30d7120fbc.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bslv5ooa",
+              "type": "p",
+              "html": "As you can see in the image above, I provide an additional “Post Interview” flow. Basically, this flow is the flow user will go through once they’re finished with their photo session and interview at the Immigration office. This way, Antrian Imigrasi app can be useful to users even after they’ve gotten called to interview and photo session, instead of just acted as a visitation scheduler and “queue number” generator. With this additional “Post Interview” flow exist in-app, users no longer have to guess around and manually send a Whatsapp message to the Immigration office just to find out the status of their new passport."
+            },
+            {
+              "id": "bytyhq3a",
+              "type": "ul",
+              "html": "<b>Scan QR Code<br></b>Once users finished with their photo session, they will need to pay, with this new design, an immigration office worker can easily give out a QR code to be scanned by the users. Then, the payment confirmation will show up on the app and the user can choose various payment options. I believe this will help the immigration office workers to monitor all payments and it will also be helpful on the users' end."
+            },
+            {
+              "id": "bk5kxsv5",
+              "type": "ul",
+              "html": "<b>Passport status<br></b>As I stated before on the problem statement, users have had a hard time finding out about their passport status. The only information user can get was from a Whatsapp formatted chat. So in this redesign, I try to give notification status on the user’s passport whether their passport is in process or is already done and on its way to user’s home. With this feature hopefully, users can easily monitor the status of their passport without wasting their time having to send out a formatted Whatsapp chat and remembering a specific request ID."
+            },
+            {
+              "id": "b5503lbg",
+              "type": "p",
+              "html": "Well, those are the 3 main improvements that I did on the Antrian Imigrasi app. Overall, if we were to refer back to my original drawing of the user journey, we have basically we’ve cut down 4 ineffective offline processes and improve the rest of the journey ✨."
+            },
+            {
+              "id": "b1p1m904",
+              "type": "image",
+              "src": "/assets/uploads/955ca6cc13ae5ebf64d8.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "byjw8dth",
+              "type": "h2",
+              "html": "Design Evaluation"
+            },
+            {
+              "id": "bkob5rl1",
+              "type": "columns",
+              "ratio": 50,
+              "columns": [
+                [
+                  {
+                    "id": "b9a66wl8",
+                    "type": "p",
+                    "html": "To better understand the impact on the improvement that i did, i conducted Usability Testing to my friends and ask them to do the following tasks:"
+                  },
+                  {
+                    "id": "bqm33324",
+                    "type": "p",
+                    "html": "Task 1: Login to the app"
+                  },
+                  {
+                    "id": "bnen5hvr",
+                    "type": "p",
+                    "html": "Task 2: Search for the immigration office"
+                  },
+                  {
+                    "id": "bjy8359t",
+                    "type": "p",
+                    "html": "Task 3: Apply for passport renewal"
+                  },
+                  {
+                    "id": "bnztjlo7",
+                    "type": "p",
+                    "html": "Task 4: Scan barcode to finish payment at the immigration office"
+                  },
+                  {
+                    "id": "b0v1ylqs",
+                    "type": "p",
+                    "html": "The prototype can be found <a href=\"https://www.figma.com/proto/DKBjoE5k9LAoXB89K44CV0/UXUI-M-Antrian-Paspor?node-id=146%253A1&amp;viewport=345%252C685%252C0.4743003249168396&amp;scaling=scale-down-width\">here</a>"
+                  }
+                ],
+                [
+                  {
+                    "id": "bumnl2rf",
+                    "type": "image",
+                    "src": "/assets/uploads/3ca3fb4b903b7f42e9d5.jpg",
+                    "caption": "",
+                    "widthPct": 100
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "bra8cq88",
+              "type": "p",
+              "html": "Based on the result of usability testing, most of the participants have no major hiccups in doing the given tasks. Though one of the participants has a little struggle identifying the status of their request. This might happen because there's no clear distinction on font color for the text on request status."
+            },
+            {
+              "id": "b5qfdvc1",
+              "type": "h2",
+              "html": "Key Takeaway &amp; Learning"
+            },
+            {
+              "id": "b50l4fuo",
+              "type": "p",
+              "html": "While designing this app, I realized that Antrian Imigrasi app is just one out of many government-run apps/websites that very much needed an improvement. In my opinion, the constant concerns from people about how bad the user experience and the user interface on most of these government-run apps/websites in Indonesia is probably because of the monopoly or dominance from our government itself. I assumed that the monopoly happens because our govt is the only one who can provide this type of public service and no other party/company can provide this (which resulted in an unhealthy monopoly environment without any competition). This might be one of the reasons why they think it’s ok not to put a 100% effort on these apps, because people who needed the public service would eventually use it even though the app sucks!"
+            },
+            {
+              "id": "bwj7bx1m",
+              "type": "p",
+              "html": "But honestly, in today’s world, this reason shouldn’t even be an excuse, otherwise, it supposed to be an encouragement for our govt to improve the app since many people might use it. Even if they might not have the resources to develop the apps themselves, they supposed to be able to spare some budget to hire design agencies to improve their online public services into a somewhat decent (not 1-star rating) service. But all in all, kudos to Indonesia’s govt to make these public services available online :) great idea, not so much on the execution. Definitely will look forward on the improved app in the future 🙌"
+            },
+            {
+              "id": "bt7tsz51",
+              "type": "p",
+              "html": "============================================================="
+            },
+            {
+              "id": "b5uloljd",
+              "type": "p",
+              "html": "Thank you for reading my personal frustration towards this government-run app and how I come down to create a solution to improve it. Hopefully, you enjoy reading this as much I enjoy writing it. Any opinion I stated above was merely based on my own personal thought and analysis. Feel free to leave any feedbacks<a href=\"http://nadyarizka.com/getintouch\"> </a>or you can also leave a simple hi 👋 via my <a href=\"https://www.linkedin.com/in/nadyarizka/\">Linkedin</a>. You can kindly see my <a href=\"https://dribbble.com/shots/12424124-Antrian-Imigrasi-App-Redesign?utm_source=Clipboard_Shot&amp;utm_campaign=nadyarizka&amp;utm_content=Antrian%20Imigrasi%20App%20Redesign&amp;utm_medium=Social_Share\">post on Dribbble</a> about Antrian Imigrasi app here too!"
+            },
+            {
+              "id": "bvbonkpz",
+              "type": "p",
+              "html": "Thanks and stay safe ✨"
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "/assets/uploads/0416c7152cfbeef25cf1.jpg",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "find-your-tutor-in-cari-ilmu-a-ux-case-study",
+          "title": "Find Your Tutor in Cari Ilmu - A UX Case Study",
+          "description": "The objective of this project is to develop an app that can easily be used to search, book, and pay private tutors or learning classes.",
+          "year": "2017",
+          "company": "Binar Academy",
+          "tags": [
+            "Case Study",
+            "Mobile App",
+            "UX",
+            "UI"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "brlmofa0",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "bkbqrgha",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bf3msy7m",
+                    "type": "ul",
+                    "html": "A project that I did as a task at UX Class: Binar Academy"
+                  },
+                  {
+                    "id": "b0jvq22b",
+                    "type": "ul",
+                    "html": "Cariilmu is an android mobile application that helps people to find the tutors that suit their needs based on their schedule, budget, even their preferred topic."
+                  },
+                  {
+                    "id": "b3nt9j62",
+                    "type": "p",
+                    "html": "<b>Objective</b>"
+                  },
+                  {
+                    "id": "b4yltk5s",
+                    "type": "p",
+                    "html": "The objective of this project is to develop an app that can easily be used to search, book, and pay private tutors or learning classes."
+                  },
+                  {
+                    "id": "bxgys13g",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "bg4o6524",
+                    "type": "ul",
+                    "html": "End to end user journey &amp; flow"
+                  },
+                  {
+                    "id": "bce0ey2l",
+                    "type": "ul",
+                    "html": "A realization of the app in form of android apk"
+                  },
+                  {
+                    "id": "bld9xjtp",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  },
+                  {
+                    "id": "bjswx4q3",
+                    "type": "ul",
+                    "html": "UX Designer Lead in this project to manage all tasks in the UI/UX team so that it can fall perfectly on schedule"
+                  },
+                  {
+                    "id": "b6jdgt9l",
+                    "type": "ul",
+                    "html": "Defining problem &amp; collaborated with PM to define requirements for the app"
+                  },
+                  {
+                    "id": "b9s8zbut",
+                    "type": "ul",
+                    "html": "Worked along side PM &amp; developers and acted as the middle party that bridging team’s PM and developers."
+                  },
+                  {
+                    "id": "bexbglyk",
+                    "type": "ul",
+                    "html": "Conducted user research &amp; usability testing"
+                  }
+                ],
+                [
+                  {
+                    "id": "bm7reha7",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "btz39xyj",
+                    "type": "p",
+                    "html": "2017"
+                  },
+                  {
+                    "id": "beyanupw",
+                    "type": "h3",
+                    "html": "🏢 Stakeholder"
+                  },
+                  {
+                    "id": "bljusphw",
+                    "type": "p",
+                    "html": "<a href=\"https://www.binaracademy.com/\">Binar Academy</a>"
+                  },
+                  {
+                    "id": "bzcx5npx",
+                    "type": "h3",
+                    "html": "🔗 Related Links"
+                  },
+                  {
+                    "id": "bkb39c3w",
+                    "type": "ul",
+                    "html": "<a href=\"https://medium.com/@nadyarizka/find-your-tutor-here-cariilmu-online-e7d5a5c040f4\">Medium Article</a>"
+                  },
+                  {
+                    "id": "bkrs9yej",
+                    "type": "ul",
+                    "html": "<a href=\"https://www.behance.net/gallery/90903113/Cari-Ilmu-A-UX-Case-Study\">Behance</a>"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "bz7dwwhz",
+              "type": "divider"
+            },
+            {
+              "id": "bga1mi2b",
+              "type": "image",
+              "src": "/assets/uploads/dd171298f2b19b11f447.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bjhpqmpt",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "bzx64y8h",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "bb4nigel",
+              "type": "p",
+              "html": "Cariilmu.online acts as an online platform that can be used by everyone mainly students who needed help with their academic and non-academic subjects. Cariilmu.online provides a list of tutors which includes detailed information about the class’ description and class’ schedule that is being held by each of the tutors. When users find the perfect tutor that matches their needs, they can easily book a class directly from our app. Now the process of looking for the perfect tutor is easier than ever!"
+            },
+            {
+              "id": "b66mopu9",
+              "type": "h2",
+              "html": "General Idea"
+            },
+            {
+              "id": "b529m15u",
+              "type": "p",
+              "html": "This project was first developed to tackle the initial problem that is still being faced by a lot of college students such as"
+            },
+            {
+              "id": "beef043w",
+              "type": "callout",
+              "html": "Skill gap and ineffective institutional-based education.",
+              "icon": "💡"
+            },
+            {
+              "id": "bwdktaa4",
+              "type": "p",
+              "html": "The skill gap emerged because many students feel that education from their campus/formal institution is rather ineffective and mostly are not applicable to the “real world” /work environment. Based on the main problem, the challenge of how to get effective and applicable education arises."
+            },
+            {
+              "id": "bq8vb42a",
+              "type": "h2",
+              "html": "Validate the Idea"
+            },
+            {
+              "id": "b1maqo34",
+              "type": "p",
+              "html": "To make sure that the issue we're trying to solve is important, we conducted background research to validate our hypothesis. The result of user research that we did shows that"
+            },
+            {
+              "id": "buq0h8sq",
+              "type": "callout",
+              "html": "<b>33 out of 39 respondents feel the need to have additional education (like tutoring) to help them excel in the academic or non-academic subjects and also to help them be ready to face the work environment (closing the skill gap). </b>",
+              "icon": "💡"
+            },
+            {
+              "id": "beaceq5e",
+              "type": "p",
+              "html": "Most of our respondents expressed that institutional education becomes less effective because usually, the number of students in a class is way too many, so they think it's rather ineffective to solely rely everything on education that they got from formal institutions."
+            },
+            {
+              "id": "btdxh669",
+              "type": "p",
+              "html": "Unfortunately, most of the respondents expressed that they couldn’t have access to tutoring because some of these <b>pain points </b>⚠️"
+            },
+            {
+              "id": "bv1uz23x",
+              "type": "ol",
+              "html": "They don’t know where to look for the tutor"
+            },
+            {
+              "id": "bwg421tm",
+              "type": "ol",
+              "html": "Regular tutoring agency/institution offer expensive fees and,"
+            },
+            {
+              "id": "bt6ftqx9",
+              "type": "ol",
+              "html": "Usually don't have flexible schedule option"
+            },
+            {
+              "id": "bkj28iej",
+              "type": "p",
+              "html": "This is where we're hoping cariilmu.online comes into play. This platform is developed to help people find tutor that suits their needs. So that people can learn anything from anywhere and whenever they feel like it. With that being the goal of cariilmu.online, our core mission is to help bringing Indonesia’s education to a better and brighter future."
+            },
+            {
+              "id": "bnfiqnkt",
+              "type": "h2",
+              "html": "Design Process"
+            },
+            {
+              "id": "blp2p9oj",
+              "type": "p",
+              "html": "The development process of this app from UX point of view starts from user research. User research was done by conducting survey to <b>39 respondents</b> consist of college students in Yogyakarta. This research aims to prove our assumption that people do need a platform that can help them find a tutor easily. But not only that, this research also aims to find user’s insights as well as their pain points which i have mentioned above. Based on user research, we then formulated a persona that represents our user target for cariilmu.online app."
+            },
+            {
+              "id": "bxatni90",
+              "type": "h3",
+              "html": "Persona"
+            },
+            {
+              "id": "b6og0h1m",
+              "type": "image",
+              "src": "/assets/uploads/894e65538d6de4b062c9.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "b8wuijz0",
+              "type": "p",
+              "html": "Based on the user research, we decided to determine 4 main goals of our users:"
+            },
+            {
+              "id": "bkt2ygrf",
+              "type": "ol",
+              "html": "Users can easily find a tutor that match their needs (based on their schedule and fees)"
+            },
+            {
+              "id": "bdewz0ko",
+              "type": "ol",
+              "html": "Users can join in tutor’s class of their choice"
+            },
+            {
+              "id": "bk697e5a",
+              "type": "ol",
+              "html": "Users can see class schedules that they’ve taken/paid for."
+            },
+            {
+              "id": "bjjd31vp",
+              "type": "ol",
+              "html": "Users can receive certificates from the class that they took."
+            },
+            {
+              "id": "bn3agc0k",
+              "type": "p",
+              "html": "Goal #1– #3 will answer the user’s pain point in finding the tutor that suits their needs. While goal #4 will support variable rewards for the users."
+            },
+            {
+              "id": "b3xctj3a",
+              "type": "h3",
+              "html": "User Journey"
+            },
+            {
+              "id": "b3pmg6if",
+              "type": "p",
+              "html": "The user journey tells a detailed story of how our app can answer the user’s pain point and their goals. It consists of a series of steps which represent a scenario in which a user might interact with the app. Below is the user journey for the cariilmu.online app."
+            },
+            {
+              "id": "bogx40b0",
+              "type": "image",
+              "src": "/assets/uploads/bf77459941404b367b3b.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "bewcsv85",
+              "type": "h3",
+              "html": "User Flow"
+            },
+            {
+              "id": "b82w6qqi",
+              "type": "p",
+              "html": "Besides persona, we also formulated user flow in form of a flowchart. This flowchart will show every possible step that the user might take in order to complete the goal/task. We created the user flow based on our assumption and we validate it by using usability testing."
+            },
+            {
+              "id": "bjjicfkm",
+              "type": "columns",
+              "ratio": 50,
+              "columns": [
+                [
+                  {
+                    "id": "bow53tcf",
+                    "type": "image",
+                    "src": "/assets/uploads/65651bf142b894992b48.jpg",
+                    "caption": "",
+                    "widthPct": 100
+                  }
+                ],
+                [
+                  {
+                    "id": "bb6p2rfg",
+                    "type": "image",
+                    "src": "/assets/uploads/d82262d857cd53878678.jpg",
+                    "caption": "",
+                    "widthPct": 100
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "brfctxiv",
+              "type": "h3",
+              "html": "Page Flow"
+            },
+            {
+              "id": "biinvu9x",
+              "type": "p",
+              "html": "Once we created user flow, we then create page flow to show a more detailed flow of how the user can use and browse through our app by displaying each of the screens that correspond to each activity in the app."
+            },
+            {
+              "id": "bi1lsb45",
+              "type": "image",
+              "src": "/assets/uploads/aa4e377699cc7d74a00d.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "btayz4kw",
+              "type": "h3",
+              "html": "Low Fidelity"
+            },
+            {
+              "id": "bsaa49zc",
+              "type": "p",
+              "html": "Before we jump into creating high-resolution mockup and screens, we first create low-fidelity screens with no color and try to place all the elements and components for the content that's needed on each of the screens."
+            },
+            {
+              "id": "btqpazqj",
+              "type": "image",
+              "src": "/assets/uploads/57f346c69078c3715a46.jpg",
+              "caption": "",
+              "widthPct": 100
+            },
+            {
+              "id": "b0gzku2l",
+              "type": "h2",
+              "html": "Final Look"
+            },
+            {
+              "id": "bap5ia7z",
+              "type": "p",
+              "html": "Once we’re done creating and placing the elements and information needed in each of the screens, we began to create a high-fidelity prototype. This time we set our overall tone color of this app would be blue and orange. The color orange corresponds to any type of activity while blue was chosen solely because it’s quite a good contrast to the bright orange. All the element placement in this high-fidelity version was based on our layout on low-fidelity."
+            },
+            {
+              "id": "birrqpqi",
+              "type": "columns",
+              "ratio": 50,
+              "columns": [
+                [
+                  {
+                    "id": "bmw4ziw1",
+                    "type": "image",
+                    "src": "/assets/uploads/1d4a37418d8252316005.jpg",
+                    "caption": "",
+                    "widthPct": 94
+                  },
+                  {
+                    "id": "bjnyunik",
+                    "type": "image",
+                    "src": "/assets/uploads/0da743a50b1387930da9.jpg",
+                    "caption": "",
+                    "widthPct": 100
+                  }
+                ],
+                [
+                  {
+                    "id": "b98m1uiz",
+                    "type": "image",
+                    "src": "/assets/uploads/9807f26a1b147c3cba08.jpg",
+                    "caption": "",
+                    "widthPct": 94
+                  },
+                  {
+                    "id": "bxzqk1m7",
+                    "type": "image",
+                    "src": "/assets/uploads/a058e1aa70aa599a55bc.jpg",
+                    "caption": "",
+                    "widthPct": 94
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "b4eywb84",
+              "type": "columns",
+              "ratio": 50,
+              "columns": [
+                [
+                  {
+                    "id": "bo5gteko",
+                    "type": "image",
+                    "src": "/assets/uploads/c9164899e9411a9d3467.jpg",
+                    "caption": "",
+                    "widthPct": 94
+                  },
+                  {
+                    "id": "bhpzih5y",
+                    "type": "image",
+                    "src": "/assets/uploads/4e5b74d7375e62cd0379.jpg",
+                    "caption": "",
+                    "widthPct": 94
+                  }
+                ],
+                [
+                  {
+                    "id": "b921c4eg",
+                    "type": "image",
+                    "src": "/assets/uploads/f31cc63ebf8ae0e6a051.jpg",
+                    "caption": "",
+                    "widthPct": 94
+                  },
+                  {
+                    "id": "bnvv069r",
+                    "type": "image",
+                    "src": "/assets/uploads/825c487eaeb25a82a23f.jpg",
+                    "caption": "",
+                    "widthPct": 94
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "b3r444zj",
+              "type": "image",
+              "src": "/assets/uploads/03069e8c0c8293efd87f.jpg",
+              "caption": "",
+              "widthPct": 50
+            },
+            {
+              "id": "bz631we6",
+              "type": "p",
+              "html": "After we created high-fidelity screen mockup, it’s time to make a working prototype. We decided to use InVision as a tool to build a prototype simply because its FREE. The prototype itself can be checked out <a href=\"https://invis.io/5UEDLMMDF\">here</a>."
+            },
+            {
+              "id": "b8yqrt4d",
+              "type": "h2",
+              "html": "Validation"
+            },
+            {
+              "id": "bip7akzh",
+              "type": "p",
+              "html": "To make sure that everything we designed has fulfilled the user’s needs, we had to do a test in the form of usability testing. For this case, we’ve prepared <b>4 scenarios</b> that represents the whole application flow."
+            },
+            {
+              "id": "bya1b9dp",
+              "type": "callout",
+              "html": "After we tested the prototype to 11 users, the result showed that all users succeed in accomplishing #1 - #3 scenario. <br><br>While almost half of our tester failed to finish the 4th scenario where they need to find certificates of the corresponding class.",
+              "icon": "💡"
+            },
+            {
+              "id": "bhah74jj",
+              "type": "p",
+              "html": "Based on that, we then conclude that there needs to be a rearrangement in the “viewing certificate” flow in order to make it easier for the user to access certificates. Other than that, we believe that we have delivered a good user flow for most of scenarios in cariilmu.online application. Nevertheless, this app is still open for continuous development in the future."
+            },
+            {
+              "id": "bfi9xlm1",
+              "type": "p",
+              "html": "====================================================================="
+            },
+            {
+              "id": "bc70x67r",
+              "type": "p",
+              "html": "Thank you for reading :) Hope you enjoy reading this as much I enjoy writing it. Feel free to leave any feedback or if you simply wanna say hi you can reach me via my <a href=\"https://www.linkedin.com/in/nadyarizka/\">LinkedIn</a>."
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "/assets/uploads/e5ff6e98e70c2e2edca8.png",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "seas-infrastructure-management-system",
+          "title": "Sea’s Infrastructure Management System",
+          "description": "A project to redesign & improve user experience infrastructure & resource management system to help users apply, manage, and process the request for resources (e.g new servers, spare servers, etc.)",
+          "year": "2021",
+          "company": "Sea Group",
+          "tags": [
+            "Portfolio",
+            "Web",
+            "UX",
+            "UI"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "bj27yl7d",
+              "type": "callout",
+              "html": "",
+              "icon": "🚧"
+            },
+            {
+              "id": "bkoq7dxc",
+              "type": "p",
+              "html": "On progress in providing the best content..."
+            },
+            {
+              "id": "beqog0wv",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "bbx4gkp3",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bsf54hag",
+                    "type": "p",
+                    "html": "A project to redesign &amp; improve user experience infrastructure &amp; resource management system to help users apply, manage, and process the request for resources (e.g new servers, spare servers, etc.)"
+                  },
+                  {
+                    "id": "bflk0lid",
+                    "type": "p",
+                    "html": "Currently, the product has improved the efficiency of the previous resource management process"
+                  },
+                  {
+                    "id": "blc4rq7e",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "b9mejv1w",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  }
+                ],
+                [
+                  {
+                    "id": "b8hwfl6p",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "b9oedp94",
+                    "type": "p",
+                    "html": "2021"
+                  },
+                  {
+                    "id": "bn4kaa32",
+                    "type": "h3",
+                    "html": "🏢 Stakeholder"
+                  },
+                  {
+                    "id": "b174tvku",
+                    "type": "ul",
+                    "html": "Sea Group"
+                  },
+                  {
+                    "id": "bwvxc9z1",
+                    "type": "h3",
+                    "html": "🧩 Team"
+                  },
+                  {
+                    "id": "buyk9bl8",
+                    "type": "ul",
+                    "html": "Infra Team"
+                  },
+                  {
+                    "id": "b43z19gh",
+                    "type": "h3",
+                    "html": "🔗 Links"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "ba31gcrr",
+              "type": "divider"
+            },
+            {
+              "id": "baysiqnw",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "b8cho1xh",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "b6jra0tc",
+              "type": "h2",
+              "html": "Define The Problem"
+            },
+            {
+              "id": "bz9am17q",
+              "type": "h2",
+              "html": "Design Process"
+            },
+            {
+              "id": "b1qz03nf",
+              "type": "h2",
+              "html": "Ideate"
+            },
+            {
+              "id": "bjdvvn83",
+              "type": "h2",
+              "html": "Features"
+            },
+            {
+              "id": "bza3igmf",
+              "type": "h2",
+              "html": "Challenge"
+            },
+            {
+              "id": "bs5j6ier",
+              "type": "h2",
+              "html": "Result &amp; Impact"
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "standardizing-200-internal-modules-for-singapore-customs",
+          "title": "Standardizing 200+ Internal Modules for Singapore Customs",
+          "description": "Transforming fragmented workflows into a scalable, consistent system for government officers",
+          "year": "2021",
+          "company": "Sea Group",
+          "tags": [
+            "Portfolio",
+            "Web",
+            "UX",
+            "UI"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "b3egf6at",
+              "type": "callout",
+              "html": "",
+              "icon": "🚧"
+            },
+            {
+              "id": "byfj5354",
+              "type": "p",
+              "html": "On progress in providing the best content..."
+            },
+            {
+              "id": "bofjg1n1",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "b0geuht4",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bl7py99n",
+                    "type": "p",
+                    "html": "Transforming fragmented workflows into a scalable, consistent system for government officers"
+                  },
+                  {
+                    "id": "b3jks42y",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "b16pzoez",
+                    "type": "p",
+                    "html": "Reduced inconsistency across 200+ internal modules<br>Established reusable UX patterns for forms, workflows, and validation<br>Improved efficiency for officers managing policy-driven updates (e.g. GST, regulatory rules)<br>Enabled faster design and development through standardization"
+                  },
+                  {
+                    "id": "bjoko0pd",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  }
+                ],
+                [
+                  {
+                    "id": "bzcw9e4d",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "bkhmvt7b",
+                    "type": "p",
+                    "html": "2021"
+                  },
+                  {
+                    "id": "bik68vo0",
+                    "type": "h3",
+                    "html": "🏢 Stakeholder"
+                  },
+                  {
+                    "id": "bp4cushq",
+                    "type": "ul",
+                    "html": "Sea Group"
+                  },
+                  {
+                    "id": "bngi1bbz",
+                    "type": "h3",
+                    "html": "🧩 Team"
+                  },
+                  {
+                    "id": "b5r0lwmh",
+                    "type": "ul",
+                    "html": "Infra Team"
+                  },
+                  {
+                    "id": "bwqcd3g0",
+                    "type": "h3",
+                    "html": "🔗 Links"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "baj9j2od",
+              "type": "divider"
+            },
+            {
+              "id": "bmwu8s66",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "b9nu5xik",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "bg0dysml",
+              "type": "h2",
+              "html": "Define The Problem"
+            },
+            {
+              "id": "bdx6g6mv",
+              "type": "h2",
+              "html": "Design Process"
+            },
+            {
+              "id": "bznrdj6i",
+              "type": "h2",
+              "html": "Ideate"
+            },
+            {
+              "id": "blyksmij",
+              "type": "h2",
+              "html": "Features"
+            },
+            {
+              "id": "bug0gftb",
+              "type": "h2",
+              "html": "Challenge"
+            },
+            {
+              "id": "b8s18v5e",
+              "type": "h2",
+              "html": "Result &amp; Impact"
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "tokopedia-sellers-campaign-participation",
+          "title": "Tokopedia Seller's Campaign Participation",
+          "description": "",
+          "year": "2020",
+          "company": "Tokopedia",
+          "tags": [
+            "Portfolio",
+            "Web",
+            "UX"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "bh586tl5",
+              "type": "callout",
+              "html": "On progress in providing the best content...",
+              "icon": "🚧"
+            },
+            {
+              "id": "bv7d9c1i",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "bcahgtbq",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bht08il4",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "bwj2cyrj",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  }
+                ],
+                [
+                  {
+                    "id": "bfudi2kf",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "b8f5vmmp",
+                    "type": "p",
+                    "html": "2020"
+                  },
+                  {
+                    "id": "b8v3yav7",
+                    "type": "h3",
+                    "html": "🏢 Stakeholder"
+                  },
+                  {
+                    "id": "belozit8",
+                    "type": "ul",
+                    "html": "<a href=\"http://tokopedia.com\">Tokopedia</a>"
+                  },
+                  {
+                    "id": "butlkfoc",
+                    "type": "h3",
+                    "html": "🧩 Team"
+                  },
+                  {
+                    "id": "bydaz345",
+                    "type": "ul",
+                    "html": "Campaign"
+                  },
+                  {
+                    "id": "bgom95t3",
+                    "type": "h3",
+                    "html": "🔗 Links"
+                  },
+                  {
+                    "id": "b6m8mk6n",
+                    "type": "ul",
+                    "html": "<a href=\"https://seller.tokopedia.com/promo\">Tokopedia Seller</a>"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "biyq5s1o",
+              "type": "divider"
+            },
+            {
+              "id": "bvhhuk1g",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "b0l156vr",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "b44q3ycg",
+              "type": "h2",
+              "html": "Define The Problem"
+            },
+            {
+              "id": "bockrlcl",
+              "type": "h2",
+              "html": "Design Process"
+            },
+            {
+              "id": "brblk6jl",
+              "type": "h2",
+              "html": "Ideate"
+            },
+            {
+              "id": "b7nqma7e",
+              "type": "h2",
+              "html": "Features"
+            },
+            {
+              "id": "buoy1u5u",
+              "type": "h2",
+              "html": "Challenge"
+            },
+            {
+              "id": "byou4f9p",
+              "type": "h2",
+              "html": "Result &amp; Impact"
+            }
+          ],
+          "layoutWidth": "wide",
+          "coverImage": "",
+          "featured": false,
+          "published": true
+        },
+        {
+          "id": "standardizing-travel-products-at-tokopedia",
+          "title": "Standardizing Travel Products at Tokopedia",
+          "description": "",
+          "year": "2019",
+          "company": "Tokopedia",
+          "tags": [
+            "Portfolio",
+            "Web",
+            "UX"
+          ],
+          "content": "",
+          "blocks": [
+            {
+              "id": "bv48ftk1",
+              "type": "callout",
+              "html": "On progress in providing the best content...",
+              "icon": "🚧"
+            },
+            {
+              "id": "bmg1dmba",
+              "type": "columns",
+              "ratio": 69,
+              "columns": [
+                [
+                  {
+                    "id": "bbojog67",
+                    "type": "h2",
+                    "html": "🔍 Overview"
+                  },
+                  {
+                    "id": "bd778l3l",
+                    "type": "h2",
+                    "html": "🎉 Outcome"
+                  },
+                  {
+                    "id": "bdgtwems",
+                    "type": "h2",
+                    "html": "👩‍💻 My Role"
+                  }
+                ],
+                [
+                  {
+                    "id": "bv9b8u5a",
+                    "type": "h3",
+                    "html": "🗓 Project Date"
+                  },
+                  {
+                    "id": "b97787j6",
+                    "type": "p",
+                    "html": "2019"
+                  },
+                  {
+                    "id": "buxzam3l",
+                    "type": "h3",
+                    "html": "🏢 Stakeholder"
+                  },
+                  {
+                    "id": "bhnt08fa",
+                    "type": "ul",
+                    "html": "<a href=\"http://tokopedia.com\">Tokopedia</a>"
+                  },
+                  {
+                    "id": "bx98andb",
+                    "type": "h3",
+                    "html": "🧩 Team"
+                  },
+                  {
+                    "id": "b6e2ge2i",
+                    "type": "ul",
+                    "html": "Travel"
+                  },
+                  {
+                    "id": "brboh7f1",
+                    "type": "h3",
+                    "html": "🔗 Related Links"
+                  },
+                  {
+                    "id": "b4buc6if",
+                    "type": "ul",
+                    "html": "<a href=\"http://tokopedia.com/flight\">Tokopedia Flight</a>"
+                  },
+                  {
+                    "id": "bouj66ql",
+                    "type": "ul",
+                    "html": "<a href=\"https://tiket.tokopedia.com/kereta-api/\">Tokopedia Train</a>"
+                  },
+                  {
+                    "id": "berk6flt",
+                    "type": "ul",
+                    "html": "<a href=\"https://www.tokopedia.com/hotel/\">Tokopedia Hotel</a>"
+                  }
+                ]
+              ]
+            },
+            {
+              "id": "bxkd1isz",
+              "type": "divider"
+            },
+            {
+              "id": "btzejbr3",
+              "type": "p",
+              "html": "[insert image]"
+            },
+            {
+              "id": "bsdjytcv",
+              "type": "h1",
+              "html": "⚡️ Behind The Product"
+            },
+            {
+              "id": "bwk1yj9d",
+              "type": "h2",
+              "html": "Project Background"
+            },
+            {
+              "id": "b9rpa2tq",
+              "type": "h2",
+              "html": "Define The Problem"
+            },
+            {
+              "id": "bzzhor9f",
+              "type": "h2",
+              "html": "Design Process"
+            },
+            {
+              "id": "bj1ehsyp",
+              "type": "h2",
+              "html": "Ideate"
+            },
+            {
+              "id": "bn7vmdbu",
+              "type": "h2",
+              "html": "Features"
+            },
+            {
+              "id": "b9siolgx",
+              "type": "h2",
+              "html": "Challenge"
+            },
+            {
+              "id": "bxqa1ilm",
+              "type": "h2",
+              "html": "Result &amp; Impact"
+            }
+          ],
+          "layoutWidth": "wide",
           "coverImage": "",
           "featured": false,
           "published": true
