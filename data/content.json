@@ -34,7 +34,6 @@
       "worksHeading": "Selected Works",
       "selectedWorkIds": [
         "sea-labs-design-system",
-        "tokopedia-travel-product-redesign",
         "tokopedias-flight-new-booking-process",
         "tokopedia-top-up-e-money",
         "redesign-tokopedias-train-booking-platform"
@@ -4066,5 +4065,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T16:09:39.461Z"
+  "savedAt": "2026-09-25T16:09:45.158Z"
 }
