@@ -34,7 +34,6 @@
       "worksHeading": "Selected Works",
       "selectedWorkIds": [
         "sea-labs-design-system",
-        "tokopedia-travel-product-redesign",
         "tokopedias-flight-new-booking-process",
         "redesign-tokopedias-train-booking-platform",
         "mall-sampah-redesign-a-ux-case-study",
@@ -4072,5 +4071,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T16:08:05.446Z"
+  "savedAt": "2026-09-25T16:08:10.594Z"
 }
