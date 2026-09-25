@@ -536,8 +536,8 @@
         },
         {
           "id": "the-village-i-didnt-know-id-left-behind",
-          "title": "The Village I Didn't Know I'd Left Behind",
-          "description": "They say it takes a village to raise a child. Nobody warns you how quiet it gets when you've moved away from yours.",
+          "title": "It Takes a Village… But What If Yours Is in Another Country?",
+          "description": "Mom-ing abroad without your people is lonely, and nobody really warns you about it. Here's what it actually feels like (sick days included), plus three small things that have made my days lighter.",
           "year": "2026",
           "company": "",
           "tags": [
@@ -547,174 +547,259 @@
           "content": "",
           "blocks": [
             {
-              "id": "bm78whn4",
+              "id": "buxhp442",
               "type": "p",
-              "html": "They say it takes a village to raise a child. Nobody warns you how quiet it gets when you've moved away from yours."
+              "html": "<i>TL;DR: Mom-ing abroad without your people is lonely, and nobody really warns you about it. Here's what it actually feels like (sick days included), plus three small things that have made my days lighter.</i>"
             },
             {
-              "id": "bhad1ax4",
+              "id": "bfpqdtzs",
               "type": "p",
-              "html": "When I became a mom abroad, I imagined the usual picture: grandparents dropping by, an aunt offering to hold the baby while I showered, a friend sitting across from me with a cup of tea saying, \"Yes, it's hard. You're doing fine.\" Instead, it was me, my husband, and a very small human who needed us every minute of every day."
+              "html": "They say it takes a village to raise a child. Well, nobody told me what happens when your village is in a different country."
             },
             {
-              "id": "bmypqomq",
+              "id": "buou5vt5",
+              "type": "p",
+              "html": "First off, to give you context: I'm an Indonesian mom raising a toddler here in Singapore, a.k.a. the little red dot 🇸🇬. When I became a mom abroad, I had this very romantic picture in my head — grandparents dropping by, an aunt holding the baby so I could shower, a friend sitting across from me with a cup of tea saying, \"Yes, it's hard. You're doing fine.\""
+            },
+            {
+              "id": "be7him4z",
+              "type": "p",
+              "html": "But boy, was I wrong. In reality, it was me, my husband, and a very small human who needed us every minute of every day."
+            },
+            {
+              "id": "brv6uqv4",
+              "type": "divider"
+            },
+            {
+              "id": "b3v9baw6",
               "type": "h2",
-              "html": "The Loneliness Nobody Talks About"
+              "html": "🫂 The loneliness nobody talks about"
             },
             {
-              "id": "bp8ceg5z",
+              "id": "bq6w2r8n",
               "type": "p",
-              "html": "Being a mom far from home is a particular kind of lonely. It isn't that you're never around people. You're surrounded by a baby's needs all day long. But there's no one who <em>knows</em> you, who remembers you from before, who can look at your face and tell you haven't slept."
+              "html": "Let's be real, being a mom far from home is a very specific kind of lonely. It's not that you're never around people — you're literally surrounded by a tiny human's needs all day long. But there's no one who <i>knows</i> you. No one who remembers you from before, who can look at your face and go, \"You haven't slept, have you?\""
             },
             {
-              "id": "bnwxfjyz",
+              "id": "bxsr20pw",
               "type": "p",
-              "html": "The hardest moments aren't dramatic. They're small and repetitive:"
+              "html": "The hardest moments aren't the dramatic ones. They're small, and they're on repeat:"
             },
             {
-              "id": "b4h49ipv",
+              "id": "btzv1na7",
               "type": "ul",
-              "html": "Standing in the kitchen at 3 p.m. with a toddler on your hip, wishing someone would just walk in and take over for ten minutes."
+              "html": "<b>The 3 p.m. kitchen moment.</b> Toddler on my hip, wishing someone would just walk in and take over for ten minutes. (Ten! That's all I ask.)"
             },
             {
-              "id": "bkhxuuh9",
+              "id": "b4j448i7",
               "type": "ul",
-              "html": "Scrolling through family group chats and seeing everyone gathered for a celebration you're missing."
+              "html": "<b>The family group chat.</b> Everyone gathered for a celebration back home, and I'm liking the photos from another country."
             },
             {
-              "id": "b1u52j78",
+              "id": "bakwk1u1",
               "type": "ul",
-              "html": "Feeling guilty that your child is growing up without cousins and grandparents in the room."
+              "html": "<b>The cousin guilt.</b> My child is growing up without cousins and grandparents in the room."
             },
             {
-              "id": "by1qz08u",
+              "id": "buiw12l4",
               "type": "ul",
-              "html": "Realizing you haven't had a full conversation with another adult in days."
+              "html": "<b>The adult-conversation drought.</b> Realising I haven't had a proper chat with another grown-up in days."
             },
             {
-              "id": "bqykv6fw",
+              "id": "bqie7tqz",
               "type": "p",
-              "html": "There's also a quiet grief in it. You miss your mom. You miss being <em>mothered</em> yourself. You miss the version of parenting where someone else knows the answers, or at least reassures you that you're allowed not to."
+              "html": "And underneath all of that, there's a quiet grief. I miss my mom. I miss being <i>mothered</i> myself. I miss the version of parenting where someone else knows the answers — or at least tells me I'm allowed not to."
             },
             {
-              "id": "bwv8ojyt",
+              "id": "b9pi9a76",
+              "type": "divider"
+            },
+            {
+              "id": "bkak272f",
               "type": "h2",
-              "html": "There Is No Sick Leave in Motherhood"
+              "html": "🤒 There's no sick leave in motherhood"
             },
             {
-              "id": "bc6vpdw2",
+              "id": "bop814dw",
               "type": "p",
-              "html": "Nothing shows how alone you are like getting sick."
+              "html": "Nothing shows you how alone you are quite like getting sick."
             },
             {
-              "id": "b3pl9m43",
+              "id": "baenqkua",
               "type": "p",
-              "html": "When you have a village, being unwell means someone shows up. Your mom takes the baby for the afternoon, or a sister brings soup and stays for a few hours. You get to lie down and just be sick."
+              "html": "When you have a village, being unwell means someone shows up. Your mom takes the baby for the afternoon, or your sister drops by with soup and stays for a few hours. You get to lie down and just… be sick."
             },
             {
-              "id": "b85mhpfj",
+              "id": "bxar7rpe",
               "type": "p",
-              "html": "When you don't, you're running a fever while warming a bottle. You're nauseous and still chasing a toddler who has no idea you feel awful. Your body wants to stop, but there's no one to hand the baby to, so you keep going. Your child still needs breakfast, a diaper change, a nap routine, and bedtime stories, whether you slept or not."
+              "html": "When you don't? You're running a fever while warming a bottle. You're nauseous (or full-on <i>masuk angin</i>) and still chasing a toddler who has zero idea you feel awful. Your body is begging you to stop, but there's no one to hand the baby to. So you keep going, because breakfast, diaper changes, nap time and bedtime stories don't care whether you slept."
             },
             {
-              "id": "ba9u99iw",
+              "id": "bxkaeppj",
               "type": "p",
-              "html": "Even when your husband takes over after work, the daytime hours are still yours. No email to your manager and no \"I'm out today\" message can make your job pause, because this job never clocks out. You just get through it, and often you get through it alone."
+              "html": "Even when my husband takes over after work, the daytime hours are still mine. No email to my manager, no \"I'm out today\" message can make this job pause. It simply never clocks out."
             },
             {
-              "id": "bm54naop",
+              "id": "bq606m0p",
+              "type": "p",
+              "html": "Being the UX designer that I am, I can't help but see it as a system with no backup — one person, zero redundancy, and no scheduled downtime. Any product team would flag that as a huge risk. In motherhood, we just call it Tuesday."
+            },
+            {
+              "id": "bnzgeaa0",
+              "type": "divider"
+            },
+            {
+              "id": "bymepdcq",
               "type": "h2",
-              "html": "The Guilt Makes It Heavier"
+              "html": "😔 And then the guilt kicks in"
             },
             {
-              "id": "byu2hfha",
+              "id": "bnjww233",
               "type": "p",
-              "html": "Then comes the second layer: guilt. You chose this move, this adventure, this life abroad. So who are you to complain? Many of us swallow the exhaustion because it feels ungrateful to say it out loud."
+              "html": "Then comes the second layer: guilt. We chose this move, this adventure, this life abroad. So who am I to complain, right? A lot of us end up swallowing the exhaustion because saying it out loud feels ungrateful."
             },
             {
-              "id": "btw08qfw",
+              "id": "bybzzrh8",
               "type": "p",
-              "html": "But two things can be true at once. You can love your life abroad <em>and</em> find motherhood without a village really, really hard. Missing your people doesn't mean you made the wrong choice. It means you're human."
+              "html": "But here's what I've come to realise:"
             },
             {
-              "id": "bpee6yqk",
+              "id": "b3wxmwjj",
+              "type": "quote",
+              "html": "<b>Two things can be true at once. You can love your life abroad <i>and</i> find motherhood without a village really, really hard.</b>"
+            },
+            {
+              "id": "bz8aeskr",
+              "type": "p",
+              "html": "Missing your people doesn't mean you made the wrong choice. It just means you're human."
+            },
+            {
+              "id": "bsh0s2rc",
+              "type": "divider"
+            },
+            {
+              "id": "btuqwzxh",
               "type": "h2",
-              "html": "What Has Helped Me (and Might Help You)"
+              "html": "💡 What has helped me (and might help you)"
             },
             {
-              "id": "b3cj0q1l",
+              "id": "b04fccwa",
               "type": "p",
-              "html": "I can't build a village overnight, and neither can you. But I've learned that small, deliberate choices can make the days lighter. Here are the three that matter most to me."
+              "html": "I can't build a village overnight (if only there was a shortcut for that), and neither can you. But I've learned that small, deliberate choices can make the days lighter. Quick disclaimer: I'm not a parenting expert — these are simply the three things that have worked for me so far."
             },
             {
-              "id": "bpd4z4e0",
+              "id": "b8sj6v8j",
               "type": "h3",
-              "html": "🙋‍♀️ Ask your partner to cover a few times a day"
+              "html": "🙋‍♀️ Ask your partner to cover you, a few times a day"
             },
             {
-              "id": "b43t2cpo",
+              "id": "br5irz0d",
               "type": "p",
-              "html": "This isn't about splitting chores or getting the laundry done. It's about giving <em>you</em> time that belongs only to you. Ask your husband or partner to take over for a short stretch, even 20 to 30 minutes, a few times a day. Use it to sit in silence, drink a hot coffee, shower without rushing, or stare out of a window."
+              "html": "This isn't about splitting chores or finally getting the laundry done. It's about giving <i>you</i> time that belongs only to you."
             },
             {
-              "id": "bz0iq83x",
+              "id": "bxr1hq0q",
+              "type": "ul",
+              "html": "<b>How it works:</b> Ask your husband or partner to take over for a short stretch — even 20 to 30 minutes — a few times a day."
+            },
+            {
+              "id": "bpxb682a",
+              "type": "ul",
+              "html": "<b>The one rule:</b> This time is <i>not</i> for the house. No errands, no dishes, no meal prep. Sit in silence, drink a coffee while it's actually hot, shower without rushing, or just stare out of a window. (All valid.)"
+            },
+            {
+              "id": "bl0altld",
+              "type": "ul",
+              "html": "<b>On sick days:</b> This is your version of sick leave. Ask for the cover, and take it without guilt."
+            },
+            {
+              "id": "bfifo61c",
               "type": "p",
-              "html": "The rule is that this time isn't for the house. It's not for errands, dishes, or meal prep. It's for <em>you</em>. And on the days you're sick, this is your version of sick leave: ask for the cover, and take it without guilt."
+              "html": "And say it out loud, because partners can't read minds. \"I need a break, can you take over for a bit?\" is a complete and reasonable sentence."
             },
             {
-              "id": "b3l1uz98",
-              "type": "p",
-              "html": "Say it out loud, because partners can't read your mind. \"I need a break, can you take over for a bit?\" is a complete and reasonable sentence."
-            },
-            {
-              "id": "bd6hipmj",
+              "id": "b5afot7n",
               "type": "h3",
               "html": "🏋️‍♀️ Move your body: workout, good mood"
             },
             {
-              "id": "b4xkdivp",
+              "id": "b8tqbmit",
               "type": "p",
-              "html": "I used to think exercise was a luxury I'd get back to \"when things settle down.\" Then I realized it's one of the fastest ways to shift my mood on a hard day. It doesn't have to be a big production. A short home workout, a run, or a walk with the stroller can clear your head and give you a little bit of yourself back."
+              "html": "I used to think exercise was a luxury I'd get back to \"once things settle down\". (Spoiler: things never really settle down.) Then I realised it's one of the fastest ways to shift my mood on a hard day."
             },
             {
-              "id": "b1teo785",
+              "id": "bhags11f",
               "type": "p",
-              "html": "Some days it feels like the last thing you have energy for. Those are usually the days it helps the most. Workout, good mood. It's simple, and it works."
+              "html": "It doesn't have to be a big production. A short home workout, a run, or a walk with the stroller can clear your head and give you a little bit of yourself back. Some days it feels like the last thing I have energy for — and those are usually the days it helps the most."
             },
             {
-              "id": "b21zeyzb",
+              "id": "bdz28lbg",
+              "type": "p",
+              "html": "Workout, good mood. Simple as that."
+            },
+            {
+              "id": "b7rw5rii",
               "type": "h3",
               "html": "📱 Video call your people, and do it often"
             },
             {
-              "id": "bwtem5v4",
+              "id": "btkqjtcr",
               "type": "p",
-              "html": "Distance is real, but so is technology. Schedule regular video calls with your mom, your sister, your best friend, anyone who makes you feel like <em>you</em>. Let them see your messy hair and your toddler's chaos. Let them make funny faces at your child."
+              "html": "Distance is real, but so is technology. Schedule regular video calls with your mom, your sister, your best friend — anyone who makes you feel like <i>you</i>. Let them see your messy hair and your toddler's chaos. Let them pull funny faces at your little one."
             },
             {
-              "id": "bzhi7zqc",
+              "id": "bimzocey",
               "type": "p",
-              "html": "It won't replace a hug, but it does remind you that you're not as alone as it feels. And it lets your child build a relationship with faraway family, even if it's through a screen."
+              "html": "It won't replace a hug, but it does remind you that you're not as alone as it feels. Bonus: your child gets to build a real relationship with faraway family, even if it's through a screen."
             },
             {
-              "id": "bm2eiih6",
+              "id": "bjarpfox",
+              "type": "divider"
+            },
+            {
+              "id": "bgqw2acs",
               "type": "h2",
-              "html": "You're Doing Better Than You Think"
+              "html": "💛 My final take: you're doing better than you think"
             },
             {
-              "id": "bie807w1",
+              "id": "bi4wwxk2",
               "type": "p",
-              "html": "If you're a mom living abroad reading this in the middle of a long, lonely day, I hope you know that you're not failing. You are doing an enormous job with fewer hands than most people get. That's not a small thing."
+              "html": "If you're a mom living abroad and reading this in the middle of a long, lonely day — hi, I see you. You're not failing. You're doing an enormous job with fewer hands than most people get, and that's not a small thing."
             },
             {
-              "id": "b8ifcgd0",
+              "id": "btmszvw1",
               "type": "p",
-              "html": "Be gentle with yourself. Ask for the break. Move your body. Call the people who love you. And if you can, find one or two other moms nearby who are in the same boat. Sometimes a village starts with just one friend."
+              "html": "So be gentle with yourself:"
             },
             {
-              "id": "bmqh8tpj",
+              "id": "b8xmb0ge",
               "type": "p",
-              "html": "You may not have the village you grew up in, but you can build a smaller one, one call, one break, and one honest conversation at a time. 💛"
+              "html": "→ <b>Ask for the break.</b> Twenty minutes counts."
+            },
+            {
+              "id": "blmvbywm",
+              "type": "p",
+              "html": "→ <b>Move your body.</b> Even a stroller walk."
+            },
+            {
+              "id": "bzqee4ur",
+              "type": "p",
+              "html": "→ <b>Call the people who love you.</b> Messy hair and all."
+            },
+            {
+              "id": "b4olo6o3",
+              "type": "p",
+              "html": "→ <b>Find your one fellow mama nearby,</b> if you can. Sometimes a village starts with just one friend."
+            },
+            {
+              "id": "b024or68",
+              "type": "p",
+              "html": "We may not have the village we grew up in, but we can build a smaller one — one call, one break, and one honest conversation at a time."
+            },
+            {
+              "id": "ba3o8fae",
+              "type": "p",
+              "html": "Thanks for reading my long story until this point :) If you're mom-ing far from home too, reply below and share what's helped you. Let's help a fellow mama out!"
             }
           ],
           "layoutWidth": "wide",
