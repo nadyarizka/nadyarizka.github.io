@@ -42,8 +42,7 @@
         "mall-sampah-redesign-a-ux-case-study",
         "antrian-imigrasi-app",
         "find-your-tutor-in-cari-ilmu-a-ux-case-study",
-        "seas-infrastructure-management-system",
-        "standardizing-200-internal-modules-for-singapore-customs"
+        "seas-infrastructure-management-system"
       ],
       "works": [
         {
@@ -4072,5 +4071,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T16:09:13.247Z"
+  "savedAt": "2026-09-25T16:09:21.779Z"
 }
