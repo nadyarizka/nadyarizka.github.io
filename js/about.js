@@ -103,7 +103,7 @@ function goBack(persona) {
 document.addEventListener("DOMContentLoaded", async () => {
   await loadPublishedContent();
   const persona = getQueryPersona();
-  document.getElementById("page-root").classList.add("page-narrow");
+  document.getElementById("page-root").classList.add("page-narrow", "is-wide");
   initNav(persona, switchPersona);
   transitionToPersona(persona, () => renderAboutContent(persona), true);
 });

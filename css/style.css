@@ -172,7 +172,7 @@ img {
 .page {
   position: relative;
   z-index: 10;
-  max-width: 42rem;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 24px;
   opacity: 1;
