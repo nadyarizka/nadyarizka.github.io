@@ -38,11 +38,7 @@
         "unifying-sg-customs-officer-internal-site",
         "tokopedias-flight-new-booking-process",
         "tokopedia-top-up-e-money",
-        "redesign-tokopedias-train-booking-platform",
-        "mall-sampah-redesign-a-ux-case-study",
-        "antrian-imigrasi-app",
-        "find-your-tutor-in-cari-ilmu-a-ux-case-study",
-        "seas-infrastructure-management-system"
+        "redesign-tokopedias-train-booking-platform"
       ],
       "works": [
         {
@@ -4071,5 +4067,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T16:09:21.779Z"
+  "savedAt": "2026-09-25T16:09:27.946Z"
 }
