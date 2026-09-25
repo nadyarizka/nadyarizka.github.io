@@ -386,7 +386,7 @@
       "socials": [
         {
           "platform": "youtube",
-          "url": ""
+          "url": "https://youtube.com/thecandidduo"
         }
       ],
       "aboutHeading": "About Me",
@@ -570,5 +570,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:26:42.723Z"
+  "savedAt": "2026-09-25T08:26:58.892Z"
 }
