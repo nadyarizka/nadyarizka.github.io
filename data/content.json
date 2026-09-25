@@ -468,7 +468,7 @@
           "name": "Malaysia"
         },
         {
-          "flag": "",
+          "flag": "🇳🇿",
           "name": "Australia"
         }
       ]
@@ -561,5 +561,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:25:55.832Z"
+  "savedAt": "2026-09-25T08:26:00.757Z"
 }
