@@ -3084,7 +3084,7 @@
           "layoutWidth": "wide",
           "coverImage": "",
           "featured": false,
-          "published": true
+          "published": false
         },
         {
           "id": "standardizing-200-internal-modules-for-singapore-customs",
@@ -3230,7 +3230,7 @@
           "layoutWidth": "wide",
           "coverImage": "",
           "featured": false,
-          "published": true
+          "published": false
         },
         {
           "id": "tokopedia-sellers-campaign-participation",
@@ -3365,7 +3365,7 @@
           "layoutWidth": "wide",
           "coverImage": "",
           "featured": false,
-          "published": true
+          "published": false
         },
         {
           "id": "standardizing-travel-products-at-tokopedia",
@@ -3515,7 +3515,7 @@
           "layoutWidth": "wide",
           "coverImage": "",
           "featured": false,
-          "published": true
+          "published": false
         }
       ],
       "showExperience": true,

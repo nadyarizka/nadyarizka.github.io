@@ -561,6 +561,13 @@ h2.section-title {
   margin-top: 16px;
 }
 
+/* Line between the Blog Posts section and whatever follows it (Contact Me) */
+.section-divider {
+  border: 0;
+  border-top: 1px solid #e5e7eb;
+  margin: 0 0 60px 0;
+}
+
 /* Countries Visited */
 .country-chip-list {
   display: flex;

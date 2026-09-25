@@ -43,25 +43,16 @@ function renderWorks(data) {
   const works = getSelectedWorks(data);
   if (!works.length) return "";
 
-  const cards = works
-    .map(
-      (w) => `
-      <div class="work-card" onclick="goToPost('${w.id}')">
-        <div class="work-thumb"${w.coverImage ? ` style="background-image:url('${w.coverImage}');background-size:cover;background-position:center"` : ""}></div>
-        <div class="work-body">
-          <h3 class="work-title">${w.title}</h3>
-          <p class="work-meta">${formatWorkMeta(w)}</p>
-          <div class="work-tags">
-            ${w.tags.map((t) => `<span class="tag">${t}</span>`).join("")}
-          </div>
-        </div>
-      </div>`
-    )
-    .join("");
+  const cards = works.map(renderPostCard).join("");
 
-  const seeMoreHtml = data.worksSeeMore
-    ? `<div class="works-see-more"><button class="btn-see-more" type="button" onclick="goToAbout()">See more</button></div>`
-    : "";
+  // A curating persona's "See more" opens the full list of its posts; the
+  // older worksSeeMore flag (Traveller) keeps pointing at the About page.
+  let seeMoreHtml = "";
+  if (data.worksSeeMore) {
+    seeMoreHtml = `<div class="works-see-more"><button class="btn-see-more" type="button" onclick="goToAbout()">See more</button></div>`;
+  } else if (usesWorkSelection(data)) {
+    seeMoreHtml = `<div class="works-see-more"><button class="btn-see-more" type="button" onclick="goToPostList('all')">See more</button></div>`;
+  }
 
   return `
     <section class="block">
@@ -106,7 +97,23 @@ function renderExperience(data) {
     <section class="block">
       <h2 class="section-title" style="margin-bottom:20px">Recent Experience</h2>
       <div class="exp-list">${rows}</div>
+      <div class="works-see-more"><button class="btn-see-more" type="button" onclick="goToAbout()">See more</button></div>
     </section>`;
+}
+
+const BLOG_POSTS_ON_HOME = 3;
+
+function renderBlogPosts(data) {
+  const posts = getBlogPosts(data).slice(0, BLOG_POSTS_ON_HOME);
+  if (!posts.length) return "";
+
+  return `
+    <section class="block">
+      <h2 class="section-title" style="margin-bottom:16px">Blog Posts</h2>
+      <div class="works-list">${posts.map(renderPostCard).join("")}</div>
+      <div class="works-see-more"><button class="btn-see-more" type="button" onclick="goToPostList('blog')">See more</button></div>
+    </section>
+    <hr class="section-divider">`;
 }
 
 function renderTestimonials(data) {
@@ -297,6 +304,7 @@ function renderHomeContent(persona) {
       ${renderWorks(data)}
       ${renderCountriesVisited(data)}
       ${renderExperience(data)}
+      ${renderBlogPosts(data)}
       ${renderTestimonials(data)}
       ${renderTikTok(data)}
       ${renderContact(data)}
@@ -315,8 +323,8 @@ function goToAbout() {
   window.location.href = "about.html?persona=" + currentPersona;
 }
 
-function goToPost(id) {
-  window.location.href = "post.html?persona=" + currentPersona + "&id=" + encodeURIComponent(id);
+function goToPostList(kind) {
+  window.location.href = "posts.html?persona=" + currentPersona + "&list=" + kind;
 }
 
 document.addEventListener("DOMContentLoaded", async () => {

@@ -63,6 +63,34 @@ function getSelectedWorks(data) {
     .filter((w) => w && w.published !== false);
 }
 
+// ---- Blog posts ----
+// Every post lives in the one "works" list. A persona that curates Selected
+// Works (see usesWorkSelection) shows just its picks there; the rest of its
+// published posts are the "Blog Posts" that get their own home-page section.
+// Posts with no body yet are left out of these lists — an article with
+// nothing in it isn't worth a card.
+
+function postHasContent(post) {
+  return blocksHaveContent(getPostBlocks(post));
+}
+
+function sortPostsNewestFirst(posts) {
+  return posts
+    .map((post, index) => ({ post, index }))
+    .sort((a, b) => (parseInt(b.post.year, 10) || 0) - (parseInt(a.post.year, 10) || 0) || b.index - a.index)
+    .map((entry) => entry.post);
+}
+
+function getAllListedPosts(data) {
+  return sortPostsNewestFirst((data.works || []).filter((w) => w.published !== false && postHasContent(w)));
+}
+
+function getBlogPosts(data) {
+  if (!usesWorkSelection(data)) return [];
+  const picked = data.selectedWorkIds;
+  return getAllListedPosts(data).filter((w) => picked.indexOf(w.id) === -1);
+}
+
 // ---- About page content ----
 
 function getAboutData() {
