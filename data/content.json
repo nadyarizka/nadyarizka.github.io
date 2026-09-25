@@ -33,7 +33,9 @@
       "aboutText": "I'm Nadya, a curious mind who thrives to learn new things from design, content creation, and everything in between.",
       "worksHeading": "Selected Works",
       "selectedWorkIds": [
-        "sea-labs-design-system"
+        "sea-labs-design-system",
+        "tokopedia-travel-product-redesign",
+        "unifying-sg-customs-officer-internal-site"
       ],
       "works": [
         {
@@ -137,6 +139,16 @@
                     "id": "bdijl6i4",
                     "type": "ul",
                     "html": "Conducted user testing &amp; user in-depth interview on end to end journey."
+                  },
+                  {
+                    "id": "bzeb27yi",
+                    "type": "p",
+                    "html": ""
+                  },
+                  {
+                    "id": "bmcr7jic",
+                    "type": "p",
+                    "html": "⚡️ Behind The Product"
                   }
                 ],
                 [
@@ -479,5 +491,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:18:42.301Z"
+  "savedAt": "2026-09-25T08:19:20.264Z"
 }
