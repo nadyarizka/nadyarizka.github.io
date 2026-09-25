@@ -448,10 +448,6 @@
           "name": "Singapore"
         },
         {
-          "flag": "🇯🇵",
-          "name": "Japan"
-        },
-        {
           "flag": "🇮🇩",
           "name": "Indonesia"
         },
@@ -553,5 +549,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:25:03.583Z"
+  "savedAt": "2026-09-25T08:25:08.422Z"
 }
