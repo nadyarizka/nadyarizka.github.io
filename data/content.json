@@ -203,7 +203,7 @@
                   {
                     "id": "bwi0ghfm",
                     "type": "ol",
-                    "html": "There's no specific entry point where sellers can request to create their product launching campaign.  Currently, sellers would have to manually reach out to our internal team to request this type of campaign."
+                    "html": "<b>There's no specific entry point where sellers can request to create their product launching campaign.</b>  Currently, sellers would have to manually reach out to our internal team to request this type of campaign."
                   }
                 ],
                 [
@@ -546,5 +546,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:22:53.530Z"
+  "savedAt": "2026-09-25T08:22:58.465Z"
 }
