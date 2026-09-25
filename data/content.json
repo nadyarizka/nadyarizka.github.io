@@ -147,7 +147,7 @@
                   },
                   {
                     "id": "bmcr7jic",
-                    "type": "h1",
+                    "type": "h2",
                     "html": ""
                   }
                 ],
@@ -491,5 +491,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:19:35.695Z"
+  "savedAt": "2026-09-25T08:19:41.136Z"
 }
