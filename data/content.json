@@ -36,9 +36,6 @@
         "sea-labs-design-system",
         "tokopedias-flight-new-booking-process",
         "redesign-tokopedias-train-booking-platform",
-        "mall-sampah-redesign-a-ux-case-study",
-        "antrian-imigrasi-app",
-        "find-your-tutor-in-cari-ilmu-a-ux-case-study",
         "seas-infrastructure-management-system",
         "standardizing-200-internal-modules-for-singapore-customs",
         "tokopedia-sellers-campaign-participation",
@@ -4071,5 +4068,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T16:08:10.594Z"
+  "savedAt": "2026-09-25T16:08:15.282Z"
 }
