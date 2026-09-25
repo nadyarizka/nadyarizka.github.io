@@ -383,7 +383,12 @@
       "marqueeImages": [
         "/assets/uploads/531f17a4e14352e92be7.jpg"
       ],
-      "socials": [],
+      "socials": [
+        {
+          "platform": "website",
+          "url": ""
+        }
+      ],
       "aboutHeading": "About Me",
       "aboutText": "Travelling is how I recharge. Every trip teaches me something new — about the world, and about myself.",
       "worksHeading": "Travel Stories",
@@ -565,5 +570,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:26:13.387Z"
+  "savedAt": "2026-09-25T08:26:29.525Z"
 }
