@@ -988,12 +988,9 @@ select.cms-input {
   max-width: 648px;
 }
 
-.be-surface.be-w-wide {
-  max-width: 1032px;
-}
-
+.be-surface.be-w-wide,
 .be-surface.be-w-full {
-  max-width: 1272px;
+  max-width: 872px;
 }
 
 .be-hint {

@@ -194,12 +194,9 @@ img {
 }
 
 /* Per-post page width, chosen in the CMS editor (narrow is the default). */
-.page.page-narrow.is-wide {
-  max-width: 60rem;
-}
-
+.page.page-narrow.is-wide,
 .page.page-narrow.is-full {
-  max-width: 96rem;
+  max-width: 800px;
 }
 
 .card {
