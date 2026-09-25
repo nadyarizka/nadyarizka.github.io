@@ -462,6 +462,10 @@
         {
           "flag": "🇸🇦",
           "name": "Saudi Arabia"
+        },
+        {
+          "flag": "🏳️",
+          "name": "New country"
         }
       ]
     },
@@ -553,5 +557,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:25:22.046Z"
+  "savedAt": "2026-09-25T08:25:33.056Z"
 }
