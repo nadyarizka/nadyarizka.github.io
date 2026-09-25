@@ -36,8 +36,6 @@
         "sea-labs-design-system",
         "tokopedias-flight-new-booking-process",
         "redesign-tokopedias-train-booking-platform",
-        "standardizing-200-internal-modules-for-singapore-customs",
-        "tokopedia-sellers-campaign-participation",
         "standardizing-travel-products-at-tokopedia"
       ],
       "works": [
@@ -4067,5 +4065,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T16:08:20.256Z"
+  "savedAt": "2026-09-25T16:08:26.281Z"
 }
