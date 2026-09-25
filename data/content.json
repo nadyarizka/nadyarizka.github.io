@@ -183,6 +183,11 @@
                   {
                     "id": "blo8dhp1",
                     "type": "p",
+                    "html": "The sudden surge of interest from brands also comes with some challenges that we need to solve. Since the first iteration of Tokopedia's product launching has to be done manually:"
+                  },
+                  {
+                    "id": "b35rclfg",
+                    "type": "p",
                     "html": ""
                   }
                 ],
@@ -526,5 +531,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:21:58.151Z"
+  "savedAt": "2026-09-25T08:22:04.149Z"
 }
