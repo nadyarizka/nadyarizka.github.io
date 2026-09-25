@@ -387,6 +387,10 @@
         {
           "platform": "youtube",
           "url": "https://youtube.com/thecandidduo"
+        },
+        {
+          "platform": "tiktok",
+          "url": ""
         }
       ],
       "aboutHeading": "About Me",
@@ -570,5 +574,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:26:58.892Z"
+  "savedAt": "2026-09-25T08:27:02.808Z"
 }
