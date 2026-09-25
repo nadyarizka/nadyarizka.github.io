@@ -152,8 +152,13 @@
                   },
                   {
                     "id": "b89xq83i",
-                    "type": "p",
+                    "type": "h3",
                     "html": "Project Background"
+                  },
+                  {
+                    "id": "blpzs0np",
+                    "type": "p",
+                    "html": ""
                   }
                 ],
                 [
@@ -496,5 +501,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:19:54.834Z"
+  "savedAt": "2026-09-25T08:20:01.148Z"
 }
