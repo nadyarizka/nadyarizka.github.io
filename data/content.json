@@ -198,7 +198,7 @@
                   {
                     "id": "b1v24aeo",
                     "type": "ol",
-                    "html": "There's a special request from brands to have specific terms and condition An example of this use case is many brands needed to limit/give exclusivity for some of their campaigns. With this request, there's an additional couple of hours for the operational team to validate this rule. There's no specific entry point where sellers can request to create their product launching campaign.  Currently, sellers would have to manually reach out to our internal team to request this type of campaign."
+                    "html": "<b>There's a special request from brands to have specific terms and condition </b>\nAn example of this use case is many brands needed to limit/give exclusivity for some of their campaigns. With this request, there's an additional couple of hours for the operational team to validate this rule. There's no specific entry point where sellers can request to create their product launching campaign.  Currently, sellers would have to manually reach out to our internal team to request this type of campaign."
                   }
                 ],
                 [
@@ -541,5 +541,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:22:44.434Z"
+  "savedAt": "2026-09-25T08:22:48.790Z"
 }
