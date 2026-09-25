@@ -163,7 +163,12 @@
                   {
                     "id": "bkps6vuy",
                     "type": "p",
-                    "html": "The collaboration was formed to provide these brands with a reliable online platform to launch their products. Considering that the products that they launch have always been a huge hit among collectors and fans of the brand &amp; public, where they usually only lasted 10&nbsp;- 30 mins before all the products sold out. This collaboration has successfully increased traffic and conversion for both parties. After the big success of launching and partnering with these brands, we receive a surge in interest from other brands to also have a product launch on our platform."
+                    "html": "The collaboration was formed to provide these brands with a reliable online platform to launch their products. Considering that the products that they launch have always been a huge hit among collectors and fans of the brand &amp; public, where they usually only lasted 10&nbsp;- 30 mins before all the products sold out. This collaboration has successfully increased traffic and conversion for both parties. "
+                  },
+                  {
+                    "id": "bckfhsej",
+                    "type": "p",
+                    "html": "After the big success of launching and partnering with these brands, we receive a surge in interest from other brands to also have a product launch on our platform."
                   }
                 ],
                 [
@@ -506,5 +511,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:20:26.894Z"
+  "savedAt": "2026-09-25T08:20:31.767Z"
 }
