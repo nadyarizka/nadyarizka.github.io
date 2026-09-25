@@ -34,9 +34,16 @@
       "worksHeading": "Selected Works",
       "selectedWorkIds": [
         "sea-labs-design-system",
+        "tokopedia-travel-product-redesign",
+        "unifying-sg-customs-officer-internal-site",
         "tokopedias-flight-new-booking-process",
+        "tokopedia-top-up-e-money",
         "redesign-tokopedias-train-booking-platform",
-        "standardizing-travel-products-at-tokopedia"
+        "mall-sampah-redesign-a-ux-case-study",
+        "antrian-imigrasi-app",
+        "find-your-tutor-in-cari-ilmu-a-ux-case-study",
+        "seas-infrastructure-management-system",
+        "standardizing-200-internal-modules-for-singapore-customs"
       ],
       "works": [
         {
@@ -4065,5 +4072,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T16:08:26.281Z"
+  "savedAt": "2026-09-25T16:09:13.247Z"
 }
