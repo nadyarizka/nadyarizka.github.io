@@ -464,7 +464,7 @@
           "name": "Saudi Arabia"
         },
         {
-          "flag": "",
+          "flag": "🇺🇸",
           "name": "Malaysia"
         }
       ]
@@ -557,5 +557,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:25:38.025Z"
+  "savedAt": "2026-09-25T08:25:43.526Z"
 }
