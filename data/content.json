@@ -148,6 +148,11 @@
                   {
                     "id": "bmcr7jic",
                     "type": "h2",
+                    "html": "⚡️ Behind The Product"
+                  },
+                  {
+                    "id": "b89xq83i",
+                    "type": "p",
                     "html": ""
                   }
                 ],
@@ -491,5 +496,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:19:41.136Z"
+  "savedAt": "2026-09-25T08:19:45.059Z"
 }
