@@ -462,10 +462,6 @@
         {
           "flag": "🇰🇷",
           "name": "South Korea"
-        },
-        {
-          "flag": "🇮🇹",
-          "name": "Italy"
         }
       ]
     },
@@ -557,5 +553,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:24:58.574Z"
+  "savedAt": "2026-09-25T08:25:03.583Z"
 }
