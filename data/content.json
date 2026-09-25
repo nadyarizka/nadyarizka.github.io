@@ -188,12 +188,12 @@
                   {
                     "id": "b35rclfg",
                     "type": "ol",
-                    "html": ""
+                    "html": "Long time to process and a campaign request from brands"
                   },
                   {
-                    "id": "bgypq9pa",
-                    "type": "p",
-                    "html": "Long time to process and a campaign request from brands A brand needs to wait for several days to launch their product due to manual operational effort. This makes the platform isn't scalable for future business opportunities with brands. Can’t run multiple launching brands at the same time Since it was done manually, the process will take up too many people &amp; effort to run. There's a special request from brands to have specific terms and condition An example of this use case is many brands needed to limit/give exclusivity for some of their campaigns. With this request, there's an additional couple of hours for the operational team to validate this rule. There's no specific entry point where sellers can request to create their product launching campaign.  Currently, sellers would have to manually reach out to our internal team to request this type of campaign."
+                    "id": "bwdymm08",
+                    "type": "ol",
+                    "html": " A brand needs to wait for several days to launch their product due to manual operational effort. This makes the platform isn't scalable for future business opportunities with brands. Can’t run multiple launching brands at the same time Since it was done manually, the process will take up too many people &amp; effort to run. There's a special request from brands to have specific terms and condition An example of this use case is many brands needed to limit/give exclusivity for some of their campaigns. With this request, there's an additional couple of hours for the operational team to validate this rule. There's no specific entry point where sellers can request to create their product launching campaign.  Currently, sellers would have to manually reach out to our internal team to request this type of campaign."
                   }
                 ],
                 [
@@ -536,5 +536,5 @@
   "siteSettings": {
     "favicon": "/assets/favicon.png"
   },
-  "savedAt": "2026-09-25T08:22:13.857Z"
+  "savedAt": "2026-09-25T08:22:23.471Z"
 }
